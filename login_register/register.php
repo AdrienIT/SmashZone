@@ -15,11 +15,13 @@ if (isset($_POST["submit"])) {
 	$pseudo = htmlspecialchars($_POST["pseudo"]);
 	$email = htmlspecialchars($_POST["email"]);
 	$ville = htmlspecialchars($_POST['ville']);
-	$age = htmlspecialchars($POST['age']);
+	$date_naissance = htmlspecialchars($_POST['date_naissance']);
 	$telephone = (int) htmlspecialchars($_POST['telephone']);
 	$postal_code = (int) htmlspecialchars($_POST['postal_code']);
 	$password = $_POST["password"];
 	$password_confirm = $_POST["password_confirm"];
+	$prenom = htmlspecialchars($_POST["prenom"]);
+	$nom = htmlspecialchars($_POST["nom"]);
 	
 
 	$query1 = $db->prepare("SELECT pseudo FROM users WHERE pseudo = ? ");
@@ -36,20 +38,22 @@ if (isset($_POST["submit"])) {
 				$err = "Le mot de pass devrait faire plus de 5 caractère";
 				echo $err;
 			} else {
-				if ((strlen($postal_code) > 6) or (01000 < $postal_code) or ($postal_code > 95880)) {
+				if ((strlen($postal_code) > 6)) {
 					$err = "Votre code postal n'a pas été prit en compte";
 					echo $err;
 				} else {
 					$password = md5($password);
-					$query = "INSERT INTO users(pseudo,email,ville,telephone,postal_code,password,age) VALUES(:pseudo,:email,:ville,:telephone,:postal_code,:password,:age)";
+					$query = "INSERT INTO users(pseudo,email,ville,telephone,postal_code,password,date_naissance,prenom,nom) VALUES(:pseudo,:email,:ville,:telephone,:postal_code,:password,:date_naissance,:prenom,:nom)";
 					$query = $db->prepare($query);
 					$query->bindParam(':pseudo', $pseudo);
 					$query->bindParam(':email', $email);
 					$query->bindParam(':ville', $ville);
+					$query->bindParam(':prenom', $prenom);
+					$query->bindParam(':nom', $nom);
 					$query->bindParam(':telephone', $telephone);
 					$query->bindParam(':postal_code', $postal_code);
 					$query->bindParam(':password', $password);
-					$query->bindParam(':age', $age);
+					$query->bindParam(':date_naissance', $date_naissance);
 					if ($query->execute()) {
 
 						$id = (int) $_SESSION["user_id"];
@@ -100,6 +104,14 @@ if (isset($_POST["submit"])) {
 							<input required type="text" <?php if (isset($pseudo)) : ?> value="<?php echo $pseudo ?>" <?php endif ?> name="pseudo">
 						</div>
 						<div>
+							<label>Prenom : </label>
+							<input required type="text" <?php if (isset($prenom)) : ?> value="<?php echo $prenom ?>" <?php endif ?> name="prenom">
+						</div>
+						<div>
+							<label>Nom : </label>
+							<input required type="text" <?php if (isset($nom)) : ?> value="<?php echo $nom ?>" <?php endif ?> name="nom">
+						</div>
+						<div>
 							<label>Email : </label>
 							<input required type="email" <?php if (isset($email)) : ?> value="<?php echo $email ?>" <?php endif ?> name="email">
 						</div>
@@ -118,7 +130,7 @@ if (isset($_POST["submit"])) {
 							</div>
 							<div>
 								<label>Date de naissance : </label>
-								<input type="date" id="start" name="trip-start" value="2000-01-01" min="1920-01-01" max="<?= $today ?>">
+								<input type="date" id="start" name="date_naissance" value="2000-01-01" min="1920-01-01" max="<?= $today ?>">
 							</div>
 							<div>
 								<label>Password : </label>
