@@ -37,7 +37,7 @@
             </div>
             <form class="justify-content-between">
                 <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login.php'" type="button">Se
-                    connecter/S'inscrire</button>
+                    connecter/S'inscrire lol</button>
             </form>
         </nav>
         <div class="container">
