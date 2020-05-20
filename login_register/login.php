@@ -1,9 +1,9 @@
 <?php  
 	include_once '../config.php';
-	session_start();
+/* 	session_start();
 	if (isset($_SESSION["user_id"])) {
 		header('location: ./home.php');
-	}
+	} */
 
 	if (isset($_POST["submit"])) {
 		$pseudo = htmlspecialchars($_POST["pseudo"]);
@@ -55,12 +55,11 @@
 						<div>
 							<button name="submit">Login</button>
 						</div>
-						<p>Pas encore de compte ? <a href="index.php">Inscrit toi !</a></p>
+						<p>Pas encore de compte ? <a href="register.php">Inscrit toi !</a></p>
 					</form>
 				</div>	
 			</div>
 			<div></div>	
-			<a href="../index.php">Choix du compte</a>
 		</div>
 	</div>
 </body>

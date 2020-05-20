@@ -1,20 +1,26 @@
 <?php
 include_once '../config.php';
-session_start();
+/* session_start();
 if (isset($_SESSION["user_id"])) {
 	header('location: ./home.php');
-}
+} */
 
 $err = '';
+
+$today = date("Y-m-d");
+
 
 if (isset($_POST["submit"])) {
 
 	$pseudo = htmlspecialchars($_POST["pseudo"]);
 	$email = htmlspecialchars($_POST["email"]);
 	$ville = htmlspecialchars($_POST['ville']);
-	$tel = (int) htmlspecialchars($_POST['tel']);
+	$age = htmlspecialchars($POST['age']);
+	$telephone = (int) htmlspecialchars($_POST['telephone']);
 	$postal_code = (int) htmlspecialchars($_POST['postal_code']);
 	$password = $_POST["password"];
+	$password_confirm = $_POST["password_confirm"];
+	
 
 	$query1 = $db->prepare("SELECT pseudo FROM users WHERE pseudo = ? ");
 	$query1->execute([$pseudo]);
@@ -22,27 +28,28 @@ if (isset($_POST["submit"])) {
 		$err = "Utilisateur deja enregistré";
 		echo $err;
 	} else {
-		if ($pseudo == "") {
-			$err = "Merci de renseigner un utilisateur";
+		if ($password != $password_confirm) {
+			$err = "les mots de passes ne correspondent pas";
 			echo $err;
 		} else {
 			if (strlen($password) < 6) {
 				$err = "Le mot de pass devrait faire plus de 5 caractère";
 				echo $err;
 			} else {
-				if (strlen($postal_code) > 6 || (01000 < $postal_code > 95880)) {
+				if ((strlen($postal_code) > 6) or (01000 < $postal_code) or ($postal_code > 95880)) {
 					$err = "Votre code postal n'a pas été prit en compte";
 					echo $err;
 				} else {
 					$password = md5($password);
-					$query = "INSERT INTO users(pseudo,email,ville,tel,postal_code,password) VALUES(:pseudo,:email,:ville,:tel,:postal_code,:password)";
+					$query = "INSERT INTO users(pseudo,email,ville,telephone,postal_code,password,age) VALUES(:pseudo,:email,:ville,:telephone,:postal_code,:password,:age)";
 					$query = $db->prepare($query);
 					$query->bindParam(':pseudo', $pseudo);
 					$query->bindParam(':email', $email);
 					$query->bindParam(':ville', $ville);
-					$query->bindParam(':tel', $tel);
+					$query->bindParam(':telephone', $telephone);
 					$query->bindParam(':postal_code', $postal_code);
 					$query->bindParam(':password', $password);
+					$query->bindParam(':age', $age);
 					if ($query->execute()) {
 
 						$id = (int) $_SESSION["user_id"];
@@ -62,6 +69,7 @@ if (isset($_POST["submit"])) {
 		}
 	}
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -88,28 +96,38 @@ if (isset($_POST["submit"])) {
 							<div>Successful</div>
 						<?php endif ?>
 						<div>
-							<label>pseudo</label>
+							<label>Pseudo : </label>
 							<input required type="text" <?php if (isset($pseudo)) : ?> value="<?php echo $pseudo ?>" <?php endif ?> name="pseudo">
 						</div>
 						<div>
-							<label>Email</label>
+							<label>Email : </label>
 							<input required type="email" <?php if (isset($email)) : ?> value="<?php echo $email ?>" <?php endif ?> name="email">
 						</div>
 						<div>
 							<div>
-								<label>Ville</label>
+								<label>Ville : </label>
 								<input required type="ville" <?php if (isset($ville)) : ?> value="<?php echo $ville ?>" <?php endif ?> name="ville">
 							</div>
 							<div>
-								<label>Code Postal</label>
+								<label>Code Postal : </label>
 								<input required type="postal_code" <?php if (isset($postal_code)) : ?> value="<?php echo $postal_code ?>" <?php endif ?> name="postal_code">
 							</div>
 							<div>
-								<label>Téléphone</label>
-								<input required type="tel" <?php if (isset($tel)) : ?> value="<?php echo $tel ?>" <?php endif ?> name="tel">
+								<label>Téléphone : </label>
+								<input required type="telephone" <?php if (isset($telephone)) : ?> value="<?php echo $telephone ?>" <?php endif ?> name="telephone">
 							</div>
-							<label>Password</label>
-							<input required type="password" name="password">
+							<div>
+								<label>Date de naissance : </label>
+								<input type="date" id="start" name="trip-start" value="2000-01-01" min="1920-01-01" max="<?= $today ?>">
+							</div>
+							<div>
+								<label>Password : </label>
+								<input required type="password" name="password">
+							</div>
+							<div>
+								<label>Confirmation Password : </label>
+								<input required type="password_confirm" name="password_confirm">
+							</div>
 						</div>
 						<div>
 							<button name="submit">Register</button>
@@ -118,11 +136,9 @@ if (isset($_POST["submit"])) {
 					</form>
 				</div>
 			</div>
-			<a href="../index.php">Choix du compte</a>
 			<div></div>
 
 		</div>
 	</div>
 </body>
-
 </html>
