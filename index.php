@@ -40,7 +40,7 @@
                     connecter/S'inscrire</button>
             </form>
         </nav>
-        <div class="container-fluid">
+        <div class="container">
             <h1>Dernières infos</h1>
         </div>
     </body>
