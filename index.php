@@ -6,33 +6,43 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
             integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
+        <link href="style/style.css" rel="stylesheet">
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Navbar</a>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #264653; margin-bottom: 20px;">
+            <a href="index.php"><img id="logo" src="style/logo.png" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse d-inline-flex justify-content-left rubriques" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <li class="nav-inline rubriquecolor">
+                        Effectuer une recherche :
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
-                    </li>
+                    <form class="form-inline">
+                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
+                            onclick="location.href='recherchejouer.php'" type="button">Joueurs</button>
+                    </form>
+                    <form class="form-inline">
+                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
+                            onclick="location.href='recherchejouer.php'" type="button">Clubs</button>
+                    </form>
+                    <form class="form-inline">
+                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
+                            onclick="location.href='recherchejouer.php'" type="button">Autre</button>
+                    </form>
                 </ul>
             </div>
+            <form class="justify-content-between">
+                <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login.php'" type="button">Se
+                    connecter/S'inscrire</button>
+            </form>
         </nav>
-        <p>Wsh la mif</p>
+        <div class="container-fluid">
+            <h1>Dernières infos</h1>
+        </div>
     </body>
 
 </html>

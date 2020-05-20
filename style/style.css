@@ -1,1 +1,23 @@
-stylax
+#logo {
+    height: 30px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.rubriques {
+    margin-left: 50px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+}
+
+.rubriquesearch {
+    margin-left: 30px;
+}
+
+.rubriquecolor {
+    color: white;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
