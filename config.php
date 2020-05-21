@@ -10,11 +10,11 @@ $database_options = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 ];
 
-$pdo = new PDO(
+$db = new PDO(
     'mysql:host=' . $database_host .
-    ';port=' . $database_port .
-    ';dbname=' . $database_dbname .
-    ';charset=' . $database_charset,
+        ';port=' . $database_port .
+        ';dbname=' . $database_dbname .
+        ';charset=' . $database_charset,
     $database_user,
     $database_password,
     $database_options

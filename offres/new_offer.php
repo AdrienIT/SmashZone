@@ -3,6 +3,11 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include_once('../config.php');
 session_start();
+$_SESSION["user_id"] = 1;
+
+if (!isset($_SESSION["user_id"])) {
+    header("Location: ../index.php");
+}
 
 if (isset($_POST["submit"])) {
     $dispo = "";
@@ -10,6 +15,17 @@ if (isset($_POST["submit"])) {
         if ($val == "true") {
             $dispo = $dispo . $key . "-";
         }
+    }
+    if ($dispo == "" || $_POST["description"] == "") {
+        $msg = "Vous devez remplir tous les champs !";
+    } else {
+        $dispo = substr($dispo, 0, -1);
+        $insert = $db->prepare("INSERT INTO offres (user_id, description, disponibilite) VALUES (:id, :descr, :dispo)");
+        $insert->bindParam(":id", $_SESSION["user_id"]);
+        $insert->bindParam(":descr", $_POST["description"]);
+        $insert->bindParam(":dispo", $dispo);
+        $insert->execute();
+        $msg = "Votre offre a été publiée avec succès !";
     }
 }
 
@@ -104,10 +120,9 @@ if (isset($_POST["submit"])) {
             <button name="submit" id="offer">Poster</button>
         </form>
         <?php
-        if (isset($_POST)) {
-            var_dump($dispo);
-        }
-        ?>
+        if (isset($msg)) { ?>
+            <p><?= $msg ?></p>
+        <?php } ?>
     </div>
 </body>
 
