@@ -24,7 +24,8 @@ h3 {
     text-align: center;
 }
 
-.new_offer {
+.new_offer,
+.filter {
     width: 800px;
     top: 0;
     left: 0;
