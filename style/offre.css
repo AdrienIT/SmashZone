@@ -13,3 +13,24 @@
 h3 {
     text-align: left;
 }
+
+#container-map-selector {
+    width: 300px;
+    height: 300px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: absolute;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.map_display {
+    width: 350px;
+    height: 350px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
