@@ -8,6 +8,15 @@
     left: 0
 }
 
+.main2 {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    top: 0;
+    left: 0
+}
+
 .ball {
     height: 28px;
     position: absolute;
@@ -17,6 +26,15 @@
     left: 113px;
 }
 
+.ball2 {
+    height: 49%;
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    top: 49%;
+    left: 75.5%;
+}
+
 .logo {
     position: absolute;
     padding: 0px;
@@ -24,7 +42,20 @@
     left: 13px;
 }
 
+.logo2 {
+    width: 100%;
+    position: relative;
+    padding: 0px;
+    margin-bottom: 30px;
+}
+
 .logo:hover .ball {
+    -webkit-animation: spin 2s linear infinite;
+    -moz-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+.logo2:hover .ball2 {
     -webkit-animation: spin 2s linear infinite;
     -moz-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
