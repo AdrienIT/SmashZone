@@ -113,8 +113,8 @@ if (isset($_POST["submit"])) {
                         onclick="location.href='login_register/login.php'" type="button">Connexion clubs</button>
                 </form>
                 <form class="form-inline">
-                    <button class="btn btn-outline-danger my-2 my-sm-0"
-                        onclick="location.href='login_register/login.php'" type="button">Administration</button>
+                    <button class="btn btn-outline-danger my-2 my-sm-0" onclick="location.href='../admin/index.php'"
+                        type="button">Administration</button>
                 </form>
             </div>
         </nav>
@@ -212,81 +212,6 @@ if (isset($_POST["submit"])) {
         </div>
         </main>
 
-        <h1>USERS REGISTRATION</h1>
-        <div>
-            <div></div>
-            <div>
-                <div>
-                    <h3>Register</h3>
-                    <form method="post">
-                        <?php if (isset($err)) : ?>
-                        <div><?php echo $err ?></div>
-                        <?php endif ?>
-
-                        <?php if (isset($success)) : ?>
-                        <div>Successful</div>
-                        <?php endif ?>
-                        <div>
-                            <label>Pseudo : </label>
-                            <input required type="text" <?php if (isset($pseudo)) : ?> value="<?php echo $pseudo ?>"
-                                <?php endif ?> name="pseudo">
-                        </div>
-                        <div>
-                            <label>Prenom : </label>
-                            <input required type="text" <?php if (isset($prenom)) : ?> value="<?php echo $prenom ?>"
-                                <?php endif ?> name="prenom">
-                        </div>
-                        <div>
-                            <label>Nom : </label>
-                            <input required type="text" <?php if (isset($nom)) : ?> value="<?php echo $nom ?>"
-                                <?php endif ?> name="nom">
-                        </div>
-                        <div>
-                            <label>Email : </label>
-                            <input required type="email" <?php if (isset($email)) : ?> value="<?php echo $email ?>"
-                                <?php endif ?> name="email">
-                        </div>
-                        <div>
-                            <div>
-                                <label>Ville : </label>
-                                <input required type="ville" <?php if (isset($ville)) : ?> value="<?php echo $ville ?>"
-                                    <?php endif ?> name="ville">
-                            </div>
-                            <div>
-                                <label>Code Postal : </label>
-                                <input required type="postal_code" <?php if (isset($postal_code)) : ?>
-                                    value="<?php echo $postal_code ?>" <?php endif ?> name="postal_code">
-                            </div>
-                            <div>
-                                <label>Téléphone : </label>
-                                <input required type="telephone" <?php if (isset($telephone)) : ?>
-                                    value="<?php echo $telephone ?>" <?php endif ?> name="telephone">
-                            </div>
-                            <div>
-                                <label>Date de naissance : </label>
-                                <input type="date" id="start" name="date_naissance" value="2000-01-01" min="1920-01-01"
-                                    max="<?= $today ?>">
-                            </div>
-                            <div>
-                                <label>Password : </label>
-                                <input required type="password" name="password">
-                            </div>
-                            <div>
-                                <label>Confirmation Password : </label>
-                                <input required type="password_confirm" name="password_confirm">
-                            </div>
-                        </div>
-                        <div>
-                            <button name="submit">Register</button>
-                        </div>
-                        <p>Tu as deja un compte ? <a href="login.php">Connecte toi !</a></p>
-                    </form>
-                </div>
-            </div>
-            <div></div>
-
-        </div>
-        </div>
     </body>
 
 </html>

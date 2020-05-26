@@ -63,8 +63,8 @@ if (isset($_POST["submit"])) {
                         onclick="location.href='login_register/login.php'" type="button">Connexion clubs</button>
                 </form>
                 <form class="form-inline">
-                    <button class="btn btn-outline-danger my-2 my-sm-0"
-                        onclick="location.href='login_register/login.php'" type="button">Administration</button>
+                    <button class="btn btn-outline-danger my-2 my-sm-0" onclick="location.href='../admin/index.php'"
+                        type="button">Administration</button>
                 </form>
             </div>
         </nav>
