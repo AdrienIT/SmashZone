@@ -31,7 +31,8 @@ $user = $query->fetch();
             Bonjour <?php echo $user['prenom'] . " " . $user['nom'] ?></h1>
         <a href="update.php">Edition de profil</a> <br> <br>
         <a href="avatar.php">Photo de profil</a> <br> <br>
-        <a href="logout.php">Se Déconnecter</a>
+        <a href="logout.php">Se Déconnecter</a> <br> <br>
+        <a href="../relations/index.php">Social</a>
     </body>
 
 </html>

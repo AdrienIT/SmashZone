@@ -3,7 +3,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include_once('../config.php');
 session_start();
-$_SESSION["user_id"] = 1;
 
 if (!isset($_SESSION["user_id"])) {
     header("Location: ../index.php");
