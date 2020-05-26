@@ -68,7 +68,7 @@
                             </form>
                             <a href="#!" class="forgot-password-link">Mot de passe oublié ?</a>
                             <p class="login-wrapper-footer-text">Pas de compte ? <a href="#!"
-                                    class="text-reset">S'inscrire</a></p>
+                                    class="text-reset">Register here</a></p>
                         </div>
                     </div>
                 </div>
