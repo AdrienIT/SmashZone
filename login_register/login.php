@@ -73,7 +73,15 @@ if (isset($_POST["submit"])) {
             <div class="container-fluid">
                 <div class="d-flex justify-content-center">
                     <div class="col-sm-3 login-section-wrapper">
-                        <img src="../style/SmahZone1.png" id="logologin" />
+
+
+                        <!-- LAAAA FAUT TAPER DEDANS -->
+                        <div><img class="main" src="style/SmashZone2.png" /><img class="ball"
+                                src="style/SmashZoneIcon.png" />
+                        </div>
+
+
+                        <!---- FIN --->
                         <div class="login-wrapper my-auto">
                             <h1 class="login-title">Connexion</h1>
                             <form method="post">
