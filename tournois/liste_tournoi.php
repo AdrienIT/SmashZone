@@ -5,8 +5,6 @@ include_once('../config.php');
 session_start();
 $_SESSION["user_id"] = 1;
 
-$all_date = "lun_am-mar_am-mer_am-jeu_am-ven_am-sam_am-dim_am-lun_pm-mar_pm-mer_pm-jeu_pm-ven_pm-sam_pm-dim_pm";
-
 if (isset($_POST["submit"])) {
     $title = "Résultats de votre recherche";
     $query = "SELECT c.*, t.* FROM tournois t INNER JOIN clubs u ON (t.club_id = c.club_id) 
@@ -41,7 +39,7 @@ if (isset($_POST["submit"])) {
     $list_offers = $get_offers->fetchAll();
 } else {
     $title = "Dernières offres";
-    $get_offers = $db->prepare("SELECT u.*, o.* FROM offres o INNER JOIN users u ON (o.user_id = u.user_id) ORDER BY o.date_publication DESC");
+    $get_offers = $db->prepare("SELECT t.*, c.* FROM tournois t INNER JOIN clubs c ON (t.club_id = c.club_id) ORDER BY t.date_debut DESC");
     $get_offers->execute();
     $list_offers = $get_offers->fetchAll();
 }
