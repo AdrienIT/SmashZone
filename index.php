@@ -1,52 +1,43 @@
-<<<<<<< HEAD
-test lol
-=======
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <title>SmashZone</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
-        <link href="style/style.css" rel="stylesheet">
-    </head>
+<head>
+    <title>SmashZone</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
+    <link href="style/style.css" rel="stylesheet">
+</head>
 
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #264653; margin-bottom: 20px;">
-            <a href="index.php"><img id="logo" src="style/logo.png" /></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-inline-flex justify-content-left rubriques" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-inline rubriquecolor">
-                        Effectuer une recherche :
-                    </li>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='recherchejouer.php'" type="button">Joueurs</button>
-                    </form>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='recherchejouer.php'" type="button">Clubs</button>
-                    </form>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='recherchejouer.php'" type="button">Autre</button>
-                    </form>
-                </ul>
-            </div>
-            <form class="justify-content-between">
-                <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login.php'" type="button">Se
-                    connecter/S'inscrire lol</button>
-            </form>
-        </nav>
-        <div class="container">
-            <h1>Dernières infos</h1>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #264653; margin-bottom: 20px;">
+        <a href="index.php"><img id="logo" src="style/SmashZone2.png" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-inline-flex justify-content-left rubriques" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-inline rubriquecolor">
+                    Effectuer une recherche :
+                </li>
+                <form class="form-inline">
+                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='recherchejouer.php'" type="button">Joueurs</button>
+                </form>
+                <form class="form-inline">
+                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='recherchejouer.php'" type="button">Clubs</button>
+                </form>
+                <form class="form-inline">
+                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='recherchejouer.php'" type="button">Autre</button>
+                </form>
+            </ul>
         </div>
-    </body>
+        <form class="justify-content-between">
+            <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login.php'" type="button">Se
+                connecter/S'inscrire</button>
+        </form>
+    </nav>
+    <div class="container">
+        <h1>Dernières infos</h1>
+    </div>
+</body>
 
 </html>
->>>>>>> 7bbb48488783e2aefd8f18c3750788647e5b4b6f
