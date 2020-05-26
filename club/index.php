@@ -8,6 +8,5 @@
 <body>
     <a href="login.php">LOGIN</a> <br> <br>
     <a href="register.php">REGISTER</a> <br> <br>
-    <a href="forgot.php">Mot de passe oublié</a>
 </body>
 </html>

@@ -1,24 +1,24 @@
 <?php
 include_once '../config.php';
 session_start();
-if (isset($_SESSION["user_id"])) {
+if (isset($_SESSION["club_id"])) {
 	header('location: home.php');
 }
 
 if (isset($_POST["submit"])) {
-	$pseudo = htmlspecialchars($_POST["pseudo"]);
+	$nom_club = htmlspecialchars($_POST["nom_club"]);
 	$password = md5($_POST["password"]);
 
-	$query1 = $db->prepare("SELECT * FROM users WHERE pseudo = ? AND password = ? ");
-	$query1->execute([$pseudo, $password]);
+	$query1 = $db->prepare("SELECT * FROM clubs WHERE nom_club = ? AND password = ? ");
+	$query1->execute([$nom_club, $password]);
 	$user = $query1->fetch();
 
 
 	if (count($user) > 0) {
-		$_SESSION['user_id'] = $user['user_id'];
-		header('Location: http://localhost/smashzone/login_register/home.php');
+		$_SESSION['club_id'] = $user['club_id'];
+		header('Location: http://localhost/smashzone/club/home.php');
 	} else {
-		$err = "pseudo / Password incorrect";
+		$err = "nom_club / Password incorrect";
 		echo $err;
 	}
 }
@@ -46,8 +46,8 @@ if (isset($_POST["submit"])) {
 							<div><?php echo $err ?></div>
 						<?php endif ?>
 						<div>
-							<label>Pseudo</label>
-							<input required type="text" name="pseudo">
+							<label>nom_club</label>
+							<input required type="text" name="nom_club">
 						</div>
 						<div>
 							<label>Password</label>

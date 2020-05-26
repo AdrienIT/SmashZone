@@ -1,7 +1,7 @@
 <?php
 include_once '../config.php';
 session_start();
-if (isset($_SESSION["user_id"])) {
+if (isset($_SESSION["club_id"])) {
 	header('location: ./home.php');
 }
 
@@ -12,20 +12,18 @@ $today = date("Y-m-d");
 
 if (isset($_POST["submit"])) {
 
-	$pseudo = htmlspecialchars($_POST["pseudo"]);
+	$nom_club = htmlspecialchars($_POST["nom_club"]);
 	$email = htmlspecialchars($_POST["email"]);
 	$ville = htmlspecialchars($_POST['ville']);
-	$date_naissance = htmlspecialchars($_POST['date_naissance']);
 	$telephone = (int) htmlspecialchars($_POST['telephone']);
 	$postal_code = (int) htmlspecialchars($_POST['postal_code']);
 	$password = $_POST["password"];
 	$password_confirm = $_POST["password_confirm"];
-	$prenom = htmlspecialchars($_POST["prenom"]);
-	$nom = htmlspecialchars($_POST["nom"]);
+	$confirme = 0;
 	
 
-	$query1 = $db->prepare("SELECT pseudo FROM users WHERE pseudo = ? ");
-	$query1->execute([$pseudo]);
+	$query1 = $db->prepare("SELECT nom_club FROM clubs WHERE nom_club = ? ");
+	$query1->execute([$nom_club]);
 	if ($query1->rowCount() > 0) {
 		$err = "Utilisateur deja enregistré";
 		echo $err;
@@ -43,22 +41,20 @@ if (isset($_POST["submit"])) {
 					echo $err;
 				} else {
 					$password = md5($password);
-					$query = "INSERT INTO users(pseudo,email,ville,telephone,postal_code,password,date_naissance,prenom,nom) VALUES(:pseudo,:email,:ville,:telephone,:postal_code,:password,:date_naissance,:prenom,:nom)";
+					$query = "INSERT INTO clubs(nom_club,email,ville,telephone,postal_code,password,confirme) VALUES(:nom_club,:email,:ville,:telephone,:postal_code,:password,:confirme)";
 					$query = $db->prepare($query);
-					$query->bindParam(':pseudo', $pseudo);
+					$query->bindParam(':nom_club', $nom_club);
 					$query->bindParam(':email', $email);
 					$query->bindParam(':ville', $ville);
-					$query->bindParam(':prenom', $prenom);
-					$query->bindParam(':nom', $nom);
 					$query->bindParam(':telephone', $telephone);
 					$query->bindParam(':postal_code', $postal_code);
 					$query->bindParam(':password', $password);
-					$query->bindParam(':date_naissance', $date_naissance);
+					$query->bindParam(':confirme', $confirme);
 					if ($query->execute()) {
 
-						$id = (int) $_SESSION["user_id"];
+						$id = (int) $_SESSION["club_id"];
 
-						$query = $db->prepare("SELECT * FROM users WHERE user_id = :id ");
+						$query = $db->prepare("SELECT * FROM clubs WHERE club_id = :id ");
 						$query->bindParam(":id", $id);
 						$query->execute();
 						$user = $query->fetch();
@@ -100,16 +96,8 @@ if (isset($_POST["submit"])) {
 							<div>Successful</div>
 						<?php endif ?>
 						<div>
-							<label>Pseudo : </label>
-							<input required type="text" <?php if (isset($pseudo)) : ?> value="<?php echo $pseudo ?>" <?php endif ?> name="pseudo">
-						</div>
-						<div>
-							<label>Prenom : </label>
-							<input required type="text" <?php if (isset($prenom)) : ?> value="<?php echo $prenom ?>" <?php endif ?> name="prenom">
-						</div>
-						<div>
-							<label>Nom : </label>
-							<input required type="text" <?php if (isset($nom)) : ?> value="<?php echo $nom ?>" <?php endif ?> name="nom">
+							<label>nom_club : </label>
+							<input required type="text" <?php if (isset($nom_club)) : ?> value="<?php echo $nom_club ?>" <?php endif ?> name="nom_club">
 						</div>
 						<div>
 							<label>Email : </label>
@@ -127,10 +115,6 @@ if (isset($_POST["submit"])) {
 							<div>
 								<label>Téléphone : </label>
 								<input required type="telephone" <?php if (isset($telephone)) : ?> value="<?php echo $telephone ?>" <?php endif ?> name="telephone">
-							</div>
-							<div>
-								<label>Date de naissance : </label>
-								<input type="date" id="start" name="date_naissance" value="2000-01-01" min="1920-01-01" max="<?= $today ?>">
 							</div>
 							<div>
 								<label>Password : </label>
