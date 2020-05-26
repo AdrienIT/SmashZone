@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>SmashZone</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
+        <link href="style/style.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-sm navbar-dark flex-column flex-xl-row"
+            style="background-color: #264653; margin-bottom: 20px;">
+            <a href="index.php">
+                <div class="logo"><img class="main" src="style/SmashZone2.png" /><img class="ball"
+                        src="style/SmashZoneIcon.png" /></div>
+            </a>
+            </button>
+            <div class="collapse navbar-collapse d-inline-flex justify-content-left rubriques" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-inline rubriquecolor">
+                        Effectuer une recherche :
+                    </li>
+                    <form class="form-inline">
+                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
+                            onclick="location.href='offres/list_offers.php'" type="button">Partenaires</button>
+                    </form>
+                    <form class="form-inline">
+                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
+                            onclick="location.href='recherchejouer.php'" type="button">Joueurs</button>
+                    </form>
+                    <form class="form-inline">
+                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
+                            onclick="location.href='recherchejouer.php'" type="button">Tournois</button>
+                    </form>
+                </ul>
+            </div>
+            <form class="justify-content-between">
+                <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login.php'" type="button">Se
+                    connecter/S'inscrire</button>
+            </form>
+        </nav>
+        <div class="container">
+            <h1>Dernières infos</h1>
+        </div>
+    </body>
+
+</html>
