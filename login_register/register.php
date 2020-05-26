@@ -205,7 +205,7 @@ if (isset($_POST["submit"])) {
                                         <button name="submit" class="btn btn-info btn-lg">S'inscrire</button>
                                     </div>
                                 </form>
-                                <p>Tu as déjà un compte ? <a href="login.php">Connectes-toi !</a></p>
+                                <p>Tu as déjà un compte ? <a href="login.php">Connecte-toi !</a></p>
                             </div>
                         </div>
                     </div>
