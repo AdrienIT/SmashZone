@@ -119,80 +119,173 @@ if (isset($_POST["submit"])) {
             </div>
         </nav>
         <div>
-            <h1>USERS REGISTRATION</h1>
-            <div>
-                <div></div>
-                <div>
-                    <div>
-                        <h3>Register</h3>
-                        <form method="post">
-                            <?php if (isset($err)) : ?>
-                            <div><?php echo $err ?></div>
-                            <?php endif ?>
 
-                            <?php if (isset($success)) : ?>
-                            <div>Successful</div>
-                            <?php endif ?>
-                            <div>
-                                <label>Pseudo : </label>
-                                <input required type="text" <?php if (isset($pseudo)) : ?> value="<?php echo $pseudo ?>"
-                                    <?php endif ?> name="pseudo">
+            <main>
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-center">
+                        <div class="col-sm-3 login-section-wrapper">
+                            <img src="../style/SmahZone1.png" id="logologin" />
+                            <div class="login-wrapper my-auto">
+                                <h1 class="login-title">Inscription</h1>
+                                <form method="post">
+                                    <?php if (isset($err)) : ?>
+                                    <div><?php echo $err ?></div>
+                                    <?php endif ?>
+
+                                    <?php if (isset($success)) : ?>
+                                    <div>Successful</div>
+                                    <?php endif ?>
+
+                                    <div class="form-group">
+                                        <label for="pseudo">Nom d'utilisateur</label>
+                                        <input required type="text" <?php if (isset($pseudo)) : ?>
+                                            value="<?php echo $pseudo ?>" <?php endif ?> name="pseudo"
+                                            class="form-control">
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col">
+                                            <label for="prenom">Prénom</label>
+                                            <input required type="text" <?php if (isset($prenom)) : ?>
+                                                value="<?php echo $prenom ?>" <?php endif ?> name="prenom"
+                                                class="form-control">
+                                        </div>
+                                        <div class="col">
+                                            <label for="nom">Nom</label>
+                                            <input required type="text" <?php if (isset($nom)) : ?>
+                                                value="<?php echo $nom ?>" <?php endif ?> name="nom"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col">
+                                            <label for="email">E-mail</label>
+                                            <input required type="email" <?php if (isset($email)) : ?>
+                                                value="<?php echo $email ?>" <?php endif ?> name="email"
+                                                class="form-control">
+                                        </div>
+                                        <div class="col">
+                                            <label for="birthdate">Date de naissance</label>
+                                            <input type="date" id="start" name="date_naissance" value="2000-01-01"
+                                                min="1920-01-01" max="<?= $today ?>" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col">
+                                            <label for="ville">Ville</label>
+                                            <input required type="ville" <?php if (isset($ville)) : ?>
+                                                value="<?php echo $ville ?>" <?php endif ?> name="ville"
+                                                class="form-control">
+                                        </div>
+                                        <div class="col">
+                                            <label for="postal_code">Code postal</label>
+                                            <input required type="postal_code" <?php if (isset($postal_code)) : ?>
+                                                value="<?php echo $postal_code ?>" <?php endif ?> name="postal_code"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col">
+                                            <label for="password">Mot de passe</label>
+                                            <input required type="password" name="password" class="form-control">
+                                        </div>
+                                        <div class="col">
+                                            <label for="password_confirm">Confirmer le mot de passe</label>
+                                            <input required type="password" name="password_confirm"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telephone">Numéro de téléphone</label>
+                                        <input required type="telephone" <?php if (isset($telephone)) : ?>
+                                            value="<?php echo $telephone ?>" <?php endif ?> name="telephone"
+                                            class="form-control">
+                                    </div>
+                                    <div class="d-flex justify-content-center flex-column mb-2">
+                                        <button name="submit" class="btn btn-info btn-lg">S'inscrire</button>
+                                    </div>
+                                </form>
+                                <p>Tu as déjà un compte ? <a href="login.php">Connectes-toi !</a></p>
                             </div>
-                            <div>
-                                <label>Prenom : </label>
-                                <input required type="text" <?php if (isset($prenom)) : ?> value="<?php echo $prenom ?>"
-                                    <?php endif ?> name="prenom">
-                            </div>
-                            <div>
-                                <label>Nom : </label>
-                                <input required type="text" <?php if (isset($nom)) : ?> value="<?php echo $nom ?>"
-                                    <?php endif ?> name="nom">
-                            </div>
-                            <div>
-                                <label>Email : </label>
-                                <input required type="email" <?php if (isset($email)) : ?> value="<?php echo $email ?>"
-                                    <?php endif ?> name="email">
-                            </div>
-                            <div>
-                                <div>
-                                    <label>Ville : </label>
-                                    <input required type="ville" <?php if (isset($ville)) : ?>
-                                        value="<?php echo $ville ?>" <?php endif ?> name="ville">
-                                </div>
-                                <div>
-                                    <label>Code Postal : </label>
-                                    <input required type="postal_code" <?php if (isset($postal_code)) : ?>
-                                        value="<?php echo $postal_code ?>" <?php endif ?> name="postal_code">
-                                </div>
-                                <div>
-                                    <label>Téléphone : </label>
-                                    <input required type="telephone" <?php if (isset($telephone)) : ?>
-                                        value="<?php echo $telephone ?>" <?php endif ?> name="telephone">
-                                </div>
-                                <div>
-                                    <label>Date de naissance : </label>
-                                    <input type="date" id="start" name="date_naissance" value="2000-01-01"
-                                        min="1920-01-01" max="<?= $today ?>">
-                                </div>
-                                <div>
-                                    <label>Password : </label>
-                                    <input required type="password" name="password">
-                                </div>
-                                <div>
-                                    <label>Confirmation Password : </label>
-                                    <input required type="password_confirm" name="password_confirm">
-                                </div>
-                            </div>
-                            <div>
-                                <button name="submit">Register</button>
-                            </div>
-                            <p>Tu as deja un compte ? <a href="login.php">Connecte toi !</a></p>
-                        </form>
+                        </div>
                     </div>
                 </div>
-                <div></div>
+        </div>
+        </main>
 
+        <h1>USERS REGISTRATION</h1>
+        <div>
+            <div></div>
+            <div>
+                <div>
+                    <h3>Register</h3>
+                    <form method="post">
+                        <?php if (isset($err)) : ?>
+                        <div><?php echo $err ?></div>
+                        <?php endif ?>
+
+                        <?php if (isset($success)) : ?>
+                        <div>Successful</div>
+                        <?php endif ?>
+                        <div>
+                            <label>Pseudo : </label>
+                            <input required type="text" <?php if (isset($pseudo)) : ?> value="<?php echo $pseudo ?>"
+                                <?php endif ?> name="pseudo">
+                        </div>
+                        <div>
+                            <label>Prenom : </label>
+                            <input required type="text" <?php if (isset($prenom)) : ?> value="<?php echo $prenom ?>"
+                                <?php endif ?> name="prenom">
+                        </div>
+                        <div>
+                            <label>Nom : </label>
+                            <input required type="text" <?php if (isset($nom)) : ?> value="<?php echo $nom ?>"
+                                <?php endif ?> name="nom">
+                        </div>
+                        <div>
+                            <label>Email : </label>
+                            <input required type="email" <?php if (isset($email)) : ?> value="<?php echo $email ?>"
+                                <?php endif ?> name="email">
+                        </div>
+                        <div>
+                            <div>
+                                <label>Ville : </label>
+                                <input required type="ville" <?php if (isset($ville)) : ?> value="<?php echo $ville ?>"
+                                    <?php endif ?> name="ville">
+                            </div>
+                            <div>
+                                <label>Code Postal : </label>
+                                <input required type="postal_code" <?php if (isset($postal_code)) : ?>
+                                    value="<?php echo $postal_code ?>" <?php endif ?> name="postal_code">
+                            </div>
+                            <div>
+                                <label>Téléphone : </label>
+                                <input required type="telephone" <?php if (isset($telephone)) : ?>
+                                    value="<?php echo $telephone ?>" <?php endif ?> name="telephone">
+                            </div>
+                            <div>
+                                <label>Date de naissance : </label>
+                                <input type="date" id="start" name="date_naissance" value="2000-01-01" min="1920-01-01"
+                                    max="<?= $today ?>">
+                            </div>
+                            <div>
+                                <label>Password : </label>
+                                <input required type="password" name="password">
+                            </div>
+                            <div>
+                                <label>Confirmation Password : </label>
+                                <input required type="password_confirm" name="password_confirm">
+                            </div>
+                        </div>
+                        <div>
+                            <button name="submit">Register</button>
+                        </div>
+                        <p>Tu as deja un compte ? <a href="login.php">Connecte toi !</a></p>
+                    </form>
+                </div>
             </div>
+            <div></div>
+
+        </div>
         </div>
     </body>
 
