@@ -1,0 +1,1 @@
+ALTER TABLE `admin` CHANGE `pseudo` `username` VARCHAR(255) NOT NULL, CHANGE `mot_de_passe` `password` VARCHAR(255) NOT NULL; 
