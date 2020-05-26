@@ -17,6 +17,10 @@
     left: 113px;
 }
 
+.articleimg {
+    width: 200px;
+}
+
 .logo {
     position: absolute;
     padding: 0px;
