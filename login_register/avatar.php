@@ -9,23 +9,24 @@ if (!isset($_SESSION["user_id"])) {
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avatar</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../style/favicon.ico" />
+        <title>Avatar</title>
+    </head>
 
-<body>
-    <form action='avatar_upload.php' method='POST' enctype='multipart/form-data'>
-        <p>Choisis ton image de profil (que du png)</p>
-        <input type='file' name='file' id='file'>
-        <input type='submit' name='submit' value='Upload'>
-    </form>
-    <br>
-    <a href="delete_avatar.php">Supprime ton Image de profil</a>
-    <br>
-    <br>
-    <a href="home.php">Retour</a>
-</body>
+    <body>
+        <form action='avatar_upload.php' method='POST' enctype='multipart/form-data'>
+            <p>Choisis ton image de profil (que du png)</p>
+            <input type='file' name='file' id='file'>
+            <input type='submit' name='submit' value='Upload'>
+        </form>
+        <br>
+        <a href="delete_avatar.php">Supprime ton Image de profil</a>
+        <br>
+        <br>
+        <a href="home.php">Retour</a>
+    </body>
 
 </html>

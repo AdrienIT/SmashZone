@@ -29,19 +29,24 @@ $clubs = $db->query('SELECT * FROM clubs');
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Entreprise</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../style/favicon.ico" />
+        <title>Entreprise</title>
+    </head>
 
-<body>
-    <ul>
-        <?php while ($e = $clubs->fetch()) { ?>
-        <li><?= $e['club_id'] ?> : <?= $e['nom_club'] ?><?php if ($e['confirme'] == 0 ) { ?> - <a href="clubs.php?confirme=<?= $e['club_id'] ?>">Confirmer le Compte</a><?php } ?> - <a href="clubs.php?deconfirme=<?= $e['club_id'] ?>">Deconfirmer le Compte</a> - <a href="clubs.php?delete=<?= $e['club_id'] ?>">Supprimer</a>  - <a href="update_club.php?id=<?= $e['club_id'] ?>">Editer le compte</a> </li>
-        <?php } ?>
-    </ul>
+    <body>
+        <ul>
+            <?php while ($e = $clubs->fetch()) { ?>
+            <li><?= $e['club_id'] ?> : <?= $e['nom_club'] ?><?php if ($e['confirme'] == 0 ) { ?> - <a
+                    href="clubs.php?confirme=<?= $e['club_id'] ?>">Confirmer le Compte</a><?php } ?> - <a
+                    href="clubs.php?deconfirme=<?= $e['club_id'] ?>">Deconfirmer le Compte</a> - <a
+                    href="clubs.php?delete=<?= $e['club_id'] ?>">Supprimer</a> - <a
+                    href="update_club.php?id=<?= $e['club_id'] ?>">Editer le compte</a> </li>
+            <?php } ?>
+        </ul>
 
-    <a href="index.php">Retour à la page d'administration</a>
-</body>
+        <a href="index.php">Retour à la page d'administration</a>
+    </body>
 
 </html>

@@ -41,20 +41,21 @@ if (isset($_POST["submit"])) {
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Mot de passe oublié</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../style/favicon.ico" />
+        <meta name="viewport" content="width=, initial-scale=1.0">
+        <title>Mot de passe oublié</title>
+    </head>
 
-<body>
-    <h1>Réinitialise ton mot de passe</h1>
-    <p>Un e-mail vous sera envoyé avec votre nouveau mot de passe !</p>
-    <form action="" method="post" enctype="multipart/form-data">
-        <label>Mail</label>
-        <input required type="text" name="email" placeholder="test@test.com">
-        <button name="submit">Recevoir mon mot de passe !</button>
-    </form>
-</body>
+    <body>
+        <h1>Réinitialise ton mot de passe</h1>
+        <p>Un e-mail vous sera envoyé avec votre nouveau mot de passe !</p>
+        <form action="" method="post" enctype="multipart/form-data">
+            <label>Mail</label>
+            <input required type="text" name="email" placeholder="test@test.com">
+            <button name="submit">Recevoir mon mot de passe !</button>
+        </form>
+    </body>
 
 </html>

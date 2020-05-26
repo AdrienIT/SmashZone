@@ -31,6 +31,7 @@ if (isset($_POST["submit"])) {
 
     <head>
         <title>Connexion</title>
+        <link rel="icon" href="../style/favicon.ico" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
             integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">

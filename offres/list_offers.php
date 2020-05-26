@@ -63,6 +63,7 @@ if (isset($_POST["submit"])) {
 
     <head>
         <meta charset="UTF-8">
+        <link rel="icon" href="../style/favicon.ico" />
         <link href="../style/style.css" rel="stylesheet">
         <link href="../style/offre.css" rel="stylesheet">
         <script src="../script/checkbox.js" type="text/javascript"></script>

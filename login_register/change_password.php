@@ -46,19 +46,20 @@ if (isset($_POST['submit_pass'])) {
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Change pwd</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../style/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Change pwd</title>
+    </head>
 
-<body>
-    <form action="" method="post">
-        <label name="title">Nouveau password</label>
-        <input type="password" name="password1" placeholder="Nouveau mot de passe">
-        <input type="password" name="password2" placeholder="Nouveau mot de passe">
-        <button name="submit_pass">Reset mon mot de passe</button>
-    </form>
-</body>
+    <body>
+        <form action="" method="post">
+            <label name="title">Nouveau password</label>
+            <input type="password" name="password1" placeholder="Nouveau mot de passe">
+            <input type="password" name="password2" placeholder="Nouveau mot de passe">
+            <button name="submit_pass">Reset mon mot de passe</button>
+        </form>
+    </body>
 
 </html>
