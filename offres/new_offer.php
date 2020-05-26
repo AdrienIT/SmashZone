@@ -35,6 +35,7 @@ if (isset($_POST["submit"])) {
 
 <head>
     <link href="../style/style.css" rel="stylesheet">
+    <script src="../script/checkbox.js" type="text/javascript"></script>
     <meta charset="UTF-8">
     <title>Postuler</title>
 </head>
@@ -46,15 +47,15 @@ if (isset($_POST["submit"])) {
             <p>Descritpion de votre demande</p>
             <textarea name="description" form="offer" cols="30" rows="5" placeholder="Description"></textarea>
             <p>Cochez vos disponibilités</p>
-            <table id="offer">
+            <table class="disponibilite">
                 <tr>
-                    <th>Lundi</th>
-                    <th>Mardi</th>
-                    <th>Mercredi</th>
-                    <th>Jeudi</th>
-                    <th>Vendredi</th>
-                    <th>Samedi</th>
-                    <th>Dimanche</th>
+                    <th><input type="checkbox" id="allcb" name="allcb" onclick="checkAll(this, 'lun')">Lundi</th>
+                    <th><input type="checkbox" id="allcb" name="allcb" onclick="checkAll(this, 'mar')">Mardi</th>
+                    <th><input type="checkbox" id="allcb" name="allcb" onclick="checkAll(this, 'mer')">Mercredi</th>
+                    <th><input type="checkbox" id="allcb" name="allcb" onclick="checkAll(this, 'jeu')">Jeudi</th>
+                    <th><input type="checkbox" id="allcb" name="allcb" onclick="checkAll(this, 'ven')">Vendredi</th>
+                    <th><input type="checkbox" id="allcb" name="allcb" onclick="checkAll(this, 'sam')">Samedi</th>
+                    <th><input type="checkbox" id="allcb" name="allcb" onclick="checkAll(this, 'dim')">Dimanche</th>
                 </tr>
                 <tr>
                     <td>

@@ -9,20 +9,9 @@ $all_date = "lun_am-mar_am-mer_am-jeu_am-ven_am-sam_am-dim_am-lun_pm-mar_pm-mer_
 
 if (isset($_POST["submit"])) {
     $title = "Résultats de votre recherche";
-    $query = "SELECT u.*, o.* FROM offres o INNER JOIN users u ON (o.user_id = u.user_id) 
-                WHERE u.classement <= :class_min 
-                AND u.classement >= :class_max
-                AND u.date_naissance <= :date_min
-                AND u.date_naissance >= :date_max
-                AND o.date_publication >= :seniority
-                AND (o.disponibilite LIKE '&'";
-    foreach ($_POST as $key => $val) {
-        if (strpos($all_date, $key)) {
-            $query = $query . " OR o.disponibilite LIKE '%$key%'";
-        }
-    }
-    $query = $query . ")
-                        AND (u.postal_code LIKE '&'";
+    $query = "SELECT c.*, t.* FROM tournois t INNER JOIN clubs u ON (t.club_id = c.club_id) 
+                WHERE 
+                AND (c.postal_code LIKE '&'";
     $all_dep = explode("-", $_POST["dep"]);
     foreach ($all_dep as $dep) {
         $query = $query . " OR u.postal_code LIKE '$dep%'";

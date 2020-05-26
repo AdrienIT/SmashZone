@@ -34,3 +34,35 @@ h3 {
     right: 0;
     margin: auto;
 }
+
+table.disponibilite_mini {
+    font-size: 8px;
+    border-top: 1px solid #555;
+    border-bottom: 1px solid #555;
+    border-right: 1px solid #555;
+    border-spacing: 0px;
+    text-align: center;
+}
+
+.disponibilite_mini tr {
+    margin: 0;
+    height: 20px;
+}
+
+.disponibilite_mini th {
+    border-bottom: 1px solid #555;
+}
+
+.disponibilite_mini th,
+.disponibilite_mini td {
+    width: 43px;
+    border-left: 1px solid #555;
+}
+
+td._1 {
+    background-color: #32CD32;
+}
+
+td._ {
+    background-color: #FF6347;
+}
