@@ -128,7 +128,7 @@ if (isset($_POST["submit"])) {
             </div>
         </nav>
 
-        <div class="filter">
+        <div class="container">
             <h1>Recherche des offres de partenaires</h1>
             <h2>Filtrez votre recherche</h2>
             <form method="post">
@@ -315,7 +315,7 @@ if (isset($_POST["submit"])) {
                 <br>
                 <br>
                 <p>Cochez vos disponibilités</p>
-                <table id="disponbilite">
+                <table class="tableoffer">
                     <tr>
                         <th><input type="checkbox" id="allcb" name="allcb" onclick="checkAll(this, 'lun')">Lundi</th>
                         <th><input type="checkbox" id="allcb" name="allcb" onclick="checkAll(this, 'mar')">Mardi</th>
@@ -388,7 +388,7 @@ if (isset($_POST["submit"])) {
                 </table>
                 <button name="submit" id="search" class="invisible"></button>
             </form>
-            <button onclick="getDepData()">Rechercher</button>
+            <button onclick="getDepData()" type="button" class="btn btn-primary">Rechercher</button>
 
         </div>
         <div class="list_offer">
