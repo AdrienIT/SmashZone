@@ -104,7 +104,7 @@ if (isset($_POST["submit"])) {
                     </li>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='offres/list_offers.php'" type="button">Partenaires</button>
+                            onclick="location.href='list_offers.php'" type="button">Partenaires</button>
                     </form>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
