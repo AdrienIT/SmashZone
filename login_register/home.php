@@ -1,8 +1,18 @@
 <?php
+include_once "../config.php";
 session_start();
 if (!isset($_SESSION["user_id"])) {
-	header('location: login.php');
+    header('location: login.php');
 }
+
+$id = (int) $_SESSION["user_id"];
+
+$query = $db->prepare('SELECT prenom,nom FROM users WHERE user_id = :user_id');
+$query->bindParam(':user_id', $id);
+$query->execute();
+
+$user = $query->fetch();
+
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +23,8 @@ if (!isset($_SESSION["user_id"])) {
     <title>Homepage</title>
 </head>
 <body>
-    <a href="logout.php">Se Déconnecter</a> <br>
-    <a href="update.php">Edition de profil</a>
+    <h1>Bonjour <?php echo $user['prenom'] . " " . $user['nom'] ?></h1>
+    <a href="update.php">Edition de profil</a> <br> <br>
+    <a href="logout.php">Se Déconnecter</a>
 </body>
 </html>
