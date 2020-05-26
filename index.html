@@ -3,6 +3,7 @@
 
 <head>
     <title>SmashZone</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
     <link href="style/style.css" rel="stylesheet">
@@ -10,7 +11,9 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #264653; margin-bottom: 20px;">
-        <a href="index.php"><img id="logo" src="style/SmashZone2.png" /></a>
+        <a href="index.html">
+            <div class="logo"><img class="main" src="style/SmashZone2.png" /><img class="ball" src="style/SmashZoneIcon.png" /></div>
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -20,10 +23,10 @@
                     Effectuer une recherche :
                 </li>
                 <form class="form-inline">
-                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='recherchejouer.php'" type="button">Joueurs</button>
+                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='offres/list_offers.php'" type="button">Partenaires</button>
                 </form>
                 <form class="form-inline">
-                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='recherchejouer.php'" type="button">Clubs</button>
+                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='recherchejouer.php'" type="button">Tournois</button>
                 </form>
                 <form class="form-inline">
                     <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='recherchejouer.php'" type="button">Autre</button>
