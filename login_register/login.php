@@ -1,9 +1,9 @@
 <?php
 include_once '../config.php';
-/* 	session_start();
-	if (isset($_SESSION["user_id"])) {
-		header('location: ./home.php');
-	} */
+session_start();
+if (isset($_SESSION["user_id"])) {
+	header('location: home.php');
+}
 
 if (isset($_POST["submit"])) {
 	$pseudo = htmlspecialchars($_POST["pseudo"]);
@@ -19,6 +19,7 @@ if (isset($_POST["submit"])) {
 		header('Location: http://localhost/smashzone/login_register/home.php');
 	} else {
 		$err = "pseudo / Password incorrect";
+		echo $err;
 	}
 }
 ?>
@@ -59,6 +60,7 @@ if (isset($_POST["submit"])) {
 						<p>Pas encore de compte ? <a href="register.php">Inscrit toi !</a></p>
 					</form>
 				</div>
+				<a href="reset-password.php">Mot de passe oublié ?</a>
 			</div>
 			<div></div>
 		</div>
