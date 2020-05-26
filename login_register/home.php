@@ -14,6 +14,6 @@ if (!isset($_SESSION["user_id"])) {
 </head>
 <body>
     <a href="logout.php">Se Déconnecter</a> <br>
-    <a href="update.php">Edition de profile</a>
+    <a href="update.php">Edition de profil</a>
 </body>
 </html>
