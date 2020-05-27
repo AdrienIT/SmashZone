@@ -9,6 +9,14 @@ let months = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "
 let monthAndYear = document.getElementById("monthAndYear");
 // showCalendar(currentMonth, currentYear);
 
+function toggleFilters() {
+    div = document.getElementsByClassName("filter")[1]
+    if (div.classList.contains("hide")) {
+        div.classList.remove("hide")
+    } else {
+        div.classList.add("hide")
+    }
+}
 
 function next() {
     currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
