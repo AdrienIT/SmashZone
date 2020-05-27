@@ -96,7 +96,7 @@ $id = (int) $_SESSION["user_id"];
             <p>Entrez le pseudo ou l'adresse email de la personne à ajouter :</p>
             <form action="" method="post">
                 <input required type="text" name="name" class="form-control">
-                <button name="submit" type="button" class="btn btn-primary">Ajouter aux amis</button>
+                <button name="submit" type="submit" class="btn btn-primary">Ajouter aux amis</button>
             </form>
             <?php var_dump($_POST['name']); 
             var_dump($_POST['submit']);?>
