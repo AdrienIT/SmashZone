@@ -1,3 +1,17 @@
+<?php
+
+include 'config.php';
+
+session_start();
+if (!isset($_SESSION["user_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -43,8 +57,7 @@
                 </form>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login_register/login.php'" type="button">Se
-                    connecter/S'inscrire</button>
+                <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login_register/login.php'" type="button"><?= $connect ?></button>
             </form>
         </div>
     </nav>

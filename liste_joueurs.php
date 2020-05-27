@@ -3,8 +3,6 @@ include_once 'config.php';
 
 $users = $db->query('SELECT * FROM users');
 
-$fetch = $users->fetch();
-
 
 ?>
 
@@ -35,7 +33,7 @@ $fetch = $users->fetch();
                     <td style="border: 1px solid black;"><?= $u['prenom'] ?></td>
                     <td style="border: 1px solid black;"><?= $u['classement'] ?></td>
                     <td style="border: 1px solid black;"><?= $u['telephone'] ?></td>
-                    <td style="border: 1px solid black;"><a href="add_friend.php"></a>Add friend</td>
+                    <td style="border: 1px solid black;"><a href="add_friend.php">Add friend</a></td>
                 </tr>
             <?php } ?>
         </tbody>
