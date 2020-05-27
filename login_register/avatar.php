@@ -54,7 +54,7 @@ if (!isset($_SESSION["user_id"])) {
                     </form>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='recherchejouer.php'" type="button">Joueurs</button>
+                            onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
                     </form>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
