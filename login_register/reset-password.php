@@ -95,7 +95,7 @@ if (isset($_POST["submit"])) {
                         <input class="form-control col-xl-4" required type="text" name="email">
                     </div>
                     <div class="row mb-4 justify-content-center">
-                        <button name="submit" type="button" class="btn btn-primary">Recevoir mon mot de passe</button>
+                        <button name="submit" type="submit" class="btn btn-primary">Recevoir mon mot de passe</button>
                     </div>
                     <a class="row justify-content-center" href="login.php">Annuler</a>
                 </form>
