@@ -399,10 +399,9 @@ if (isset($_POST["submit"])) {
                 <button onclick="getDepData()" type="button" class="btn btn-primary text-center">Rechercher</button>
             </div>
 
-        </div>
-        <div class="list_offer">
-            <h2><?= $title ?></h2>
-            <?php foreach ($list_offers as $offre) {
+            <div class="list_offer">
+                <h2><?= $title ?></h2>
+                <?php foreach ($list_offers as $offre) {
             $nom = $offre["nom"];
             $prenom = $offre["prenom"];
             if (strpos(strval($offre["classement"]), ".")) {
@@ -417,14 +416,16 @@ if (isset($_POST["submit"])) {
             $description = $offre["description"];
             $publi = new DateTime(strval($offre["date_publication"]));
             $date_publi = $publi->format("d/m/Y H:i:s"); ?>
-            <div class="offre">
-                <h3><?= $nom . " " . $prenom ?></h3>
-                <p><?= $age . " ans - " . $classement ?></p>
-                <i><?= $date_publi ?></i>
-                <p><?= $description ?></p>
+                <div class="offre">
+                    <h3><?= $nom . " " . $prenom ?></h3>
+                    <p><?= $age . " ans - " . $classement ?></p>
+                    <i><?= $date_publi ?></i>
+                    <p><?= $description ?></p>
 
+                </div>
             </div>
             <?php } ?>
+
         </div>
     </body>
 

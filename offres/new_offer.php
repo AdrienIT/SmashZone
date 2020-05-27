@@ -181,6 +181,30 @@ if (isset($_POST["submit"])) {
             <p><?= $msg ?></p>
             <?php } ?>
         </div>
+
+        <!-- <footer class="footer font-small pt-2" style="background-color: #264653; color: #2a9d8f">
+            <div class="container" style="background-color: #264653;">
+                <div class="row justify-content-around">
+                    <a href="http://endless.horse/">
+                        <img class="imgfooter" src=../style/contact.png />
+                    </a>
+                    <a href="http://corndog.io/">
+                        <img class="imgfooter" src=../style/github.png />
+                    </a>
+                    <a href="https://ynov-bordeaux.com/">
+                        <img class="imgfooter" src=../style/ynov.png />
+                    </a>
+                    <a href="https://twitter.com/FantHaxV1">
+                        <img class="imgfooter" src=../style/twitter.png />
+                    </a>
+                </div>
+            </div>
+            <div class="footer-copyright text-center py-3" style="background-color: #264653; color: white;">© 2020
+                Copyright
+                <a href="https://thatsthefinger.com/"> SmashZone</a>
+            </div>
+
+        </footer> -->
     </body>
 
 </html>

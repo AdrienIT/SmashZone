@@ -1,4 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+html {
+    margin:0;
+    padding:0;
+ }
+
 .main {
     height: 30px;
     margin: 0px;
@@ -37,6 +43,11 @@
     position: absolute;
     width: 100%;
     bottom: 0;
+    height: 115px;
+}
+
+.imgfooter {
+    height: 50px;
 }
 
 .articleimg {

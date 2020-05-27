@@ -108,27 +108,31 @@ if (!isset($_SESSION["user_id"])) {
                 </div>
             </div>
         </div>
-        <!-- Footer -->
-        <footer class="footer font-small pt-4" style="background-color: #264653; color: #2a9d8f">
 
-            <!-- Footer Links -->
+        <!-- <footer class="footer font-small pt-2" style="background-color: #264653; color: #2a9d8f">
+
             <div class="container" style="background-color: #264653;">
-                <div class="row">
-                    <div class="col-sm">
-                        <p>lol</p>
-                        <p>fezfzefez</p>
-                    </div>
+                <div class="row justify-content-around">
+                    <a href="http://endless.horse/">
+                        <img class="imgfooter" src=style/contact.png />
+                    </a>
+                    <a href="http://corndog.io/">
+                        <img class="imgfooter" src=style/github.png />
+                    </a>
+                    <a href="https://ynov-bordeaux.com/">
+                        <img class="imgfooter" src=style/ynov.png />
+                    </a>
+                    <a href="https://twitter.com/FantHaxV1">
+                        <img class="imgfooter" src=style/twitter.png />
+                    </a>
                 </div>
             </div>
-            <!-- Footer Links -->
-
-            <!-- Copyright -->
             <div class="footer-copyright text-center py-3" style="background-color: #264653; color: white;">© 2020
                 Copyright
                 <a href="https://thatsthefinger.com/"> SmashZone</a>
             </div>
 
-        </footer>
+        </footer> -->
     </body>
 
 </html>
