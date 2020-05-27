@@ -28,39 +28,43 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Login</title>
-</head>
-<body>
-	<div>
-		<h1>Admin page</h1>
-		<div>
-			<div></div>	
-			<div>
-				<div>
-					<h3>Login</h3>
-					<form method="post">
-						<?php if (isset($err)): ?>
-							<div><?php echo $err ?></div>
-						<?php endif ?>
-						<div>
-							<label>Username</label>
-							<input required type="text" name="username">
-						</div>
-						<div>
-							<label>Password</label>
-							<input required type="password" name="password">
-						</div>
-						
-						<div>
-							<button name="submit">Login</button>
-						</div>
-					</form>
-				</div>	
-			</div>
-			<div></div>	<br>
-			<a href="../index.php">Back</a>
-		</div>
-	</div>
-</body>
+
+    <head>
+        <title>Login</title>
+        <link rel="icon" href="../style/favicon.ico" />
+    </head>
+
+    <body>
+        <div>
+            <h1>Admin page</h1>
+            <div>
+                <div></div>
+                <div>
+                    <div>
+                        <h3>Login</h3>
+                        <form method="post">
+                            <?php if (isset($err)): ?>
+                            <div><?php echo $err ?></div>
+                            <?php endif ?>
+                            <div>
+                                <label>Username</label>
+                                <input required type="text" name="username">
+                            </div>
+                            <div>
+                                <label>Password</label>
+                                <input required type="password" name="password">
+                            </div>
+
+                            <div>
+                                <button name="submit">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div></div> <br>
+                <a href="../index.php">Back</a>
+            </div>
+        </div>
+    </body>
+
 </html>

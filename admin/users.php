@@ -18,18 +18,21 @@ if (isset($_GET['delete']) and !empty($_GET['delete'])) {
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Users</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../style/favicon.ico" />
+        <title>Users</title>
+    </head>
 
-<body>
-    <ul>
-        <?php while ($u = $users->fetch()) { ?>
-            <li><?= $u['user_id'] ?> : <?= $u['pseudo'] ?> - <a href="users.php?delete=<?= $u['user_id'] ?>">Supprimer</a> - <a href="update_user.php?id=<?= $u['user_id'] ?>">Editer le compte</a> </li>
-        <?php } ?>
-    </ul>
-    <a href="index.php">Retour à la page d'administration</a>
-</body>
+    <body>
+        <ul>
+            <?php while ($u = $users->fetch()) { ?>
+            <li><?= $u['user_id'] ?> : <?= $u['pseudo'] ?> - <a
+                    href="users.php?delete=<?= $u['user_id'] ?>">Supprimer</a> - <a
+                    href="update_user.php?id=<?= $u['user_id'] ?>">Editer le compte</a> </li>
+            <?php } ?>
+        </ul>
+        <a href="index.php">Retour à la page d'administration</a>
+    </body>
 
 </html>

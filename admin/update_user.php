@@ -90,34 +90,37 @@ if (isset($user["user_id"])) {
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Edition de profil</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../style/favicon.ico" />
+        <title>Edition de profil</title>
+    </head>
 
-<body>
-    <h1>Edition de profil</h1>
-    <form method="POST" action="" enctype="multipart/form-data">
-        <label>Username : </label>
-        <input type="text" name="newpseudo" placeholder="Pseudo" value="<?php echo $user['pseudo']; ?>"> <br> <br>
-        <label>E-Mail : </label>
-        <input type="text" name="new_mail" placeholder="Mail" value="<?php echo $user['email']; ?>"> <br> <br>
-        <label>Prenom : </label>
-        <input type="text" name="new_prenom" placeholder="prenom" value="<?php echo $user['prenom']; ?>"> <br> <br>
-        <label>Nom : </label>
-        <input type="text" name="new_nom" placeholder="nom" value="<?php echo $user['nom']; ?>"> <br> <br>
-        <label>Ville : </label>
-        <input type="text" name="new_ville" placeholder="ville" value="<?php echo $user['ville']; ?>"> <br> <br>
-        <label>Code Postal : </label>
-        <input type="text" name="new_postal_code" placeholder="postal_code" value="<?php echo $user['postal_code']; ?>"> <br> <br>
-        <label>Telephone : </label>
-        <input type="numbers" max="10" name="new_telephone" placeholder="telephone" value="<?php echo $user['telephone']; ?>"> <br> <br>
-        <label>Mot de passe : </label>
-        <input type="password" name="newpasswd1" placeholder="Password"> <br> <br>
-        <label>Confirmation - Mot de passe</label>
-        <input type="password" name="newpasswd2" placeholder="Password"> <br> <br>
-        <input type="submit" value="Mettre à jour le profil !">
-    </form>
-    <a href="home.php">Retour au profil</a>
+    <body>
+        <h1>Edition de profil</h1>
+        <form method="POST" action="" enctype="multipart/form-data">
+            <label>Username : </label>
+            <input type="text" name="newpseudo" placeholder="Pseudo" value="<?php echo $user['pseudo']; ?>"> <br> <br>
+            <label>E-Mail : </label>
+            <input type="text" name="new_mail" placeholder="Mail" value="<?php echo $user['email']; ?>"> <br> <br>
+            <label>Prenom : </label>
+            <input type="text" name="new_prenom" placeholder="prenom" value="<?php echo $user['prenom']; ?>"> <br> <br>
+            <label>Nom : </label>
+            <input type="text" name="new_nom" placeholder="nom" value="<?php echo $user['nom']; ?>"> <br> <br>
+            <label>Ville : </label>
+            <input type="text" name="new_ville" placeholder="ville" value="<?php echo $user['ville']; ?>"> <br> <br>
+            <label>Code Postal : </label>
+            <input type="text" name="new_postal_code" placeholder="postal_code"
+                value="<?php echo $user['postal_code']; ?>"> <br> <br>
+            <label>Telephone : </label>
+            <input type="numbers" max="10" name="new_telephone" placeholder="telephone"
+                value="<?php echo $user['telephone']; ?>"> <br> <br>
+            <label>Mot de passe : </label>
+            <input type="password" name="newpasswd1" placeholder="Password"> <br> <br>
+            <label>Confirmation - Mot de passe</label>
+            <input type="password" name="newpasswd2" placeholder="Password"> <br> <br>
+            <input type="submit" value="Mettre à jour le profil !">
+        </form>
+        <a href="home.php">Retour au profil</a>
 
 </html>

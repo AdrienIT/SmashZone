@@ -29,42 +29,43 @@ if (isset($_POST["submit"])) {
 <!DOCTYPE html>
 <html>
 
-<head>
-	<title>Login</title>
-</head>
+    <head>
+        <title>Login</title>
+        <link rel="icon" href="../style/favicon.ico" />
+    </head>
 
-<body>
-	<div>
-		<h1>USERS LOGIN</h1>
-		<div>
-			<div></div>
-			<div>
-				<div>
-					<h3>Login</h3>
-					<form method="post">
-						<?php if (isset($err)) : ?>
-							<div><?php echo $err ?></div>
-						<?php endif ?>
-						<div>
-							<label>nom_club</label>
-							<input required type="text" name="nom_club">
-						</div>
-						<div>
-							<label>Password</label>
-							<input required type="password" name="password">
-						</div>
+    <body>
+        <div>
+            <h1>USERS LOGIN</h1>
+            <div>
+                <div></div>
+                <div>
+                    <div>
+                        <h3>Login</h3>
+                        <form method="post">
+                            <?php if (isset($err)) : ?>
+                            <div><?php echo $err ?></div>
+                            <?php endif ?>
+                            <div>
+                                <label>nom_club</label>
+                                <input required type="text" name="nom_club">
+                            </div>
+                            <div>
+                                <label>Password</label>
+                                <input required type="password" name="password">
+                            </div>
 
-						<div>
-							<button name="submit">Login</button>
-						</div>
-						<p>Pas encore de compte ? <a href="register.php">Inscrit toi !</a></p>
-					</form>
-				</div>
-				<a href="reset-password.php">Mot de passe oublié ?</a>
-			</div>
-			<div></div>
-		</div>
-	</div>
-</body>
+                            <div>
+                                <button name="submit">Login</button>
+                            </div>
+                            <p>Pas encore de compte ? <a href="register.php">Inscrit toi !</a></p>
+                        </form>
+                    </div>
+                    <a href="reset-password.php">Mot de passe oublié ?</a>
+                </div>
+                <div></div>
+            </div>
+        </div>
+    </body>
 
 </html>

@@ -3,6 +3,7 @@
 
     <head>
         <title>SmashZone</title>
+        <link rel="icon" href="style/favicon.ico" />
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
             integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -46,16 +47,53 @@
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
                             onclick="location.href='recherchejouer.php'" type="button">Tournois</button>
                     </form>
+                    <form class="form-inline ml-5">
+                        <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch"
+                            onclick="location.href='offres/new_offer.php'" type="button">Poster une annonce</button>
+                    </form>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login_register/index.php'"
+                    <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login_register/login.php'"
                         type="button">Se
                         connecter/S'inscrire</button>
                 </form>
             </div>
         </nav>
         <div class="container">
-            <h1>Dernières infos</h1>
+            <h1 class="mb-4">Dernières infos</h1>
+            <div class="row border rounded mb-4">
+                <div class="col-4">
+                    <img class="articleimg img-fluid" src="style/test.jpg" />
+                </div>
+                <div class="col-6">
+                    <h3 class="text-sm-left">Champion du monde tennis très fort là maintenant</h3>
+                    <p class="text-sm-left"> Maintes fois, précisément la phrase que le besoin de prendre l'offensive
+                        dans ce cas que le ministre reprenait sa place de six mille braves en tant de manières qu'elle
+                        gardait près d'elle pour être sa meilleure huile d'olive.</p>
+                </div>
+            </div>
+            <div class="row border rounded mb-4">
+                <div class="col-4">
+                    <img class="articleimg img-fluid" src="style/test.jpg" />
+                </div>
+                <div class="col-6">
+                    <h3 class="text-sm-left">Blablabla post sur le tennis t'as capté</h3>
+                    <p class="text-sm-left"> Uniformément aussi, la parole de son frère le duc d'une voix sèche, donnant
+                        libre cours à vos ego naturellement vachards. Fils de soldat et de citoyen ; et se tournant vers
+                        moi, je puis nombrer en elle plusieurs lacunes, la plupart de celles du paradis.</p>
+                </div>
+            </div>
+            <div class="row border rounded mb-4">
+                <div class="col-4">
+                    <img class="articleimg img-fluid" src="style/test.jpg" />
+                </div>
+                <div class="col-6">
+                    <h3 class="text-sm-left">AwayFromNetwork sponsorise le projet (c'est faux)</h3>
+                    <p class="text-sm-left"> Persuadé que ce sera impossible, répondit le greffier, un peu fat auprès
+                        des femmes ? Indisposée par cette vision, qui est restée inachevée. Conscience, que vous
+                        poursuivez, ils se retirèrent avec respect.</p>
+                </div>
+            </div>
         </div>
     </body>
 
