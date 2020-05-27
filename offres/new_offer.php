@@ -2,13 +2,13 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include_once('../config.php');
-session_start();
+/* session_start();
 $_SESSION["user_id"] = 1;
 
 if (!isset($_SESSION["user_id"])) {
     header("Location: ../index.php");
 }
-
+ */
 if (isset($_POST["submit"])) {
     $dispo = "";
     foreach ($_POST as $key => $val) {

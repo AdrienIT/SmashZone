@@ -79,7 +79,7 @@ if (isset($user["user_id"])) {
             $update_password->execute();
             header('Location: update.php?id='.$id);
         } else {
-            $err_passwd = "Les mdp ne correspondent pas";
+            $err_passwd = "<script>alert('Les mdp ne correspondent pas');</script>";
             echo $err_passwd;
         }
     }
