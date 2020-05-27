@@ -17,10 +17,10 @@ $query->execute();
 
 $user = $query->fetch();
 
-$queryfriend = $db->prepare('SELECT u.prenom,r.request_id FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE status = "En attente"');
+$queryfriend = $db->prepare('SELECT u.pseudo,r.request_id FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE r.status = "En attente" AND r.receiver_id = :user_id');
+$queryfriend->bindParam(':user_id', $id);
 $queryfriend->execute();
-
-$userfriend = $query->fetch();
+$userfriend = $queryfriend->fetch();
 
 
 ?>
@@ -90,9 +90,12 @@ $userfriend = $query->fetch();
             <p>Amis en ligne :</p>
             <p>Demandes d'amis</p>
             <a>Ajouter un ami</a>
-            <?php foreach ($userfriend as $row) {
-                echo $row['u.prenom'];
-            }?>
+            <?php if(empty($userfriend)) {
+                echo "<p> Vous n'avez pas d'ami</p>";
+            } else {
+                ?>
+            <p> <?php
+            echo $userfriend['0']; }?> souhaite devenir votre ami </p>
         </div>
     </body>
 
