@@ -207,12 +207,12 @@ if (isset($user["user_id"])) {
                                 <div class="row mb-4">
                                     <div class="col">
                                         <label for="password">Mot de passe</label>
-                                        <input type="text" name="newpasswd1" placeholder="Ancien mot de passe"
+                                        <input type="password" name="newpasswd1" placeholder="Ancien mot de passe"
                                             class="form-control">
                                     </div>
                                     <div class="col">
                                         <label for="password_confirm">Confirmer le mot de passe</label>
-                                        <input type="text" name="newpasswd2" placeholder="Nouveau mot de passe"
+                                        <input type="password" name="newpasswd2" placeholder="Nouveau mot de passe"
                                             class="form-control">
                                     </div>
                                 </div>
