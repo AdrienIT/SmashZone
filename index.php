@@ -72,6 +72,7 @@ if (!isset($_SESSION["user_id"])) {
                 </form>
             </div>
         </nav>
+
         <div class="container">
             <h1 class="mb-4">Dernières infos</h1>
             <div class="row border rounded mb-4">
