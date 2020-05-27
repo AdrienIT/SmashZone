@@ -11,18 +11,31 @@ if (!isset($_SESSION["user_id"])) {
 
 $id = (int) $_SESSION["user_id"];
 
+$getusername = $db->prepare('SELECT pseudo FROM users WHERE user_id = :user_id');
+$getusername->bindParam(':user_id', $id);
+$getusername->execute();
+$username = $getusername->fetch();
+
 $query = $db->prepare('SELECT prenom,nom FROM users WHERE user_id = :user_id');
 $query->bindParam(':user_id', $id);
 $query->execute();
 
 $user = $query->fetch();
 
-$queryfriend = $db->prepare('SELECT u.pseudo,r.request_id FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE r.status = "En attente" AND r.receiver_id = :user_id');
-$queryfriend->bindParam(':user_id', $id);
+$queryfriend = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE r.status = "En attente" AND r.receiver_name = :receiver_name');
+$queryfriend->bindParam(':receiver_name', $username['0']);
 $queryfriend->execute();
 $userfriend = $queryfriend->fetchAll();
 
+$senderid = $userfriend;
+// if (isset($_POST['accepter'])) {
+//     $senderid = $db->prepare('SELECT sender_id FROM relationships WHERE sender_id = :sender_id AND receiver_name = :receiver_name');
+//     $queryaccept = $db->prepare('UPDATE relationships SET status = "Ami" WHERE status = "En attente" AND sender_id = :sender_id');
+//     $queryaccept->bindParam(':sender_id', $senderid);
+//    $queryaccept->execute();
+// }
 
+var_dump($senderid);
 ?>
 
 <!DOCTYPE html>
@@ -97,7 +110,10 @@ $userfriend = $queryfriend->fetchAll();
             <p> <?php 
             foreach($userfriend as $row) {
             echo $row['pseudo'];
-            echo " souhaite devenir votre ami <br>"; } }?>
+            echo " souhaite devenir votre ami <form action='' method='post'>
+            <button name='accepter' type='submit' class='btn btn-primary ml-4'>Accepter</button>";
+            echo "<button name='refuser' type='submit' class='btn btn-danger ml-4'>Refuser</button>  </form>";
+            } }?>
         </div>
     </body>
 
