@@ -119,8 +119,8 @@ if (isset($_POST["submit"])) {
                 </form>
             </div>
         </nav>
-        <div>
 
+        <div>
             <main>
                 <div class="container">
                     <div class="d-flex justify-content-center">
