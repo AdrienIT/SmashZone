@@ -4,6 +4,12 @@ ini_set('display_errors', 1);
 include_once('../config.php');
 /* session_start();
 $_SESSION["user_id"] = 1; */
+session_start();
+if (!isset($_SESSION["user_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
 
 $all_date = "lun_am-mar_am-mer_am-jeu_am-ven_am-sam_am-dim_am-lun_pm-mar_pm-mer_pm-jeu_pm-ven_pm-sam_pm-dim_pm";
 
@@ -122,8 +128,7 @@ if (isset($_POST["submit"])) {
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <button class="btn btn-outline-info my-2 my-sm-0"
-                        onclick="location.href='../login_register/login.php'" type="button">Se
-                        connecter/S'inscrire</button>
+                        onclick="location.href='../login_register/login.php'" type="button"><?= $connect ?></button>
                 </form>
             </div>
         </nav>
