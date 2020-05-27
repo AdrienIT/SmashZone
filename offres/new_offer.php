@@ -174,7 +174,7 @@ if (isset($_POST["submit"])) {
                         </td>
                     </tr>
                 </table>
-                <button name="submit" id="offer" type="button" class="btn btn-primary">Poster</button>
+                <button name="submit" id="offer" type="submit" class="btn btn-primary">Poster</button>
             </form>
             <?php
         if (isset($msg)) { ?>
