@@ -2,8 +2,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include_once('../config.php');
-session_start();
-$_SESSION["user_id"] = 1;
+/* session_start();
+$_SESSION["user_id"] = 1; */
 
 $all_date = "lun_am-mar_am-mer_am-jeu_am-ven_am-sam_am-dim_am-lun_pm-mar_pm-mer_pm-jeu_pm-ven_pm-sam_pm-dim_pm";
 
