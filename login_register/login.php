@@ -59,8 +59,8 @@ if (isset($_POST["submit"])) {
                 <span class="navbar-toggler-icon"></span> </button>
             <div class="collapse navbar-collapse rubriques" id="navbarNav">
                 <form class="form-inline ml-auto p-2">
-                    <button class="btn btn-outline-success my-2 my-sm-0"
-                        onclick="location.href='login_register/login.php'" type="button">Connexion clubs</button>
+                    <button class="btn btn-outline-success my-2 my-sm-0" onclick="location.href='../club/login.php'"
+                        type="button">Connexion clubs</button>
                 </form>
                 <form class="form-inline">
                     <button class="btn btn-outline-danger my-2 my-sm-0" onclick="location.href='../admin/index.php'"
