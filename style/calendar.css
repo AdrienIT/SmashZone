@@ -1,0 +1,30 @@
+.el-1 {
+    width: 70px;
+    height: 5px;
+    background-color: red;
+    position: absolute;
+    margin-top: 20px;
+}
+
+.el-2 {
+    width: 100%;
+    height: 5px;
+    background-color: green;
+    position: absolute;
+    margin-top: 30px;
+}
+
+.card {
+    width: 100%;
+}
+
+.table td {
+    padding: 0
+}
+
+.table th,
+.table td {
+    width: 10%;
+    height: 60px;
+    ;
+}
