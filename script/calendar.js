@@ -45,10 +45,10 @@ function showCalendar(month, year) {
 
     // creating all cells
     let date = 1;
+    let color_index = 1
     for (let i = 0; i < 6; i++) {
         // creates a table row
         let row = document.createElement("tr");
-
         //creating individual cells, filing them up with data.
         for (let j = 0; j < 7; j++) {
             if (i === 0 && j < firstDay) {
@@ -67,17 +67,39 @@ function showCalendar(month, year) {
                     if (date >= debut.getDate() && year >= debut.getFullYear() && month >= debut.getMonth() && date <= fin.getDate() && year <= fin.getFullYear() && month <= fin.getMonth()) {
                         div = document.createElement('div')
                         if (typeof liste_tournois[k]["order"] === 'undefined') {
-                            liste_tournois[k]["order"] = cell.childElementCount + 1
+                            for (var l = 1; l <= 100; l++) {
+                                if (cell.getElementsByClassName("el-" + l.toString()).length === 0) {
+                                    liste_tournois[k]["order"] = "el-" + l.toString()
+                                    break;
+                                }
+                            }
                         }
-                        div.className = "el-" + liste_tournois[k]["order"].toString()
-                        cell.appendChild(div)
+                        if (typeof liste_tournois[k]["color"] === 'undefined') {
+                            liste_tournois[k]["color"] = color_index;
+                            color_index += 1;
+                            if (color_index > 10) {
+                                color_index = 1
+                            }
+                        }
+                        if (date === debut.getDate() && year === debut.getFullYear() && month === debut.getMonth()) {
+                            div.classList.add("start");
+                            let cellText = document.createTextNode(liste_tournois[k]["nom_club"]);
+                            div.appendChild(cellText);
+                        } else if (date === fin.getDate() && year === fin.getFullYear() && month === fin.getMonth()) {
+                            div.classList.add("end");
+                        }
+                        div.classList.add("color-" + liste_tournois[k]["color"].toString());
+                        div.classList.add(liste_tournois[k]["order"]);
+                        link = document.createElement("a")
+                        link.href = "view_tournoi.php?id=" + liste_tournois[k]["tournoi_id"].toString()
+                        link.appendChild(div)
+                        cell.appendChild(link)
 
 
                     }
                 }
-
-
                 let cellText = document.createTextNode(date);
+                cell.className = "cell"
                 if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
                     cell.classList.add("bg-info");
                 } // color today's date

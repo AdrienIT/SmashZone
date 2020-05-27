@@ -1,17 +1,69 @@
 .el-1 {
-    width: 70px;
-    height: 5px;
-    background-color: red;
+    width: 14.3%;
+    height: 8px;
     position: absolute;
     margin-top: 20px;
 }
 
 .el-2 {
-    width: 100%;
-    height: 5px;
-    background-color: green;
+    width: 14.3%;
+    height: 8px;
     position: absolute;
     margin-top: 30px;
+}
+
+.el-3 {
+    width: 14.3%;
+    height: 8px;
+    position: absolute;
+    margin-top: 40px;
+}
+
+.el-4 {
+    width: 14.3%;
+    height: 8px;
+    position: absolute;
+    margin-top: 50px;
+}
+
+.color-1 {
+    background-color: #2ECC71;
+}
+
+.color-2 {
+    background-color: #E74C3C;
+}
+
+.color-3 {
+    background-color: #5DADE2;
+}
+
+.color-4 {
+    background-color: #F39C12;
+}
+
+.color-5 {
+    background-color: #9B59B6;
+}
+
+.color-6 {
+    background-color: #1ABC9C;
+}
+
+.color-7 {
+    background-color: #F4D03F;
+}
+
+.color-8 {
+    background-color: #CD6155;
+}
+
+.color-9 {
+    background-color: #D35400;
+}
+
+.color-10 {
+    background-color: #1A5276;
 }
 
 .card {
@@ -24,7 +76,19 @@
 
 .table th,
 .table td {
-    width: 10%;
+    width: 14.2%;
     height: 60px;
     ;
+}
+
+.start {
+    font-size: 5px;
+    color: white;
+    padding: 1px;
+    border-radius: 3px 0px 0px 3px;
+}
+
+.end {
+    width: 14.2%;
+    border-radius: 0px 3px 3px 0px;
 }
