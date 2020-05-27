@@ -12,24 +12,31 @@ if (!isset($_SESSION["user_id"])) {
 $id = (int) $_SESSION["user_id"];
 
 
-// if (isset($_POST["submit"])) {
+if (isset($_POST['name'])) {
     
-//     $search = $_POST['name'];
-//     $messagetrouver = "Une demande d'ami a été envoyée";
-//     $messagepastrouver = "Cet utilisateur n'existe pas";
+    $search = $_POST['name'];
+    $messagetrouver = "Une demande d'ami a été envoyée";
+    $messagepastrouver = "Cet utilisateur n'existe pas";
 
-//     $query = $db->prepare('SELECT pseudo,email FROM users WHERE email = :email OR pseudo = :pseudo');
-//     $query->bindParam(':email', $name);
-//     $query->bindParam(':pseudo', $name);
-//     $query->execute();
+    $query = $db->prepare('SELECT pseudo,email FROM users WHERE email = :email OR pseudo = :pseudo');
+    $query->bindParam(':email', $search);
+    $query->bindParam(':pseudo', $search);
+    $query->execute();
+    $recherche = $query->fetch();
 
-//     if ($query == $search) {
-//         echo "<pre> $messagetrouver </pre>";
-//     }
-//     else {
-//         echo "<pre> $messagepastrouver </pre>";
-//     }
-// }
+    if ($recherche > 0) {
+        echo "<pre> $messagetrouver </pre>";
+
+        $token = bin2hex(openssl_random_pseudo_bytes(16));
+        $username = $_SESSION["user_id"];
+        // $addfriend = $db->prepare('INSERT INTO relationships (request_id,sender_id,receiver_name,status) VALUES (:token,:sender_id,:receiver_name,"En attente"');
+        $addfriend->bindParam(':token', $token);
+        $addfriend->bindParam(':sender_id', $token);
+    }
+    else {
+        echo "<pre> $messagepastrouver </pre>";
+    }
+}
 
 ?>
 
@@ -98,8 +105,6 @@ $id = (int) $_SESSION["user_id"];
                 <input required type="text" name="name" class="form-control">
                 <button name="submit" type="submit" class="btn btn-primary">Ajouter aux amis</button>
             </form>
-            <?php var_dump($_POST['name']); 
-            var_dump($_POST['submit']);?>
         </div>
     </body>
 
