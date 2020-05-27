@@ -11,17 +11,25 @@ if (!isset($_SESSION["user_id"])) {
 
 $id = (int) $_SESSION["user_id"];
 
-$query = $db->prepare('SELECT prenom,nom FROM users WHERE user_id = :user_id');
-$query->bindParam(':user_id', $id);
-$query->execute();
 
-$user = $query->fetch();
+// if (isset($_POST["submit"])) {
+    
+//     $search = $_POST['name'];
+//     $messagetrouver = "Une demande d'ami a été envoyée";
+//     $messagepastrouver = "Cet utilisateur n'existe pas";
 
-$queryfriend = $db->prepare('SELECT u.pseudo,r.request_id FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE r.status = "En attente" AND r.receiver_id = :user_id');
-$queryfriend->bindParam(':user_id', $id);
-$queryfriend->execute();
-$userfriend = $queryfriend->fetchAll();
+//     $query = $db->prepare('SELECT pseudo,email FROM users WHERE email = :email OR pseudo = :pseudo');
+//     $query->bindParam(':email', $name);
+//     $query->bindParam(':pseudo', $name);
+//     $query->execute();
 
+//     if ($query == $search) {
+//         echo "<pre> $messagetrouver </pre>";
+//     }
+//     else {
+//         echo "<pre> $messagepastrouver </pre>";
+//     }
+// }
 
 ?>
 
@@ -84,20 +92,14 @@ $userfriend = $queryfriend->fetchAll();
             </div>
         </nav>
         <div class="container">
-            <h1> <img src=<?php echo "./" . $user['prenom'] . "/" . $user['prenom'] . ".png" ?>
-                    style="overflow:hidden; -webkit-border-radius:50px; -moz-border-radius:50px; border-radius:50px; height:90px; width:90px">
-                <?php echo $user['prenom'] . " " . $user['nom'] ?></h1>
-            <button type="button" class="btn btn-primary" onclick="location.href='add_friend.php'">Ajouter un
-                ami</button>
-            <p>Demandes d'amis</p>
-            <?php if(empty($userfriend)) {
-                echo "<p> Vous n'avez pas d'ami</p>";
-            } else {
-                ?>
-            <p> <?php 
-            foreach($userfriend as $row) {
-            echo $row['pseudo'];
-            echo " souhaite devenir votre ami <br>"; } }?>
+            <h1>Ajouter un ami</h1>
+            <p>Entrez le pseudo ou l'adresse email de la personne à ajouter :</p>
+            <form action="" method="post">
+                <input required type="text" name="name" class="form-control">
+                <button name="submit" type="button" class="btn btn-primary">Ajouter aux amis</button>
+            </form>
+            <?php var_dump($_POST['name']); 
+            var_dump($_POST['submit']);?>
         </div>
     </body>
 
