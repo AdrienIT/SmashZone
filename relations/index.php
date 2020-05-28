@@ -29,7 +29,6 @@ $querypote = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id FROM relatio
 $querypote->bindParam(':receiver_name', $username['0']);
 $querypote->execute();
 
-
 if (isset($_GET['accept'])) {
     $ami = (int) $_GET['accept'];
     $queryaccept = $db->prepare('UPDATE relationships SET status = "Ami" WHERE request_id = :request_id');
@@ -132,12 +131,10 @@ if (isset($_GET['refuse'])) {
                 if (isset($_POST["accepter"])) {
                     echo $senderid;
                 }
-
-                if (empty($querypote)) {
+                if (empty($listepote->fetch())) {
                     echo "<p> Vous n'avez pas d'ami, pleurez</p>";
                 } else {
                 ?>
-
 
                 <?php
                     while ($row2 = $querypote->fetch()) {
@@ -145,6 +142,7 @@ if (isset($_GET['refuse'])) {
                         echo "<button name='contacter' type='submit' class='btn btn-info ml-4'>Contacter</button>";
                         echo "<button name='options' type='submit' class='btn btn-light ml-4'>Options</button>  </form>";
                     }
+                    var_dump($row2);
                 }
             }
             ?>

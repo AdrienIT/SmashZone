@@ -13,7 +13,7 @@ $id = (int) $_SESSION["user_id"];
 
 
 if (isset($_POST['name'])) {
-    
+
     $search = $_POST['name'];
     $messagetrouver = "Une demande d'ami a été envoyée";
     $messagepastrouver = "Cet utilisateur n'existe pas";
@@ -29,14 +29,13 @@ if (isset($_POST['name'])) {
 
         $token = bin2hex(openssl_random_pseudo_bytes(16));
         $username = $_SESSION["user_id"];
-        
+
         $addfriend = $db->prepare('INSERT INTO relationships (request_id,sender_id,receiver_name,status) VALUES (:request_id,:sender_id,:receiver_name,"En attente")');
         $addfriend->bindParam(':request_id', $token);
         $addfriend->bindParam(':sender_id', $id);
         $addfriend->bindParam(':receiver_name', $search);
         $addfriend->execute();
-    }
-    else {
+    } else {
         echo "<pre> $messagepastrouver </pre>";
     }
 }
@@ -108,7 +107,6 @@ if (isset($_POST['name'])) {
                 <input required type="text" name="name" class="form-control">
                 <button name="submit" type="submit" class="btn btn-primary">Ajouter aux amis</button>
             </form>
-            <?php echo $_SESSION["user_id"]; ?>
         </div>
     </body>
 
