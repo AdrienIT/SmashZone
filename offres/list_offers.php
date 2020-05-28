@@ -67,71 +67,155 @@ if (isset($_POST["submit"])) {
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="UTF-8">
-        <link rel="icon" href="../style/favicon.ico" />
-        <link href="../style/style.css" rel="stylesheet">
-        <link href="../style/offre.css" rel="stylesheet">
-        <script src="../script/checkbox.js" type="text/javascript"></script>
-        <link rel="stylesheet" href="../style/jquery-jvectormap-2.0.5.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-        </script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-        </script>
-        <script src="../script/jquery.js"></script>
-        <script src="../script/jquery-jvectormap-2.0.5.min.js"></script>
-        <script src="../script/map_fr.js"></script>
-        <script src="../script/dep_fr.js"></script>
-        <title>Liste des offres</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../style/favicon.ico" />
+    <link href="../style/style.css" rel="stylesheet">
+    <link href="../style/offre.css" rel="stylesheet">
+    <script src="../script/checkbox.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../style/jquery-jvectormap-2.0.5.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script src="../script/jquery.js"></script>
+    <script src="../script/jquery-jvectormap-2.0.5.min.js"></script>
+    <script src="../script/map_fr.js"></script>
+    <script src="../script/dep_fr.js"></script>
+    <title>Liste des offres</title>
+</head>
 
-    <body>
-        <nav class="navbar navbar-expand-xl navbar-dark"
-            style="background-color: #264653; margin-bottom: 20px; height: 55px;">
-            <a class="logo" href="../index.php">
-                <div><img class="main" src="../style/SmashZone2.png" /><img class="ball"
-                        src="../style/SmashZoneIcon.png" />
-                </div>
-            </a>
-            <button class="navbar-toggler ml-auto" type=" button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span> </button>
-            <div class="collapse navbar-collapse rubriques" id="navbarNav">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-inline rubriquecolor">
-                        Effectuer une recherche :
-                    </li>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='list_offers.php'" type="button">Partenaires</button>
-                    </form>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
-                    </form>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='recherchejouer.php'" type="button">Tournois</button>
-                    </form>
-                    <form class="form-inline ml-5">
-                        <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='new_offer.php'" type="button">Poster une annonce</button>
-                    </form>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <button class="btn btn-outline-info my-2 my-sm-0"
-                        onclick="location.href='../login_register/login.php'" type="button"><?= $connect ?></button>
-                </form>
+<body>
+    <nav class="navbar navbar-expand-xl navbar-dark" style="background-color: #264653; margin-bottom: 20px; height: 55px;">
+        <a class="logo" href="../index.php">
+            <div><img class="main" src="../style/SmashZone2.png" /><img class="ball" src="../style/SmashZoneIcon.png" />
             </div>
-        </nav>
+        </a>
+        <button class="navbar-toggler ml-auto" type=" button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse rubriques" id="navbarNav">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-inline rubriquecolor">
+                    Effectuer une recherche :
+                </li>
+                <form class="form-inline">
+                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='list_offers.php'" type="button">Partenaires</button>
+                </form>
+                <form class="form-inline">
+                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
+                </form>
+                <form class="form-inline">
+                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='recherchejouer.php'" type="button">Tournois</button>
+                </form>
+                <form class="form-inline ml-5">
+                    <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch" onclick="location.href='new_offer.php'" type="button">Poster une annonce</button>
+                </form>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='../login_register/login.php'" type="button"><?= $connect ?></button>
+            </form>
+        </div>
+        <label for="seniority">Ancienneté maximum de l'offre : </label>
+        <select name="seniority" id="seniority">
+            <option value="20Y">--Aucun--</option>
+            <option value="7D">1 semaine</option>
+            <option value="1M">1 mois</option>
+            <option value="6M">6 mois</option>
+            <option value="1Y">1 an</option>
+        </select>
+        <br>
+        <br>
+        <label for="order">Trier par :</label>
+        <select name="order" id="order">
+            <option value="o.date_publication">Date</option>
+            <option value="u.classement">Classement</option>
+            <option value="u.date_naissance">Âge</option>
+        </select>
+        <select name="type_order" id="order">
+            <option value="DESC">Plus grand au plus petit</option>
+            <option value="ASC">Plus petit au plus grand</option>
+        </select>
+        <br>
+        <br>
+        <p>Cochez vos disponibilités</p>
+        <table class="disponibilite">
+            <tr>
+                <th><input type="checkbox" id="allcb" name="allcb" onclick="checkAll(this, 'lun')">Lundi</th>
+                <th><input type="checkbox" id="allcb" name="allcb" onclick="checkAll(this, 'mar')">Mardi</th>
+                <th><input type="checkbox" id="allcb" name="allcb" onclick="checkAll(this, 'mer')">Mercredi</th>
+                <th><input type="checkbox" id="allcb" name="allcb" onclick="checkAll(this, 'jeu')">Jeudi</th>
+                <th><input type="checkbox" id="allcb" name="allcb" onclick="checkAll(this, 'ven')">Vendredi</th>
+                <th><input type="checkbox" id="allcb" name="allcb" onclick="checkAll(this, 'sam')">Samedi</th>
+                <th><input type="checkbox" id="allcb" name="allcb" onclick="checkAll(this, 'dim')">Dimanche</th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="lun_am" name="lun_am" value="true">
+                    <label for="lun_am">Matin</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="mar_am" name="mar_am" value="true">
+                    <label for="mar_am">Matin</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="mer_am" name="mer_am" value="true">
+                    <label for="mer_am">Matin</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="jeu_am" name="jeu_am" value="true">
+                    <label for="jeu_am">Matin</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="ven_am" name="ven_am" value="true">
+                    <label for="ven_am">Matin</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="sam_am" name="sam_am" value="true">
+                    <label for="sam_am">Matin</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="dim_am" name="dim_am" value="true">
+                    <label for="dim_am">Matin</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="lun_pm" name="lun_pm" value="true">
+                    <label for="lun_pm">Après-midi</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="mar_pm" name="mar_pm" value="true">
+                    <label for="mar_pm">Après-midi</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="mer_pm" name="mer_pm" value="true">
+                    <label for="mer_pm">Après-midi</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="jeu_pm" name="jeu_pm" value="true">
+                    <label for="jeu_pm">Après-midi</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="ven_pm" name="ven_pm" value="true">
+                    <label for="ven_pm">Après-midi</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="sam_pm" name="sam_pm" value="true">
+                    <label for="sam_pm">Après-midi</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="dim_pm" name="dim_pm" value="true">
+                    <label for="dim_pm">Après-midi</label>
+                </td>
+            </tr>
+        </table>
+        <button name="submit" id="search" class="invisible"></button>
+        </form>
+        <button onclick="getDepData()">Rechercher</button>
 
         <div class="container">
             <h1>Recherche des offres de partenaires</h1>
@@ -407,31 +491,60 @@ if (isset($_POST["submit"])) {
             <div class="list_offer">
                 <h2><?= $title ?></h2>
                 <?php foreach ($list_offers as $offre) {
-            $nom = $offre["nom"];
-            $prenom = $offre["prenom"];
-            if (strpos(strval($offre["classement"]), ".")) {
-                $classement = explode(".", strval($offre["classement"]));
-                $classement = $classement[0] . "/" . $classement[1];
-            } else {
-                $classement = strval($offre["classement"]);
-            }
-            $birth_date = new DateTime($offre["date_naissance"]);
-            $today = new DateTime(date("Y-m-d H:i:s"));
-            $age =  $today->diff($birth_date)->format("%Y");
-            $description = $offre["description"];
-            $publi = new DateTime(strval($offre["date_publication"]));
-            $date_publi = $publi->format("d/m/Y H:i:s"); ?>
-                <div class="offre">
-                    <h3><?= $nom . " " . $prenom ?></h3>
-                    <p><?= $age . " ans - " . $classement ?></p>
-                    <i><?= $date_publi ?></i>
-                    <p><?= $description ?></p>
+                    $nom = $offre["nom"];
+                    $prenom = $offre["prenom"];
+                    if (strpos(strval($offre["classement"]), ".")) {
+                        $classement = explode(".", strval($offre["classement"]));
+                        $classement = $classement[0] . "/" . $classement[1];
+                    } else {
+                        $classement = strval($offre["classement"]);
+                    }
+                    $birth_date = new DateTime($offre["date_naissance"]);
+                    $today = new DateTime(date("Y-m-d H:i:s"));
+                    $age =  $today->diff($birth_date)->format("%Y");
+                    $description = $offre["description"];
+                    $publi = new DateTime(strval($offre["date_publication"]));
+                    $date_publi = $publi->format("d/m/Y H:i:s");
+                    $dispo = "-" . $offre["disponibilite"];
+                ?>
+                    <div class="offre">
+                        <h3><?= $nom . " " . $prenom ?></h3>
+                        <p><?= $age . " ans - " . $classement ?></p>
+                        <i><?= $date_publi ?></i>
+                        <p><?= $description ?></p>
+                        <table class="disponibilite_mini">
+                            <tr>
+                                <th>Lundi</th>
+                                <th>Mardi</th>
+                                <th>Mercredi</th>
+                                <th>Jeudi</th>
+                                <th>Vendredi</th>
+                                <th>Samedi</th>
+                                <th>Dimanche</th>
+                            </tr>
+                            <tr>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "lun_am")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "mar_am")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "mer_am")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "jeu_am")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "ven_am")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "sam_am")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "dim_am")) ?>></td>
+                            </tr>
+                            <tr>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "lun_pm")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "mar_pm")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "mer_pm")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "jeu_pm")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "ven_pm")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "sam_pm")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "dim_pm")) ?>></td>
+                            </tr>
+                        </table>
+                    </div>
+                <?php } ?>
 
-                </div>
             </div>
-            <?php } ?>
-
-        </div>
-    </body>
+</body>
 
 </html>
