@@ -7,8 +7,6 @@ session_start();
 if (!isset($_SESSION["user_id"])) {
     header("Location: ../login/login.php");
 }
-
-session_start();
 if (!isset($_SESSION["user_id"])) {
     $connect = "Se connecter/S'inscrire";
 } else {
@@ -78,9 +76,6 @@ if (isset($_POST["submit"])) {
                 </form>
                 <form class="form-inline">
                     <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='recherchejouer.php'" type="button">Tournois</button>
-                </form>
-                <form class="form-inline ml-5">
-                    <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch" onclick="location.href='new_offer.php'" type="button"><?= $connect ?></button>
                 </form>
             </ul>
             <form class="form-inline my-2 my-lg-0">
