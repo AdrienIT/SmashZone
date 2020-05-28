@@ -4,9 +4,29 @@ ini_set('display_errors', 1);
 include_once('../config.php');
 session_start();
 $_SESSION["user_id"] = 1;
-$query = $db->prepare("SELECT t.tournoi_id, t.date_debut, t.date_fin, c.nom_club, t.age_min, t.age_max FROM tournois t INNER JOIN clubs c ON (t.club_id = c.club_id) ORDER BY t.date_debut ASC");
-$query->execute();
-$liste_tournois = $query->fetchAll();
+if (isset($_POST["submit"])) {
+    $title = "Résultats de votre recherche";
+    $query = "SELECT t.tournoi_id, t.date_debut, t.date_fin, c.nom_club, t.age_min, t.age_max FROM tournois t INNER JOIN clubs c ON (t.club_id = c.club_id) 
+                AND t.age_min >= :age_min
+                AND t.age_max <= :age_max
+                AND (c.postal_code LIKE '&'";
+    $all_dep = explode("-", $_POST["dep"]);
+    foreach ($all_dep as $dep) {
+        $query = $query . " OR c.postal_code LIKE '$dep%'";
+    }
+    $query = $query . ")
+                        ORDER BY t.date_debut ASC";
+
+    $query = $db->prepare($query);
+    $query->bindParam(":age_min", $_POST["age_min"]);
+    $query->bindParam(":age_max", $_POST["age_max"]);
+    $query->execute();
+    $liste_tournois = $query->fetchAll();
+} else {
+    $query = $db->prepare("SELECT t.tournoi_id, t.date_debut, t.date_fin, c.nom_club, t.age_min, t.age_max FROM tournois t INNER JOIN clubs c ON (t.club_id = c.club_id) ORDER BY t.date_debut ASC");
+    $query->execute();
+    $liste_tournois = $query->fetchAll();
+}
 ?>
 <html>
 
@@ -20,24 +40,25 @@ $liste_tournois = $query->fetchAll();
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../style/calendar.css">
     <link rel="stylesheet" href="../style/style.css">
-    <link href="../style/offre.css" rel="stylesheet">
-    <script src="../script/checkbox.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../style/offre.css">
     <link rel="stylesheet" href="../style/jquery-jvectormap-2.0.5.css">
+    <script src="../script/checkbox.js" type="text/javascript"></script>
     <script src="../script/jquery.js"></script>
     <script src="../script/jquery-jvectormap-2.0.5.min.js"></script>
     <script src="../script/map_fr.js"></script>
     <script src="../script/dep_fr.js"></script>
+
     <title>Liste des tournois</title>
 
 </head>
 
-<body>
+<body onload="toggleFilters()">
     <div class="filtres-tournoi"></div>
     <div class="liste-tournoi">
         <h1>Calendrier des tournois</h1>
         <div class="filter">
             <button onclick="toggleFilters()">Afficher filtres</button>
-            <div class="filter hide">
+            <div class="filter">
                 <form method="post">
                     <label for="age_min">Âge minimum :</label>
                     <input type="number" id="age_min" name="age_min" min="3" max="100" value="3">
@@ -153,7 +174,9 @@ $liste_tournois = $query->fetchAll();
                             <option value="976">(976) Mayotte </option>
                         </select>
                     </div>
+                    <button name="submit" id="search" class="invisible"></button>
                 </form>
+                <button onclick="getDepData()">Rechercher</button>
             </div>
         </div>
         <div class="container">
