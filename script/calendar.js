@@ -96,10 +96,15 @@ function showCalendar(month, year) {
                         } else if (date === fin.getDate() && year === fin.getFullYear() && month === fin.getMonth()) {
                             div.classList.add("end");
                         }
+                        div.classList.add("line")
                         div.classList.add("color-" + liste_tournois[k]["color"].toString());
                         div.classList.add(liste_tournois[k]["order"]);
                         link = document.createElement("a")
                         link.href = "view_tournoi.php?id=" + liste_tournois[k]["tournoi_id"].toString()
+                        frame = document.createElement("iframe")
+                        frame.src = "view_tournoi.php?id=" + liste_tournois[k]["tournoi_id"].toString()
+                        frame.classList.add("preview")
+                        link.appendChild(frame)
                         link.appendChild(div)
                         cell.appendChild(link)
 

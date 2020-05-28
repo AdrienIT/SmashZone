@@ -42,11 +42,13 @@ if (isset($_POST["submit"])) {
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="../style/offre.css">
     <link rel="stylesheet" href="../style/jquery-jvectormap-2.0.5.css">
+    <link rel="stylesheet" href="../style/tournoi_preview.css">
     <script src="../script/checkbox.js" type="text/javascript"></script>
     <script src="../script/jquery.js"></script>
     <script src="../script/jquery-jvectormap-2.0.5.min.js"></script>
     <script src="../script/map_fr.js"></script>
     <script src="../script/dep_fr.js"></script>
+    <script src="../script/hover.js"></script>
 
     <title>Liste des tournois</title>
 
