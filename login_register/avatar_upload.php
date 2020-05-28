@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
     $fileExt = explode('.', $fileName);
     $fileActualExt = strtolower(end($fileExt));
 
-    $allowed = array('png');
+    $allowed = array('.png');
 
     $path = "./" . $pseudo . "/";
 

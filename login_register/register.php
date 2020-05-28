@@ -2,76 +2,77 @@
 include_once '../config.php';
 session_start();
 if (isset($_SESSION["user_id"])) {
-	header('location: ./home.php');
+    header('location: ./home.php');
 }
 
 $err = '';
+
 
 $today = date("Y-m-d");
 
 
 if (isset($_POST["submit"])) {
 
-	$pseudo = htmlspecialchars($_POST["pseudo"]);
-	$email = htmlspecialchars($_POST["email"]);
-	$ville = htmlspecialchars($_POST['ville']);
-	$date_naissance = htmlspecialchars($_POST['date_naissance']);
-	$telephone = (int) htmlspecialchars($_POST['telephone']);
-	$postal_code = (int) htmlspecialchars($_POST['postal_code']);
-	$password = $_POST["password"];
-	$password_confirm = $_POST["password_confirm"];
-	$prenom = htmlspecialchars($_POST["prenom"]);
-	$nom = htmlspecialchars($_POST["nom"]);
-	
-
-	$query1 = $db->prepare("SELECT pseudo FROM users WHERE pseudo = ? ");
-	$query1->execute([$pseudo]);
-	if ($query1->rowCount() > 0) {
-		$err = "Utilisateur deja enregistré";
-		echo $err;
-	} else {
-		if ($password != $password_confirm) {
-			$err = "les mots de passes ne correspondent pas";
-			echo $err;
-		} else {
-			if (strlen($password) < 6) {
-				$err = "Le mot de pass devrait faire plus de 5 caractère";
-				echo $err;
-			} else {
-				if ((strlen($postal_code) > 6)) {
-					$err = "Votre code postal n'a pas été prit en compte";
-					echo $err;
-				} else {
-					$password = md5($password);
-					$query = "INSERT INTO users(pseudo,email,ville,telephone,postal_code,password,date_naissance,prenom,nom) VALUES(:pseudo,:email,:ville,:telephone,:postal_code,:password,:date_naissance,:prenom,:nom)";
-					$query = $db->prepare($query);
-					$query->bindParam(':pseudo', $pseudo);
-					$query->bindParam(':email', $email);
-					$query->bindParam(':ville', $ville);
-					$query->bindParam(':prenom', $prenom);
-					$query->bindParam(':nom', $nom);
-					$query->bindParam(':telephone', $telephone);
-					$query->bindParam(':postal_code', $postal_code);
-					$query->bindParam(':password', $password);
-					$query->bindParam(':date_naissance', $date_naissance);
-					if ($query->execute()) {
-
-						$id = (int) $_SESSION["user_id"];
-
-						$query = $db->prepare("SELECT * FROM users WHERE user_id = :id ");
-						$query->bindParam(":id", $id);
-						$query->execute();
-						$user = $query->fetch();
-
-						$err = 'Compte enregistré avec succes';
+    $pseudo = htmlspecialchars($_POST["pseudo"]);
+    $email = htmlspecialchars($_POST["email"]);
+    $ville = htmlspecialchars($_POST['ville']);
+    $date_naissance = htmlspecialchars($_POST['date_naissance']);
+    $telephone = (int) htmlspecialchars($_POST['telephone']);
+    $postal_code = (int) htmlspecialchars($_POST['postal_code']);
+    $password = $_POST["password"];
+    $password_confirm = $_POST["password_confirm"];
+    $prenom = htmlspecialchars($_POST["prenom"]);
+    $nom = htmlspecialchars($_POST["nom"]);
 
 
-						header('location: ./login.php');
-					}
-				}
-			}
-		}
-	}
+    $query1 = $db->prepare("SELECT pseudo FROM users WHERE pseudo = ? ");
+    $query1->execute([$pseudo]);
+    if ($query1->rowCount() > 0) {
+        $err = "Utilisateur deja enregistré";
+        echo $err;
+    } else {
+        if ($password != $password_confirm) {
+            $err = "les mots de passes ne correspondent pas";
+            echo $err;
+        } else {
+            if (strlen($password) < 6) {
+                $err = "Le mot de pass devrait faire plus de 5 caractère";
+                echo $err;
+            } else {
+                if ((strlen($postal_code) > 6)) {
+                    $err = "Votre code postal n'a pas été prit en compte";
+                    echo $err;
+                } else {
+                    $password = md5($password);
+                    $query = "INSERT INTO users(pseudo,email,ville,telephone,postal_code,password,date_naissance,prenom,nom) VALUES(:pseudo,:email,:ville,:telephone,:postal_code,:password,:date_naissance,:prenom,:nom)";
+                    $query = $db->prepare($query);
+                    $query->bindParam(':pseudo', $pseudo);
+                    $query->bindParam(':email', $email);
+                    $query->bindParam(':ville', $ville);
+                    $query->bindParam(':prenom', $prenom);
+                    $query->bindParam(':nom', $nom);
+                    $query->bindParam(':telephone', $telephone);
+                    $query->bindParam(':postal_code', $postal_code);
+                    $query->bindParam(':password', $password);
+                    $query->bindParam(':date_naissance', $date_naissance);
+                    if ($query->execute()) {
+
+                        $id = (int) $_SESSION["user_id"];
+
+                        $query = $db->prepare("SELECT * FROM users WHERE user_id = :id ");
+                        $query->bindParam(":id", $id);
+                        $query->execute();
+                        $user = $query->fetch();
+
+                        $err = 'Compte enregistré avec succes';
+
+
+                        header('location: ./login.php');
+                    }
+                }
+            }
+        }
+    }
 }
 
 ?>
@@ -119,13 +120,16 @@ if (isset($_POST["submit"])) {
                 </form>
             </div>
         </nav>
-        <div>
 
+        <div>
             <main>
-                <div class="container-fluid">
+                <div class="container">
                     <div class="d-flex justify-content-center">
-                        <div class="col-sm-3 login-section-wrapper">
-                            <img src="../style/SmahZone1.png" id="logologin" />
+                        <div class="col-sm">
+                            <div class="logo2 d-flex justify-content-center">
+                                <img class="main2" src="../style/SmashZone1.png" />
+                                <img class="ball2" src="../style/SmashZoneIcon.png" />
+                            </div>
                             <div class="login-wrapper my-auto">
                                 <h1 class="login-title">Inscription</h1>
                                 <form method="post">
@@ -205,7 +209,7 @@ if (isset($_POST["submit"])) {
                                         <button name="submit" class="btn btn-info btn-lg">S'inscrire</button>
                                     </div>
                                 </form>
-                                <p>Tu as déjà un compte ? <a href="login.php">Connectes-toi !</a></p>
+                                <p>Tu as déjà un compte ? <a href="login.php">Connecte-toi !</a></p>
                             </div>
                         </div>
                     </div>
