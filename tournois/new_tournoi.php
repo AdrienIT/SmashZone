@@ -3,6 +3,9 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include_once('../config.php');
 session_start();
+if (!isset($_SESSION["club_id"])) {
+    header("Location: ..login/login.php");
+}
 $today = new DateTime(date("Y-m-d"));
 $today = $today->format("Y-m-d");
 $max_date = new DateTime(date("Y-m-d"));
