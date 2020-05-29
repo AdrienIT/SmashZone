@@ -87,6 +87,8 @@ $user = $query->fetch();
                     profil</button>
                 <button type="button" onclick="location.href='logout.php'"
                     class="btn btn-light col-xl-6 mx-auto justify-content-center mb-4">Se déconnecter</button>
+                <button type="button" onclick="location.href='../relations/index.php'"
+                    class="btn btn-light col-xl-6 mx-auto justify-content-center mb-4">Amis</button>
             </div>
         </div>
     </body>

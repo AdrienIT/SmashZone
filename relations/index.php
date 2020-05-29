@@ -29,6 +29,7 @@ $querypote = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id FROM relatio
 $querypote->bindParam(':receiver_name', $username['0']);
 $querypote->execute();
 
+
 if (isset($_GET['accept'])) {
     $ami = (int) $_GET['accept'];
     $queryaccept = $db->prepare('UPDATE relationships SET status = "Ami" WHERE request_id = :request_id');
@@ -112,40 +113,42 @@ if (isset($_GET['refuse'])) {
             <button type="button" class="btn btn-primary" onclick="location.href='add_friend.php'">Ajouter un
                 ami</button>
             <p>Demandes d'amis</p>
-            <?php if (empty($queryfriend)) {
+            <?php
+        if (empty($queryfriend->fetch())) {
             echo "<p> Aucune demande d'ami</p>";
         } else {
         ?>
             <p> <?php
                 while ($row = $queryfriend->fetch()) { ?>
-                <?php echo $row['pseudo']; ?>
-                <p>veut devenir votre ami</p>
+                <p><?php echo $row['pseudo']; ?> veut devenir votre ami
 
-                <a name='accepter' href='index.php?accept=<?php echo $row['request_id'] ?>' class=' btn btn-primary
-                    ml-4'>Accepter</a>";
+                    <a name='accepter' href='index.php?accept=<?php echo $row['request_id'] ?>' class=' btn btn-primary
+                    ml-4'>Accepter</a>
 
-                <a name='refuser' href='index.php?refuse=<?php echo $row['request_id'] ?>' class=' btn btn-danger
-                    ml-4'>Refuser</a>";
+                    <a name='refuser' href='index.php?refuse=<?php echo $row['request_id'] ?>' class=' btn btn-danger
+                    ml-4'>Refuser</a></p>
 
                 <?php }
-                if (isset($_POST["accepter"])) {
-                    echo $senderid;
-                }
-                if (empty($listepote->fetch())) {
-                    echo "<p> Vous n'avez pas d'ami, pleurez</p>";
-                } else {
-                ?>
+            } ?>
+                <?php if (empty($querypote->fetch())) {
+                echo "<p> Vous n'avez pas d'ami, pleurez</p>";
+            } else {
+            ?> <p>
+                    <?php
+                    while ($row2 = $querypote->fetch()) { ?>
+                    <p><?php echo $row['pseudo']; ?>
+                        <a name='contact' href='index.php?contact=<?php echo $row['request_id'] ?>' class=' btn btn-success
+                    ml-4'>Contacter</a>
 
-                <?php
-                    while ($row2 = $querypote->fetch()) {
-                        echo $row2['pseudo'];
-                        echo "<button name='contacter' type='submit' class='btn btn-info ml-4'>Contacter</button>";
-                        echo "<button name='options' type='submit' class='btn btn-light ml-4'>Options</button>  </form>";
+                        <a name='options' href='index.php?options=<?php echo $row['request_id'] ?>' class=' btn btn-light
+                    ml-4'>Options</a></p>
+
+                    <?php
                     }
                     var_dump($row2);
                 }
-            }
-            ?>
+                ?>
+
         </div>
     </body>
 
