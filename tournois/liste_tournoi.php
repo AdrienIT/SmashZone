@@ -59,7 +59,7 @@ if (isset($_POST["submit"])) {
     <div class="liste-tournoi">
         <h1>Calendrier des tournois</h1>
         <div class="filter">
-            <button onclick="toggleFilters()">Afficher filtres</button>
+            <button onclick="toggleFilters()" id="filter_button">Afficher filtres</button>
             <div class="filter">
                 <form method="post">
                     <label for="age_min">Âge minimum :</label>

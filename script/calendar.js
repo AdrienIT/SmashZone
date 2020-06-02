@@ -107,9 +107,9 @@ function showCalendar(month, year) {
                         frame.src = "view_tournoi.php?id=" + liste_tournois[k]["tournoi_id"].toString()
                         divframe.classList.add("preview")
                         divframe.appendChild(frame)
-                        link.appendChild(divframe)
                         link.appendChild(div)
                         cell.appendChild(link)
+                        cell.appendChild(divframe)
 
 
                     }
