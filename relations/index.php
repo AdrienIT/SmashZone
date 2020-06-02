@@ -46,6 +46,14 @@ if (isset($_GET['refuse'])) {
     header("location: index.php");
 }
 
+if (isset($_GET['delete'])) {
+    $ami = (int) $_GET['delete'];
+    $queryaccept = $db->prepare('DELETE FROM relationships WHERE request_id = :request_id');
+    $queryaccept->bindParam(':request_id', $ami);
+    $queryaccept->execute();
+    header("location: index.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -135,15 +143,25 @@ if (isset($_GET['refuse'])) {
             echo "Vous n'avez pas d'ami, pleurez";
         }
         while ($row2 = $querypote->fetch()) {
-        ?> <p>
-                <?php echo $row2['pseudo']; ?>
+        ?> <div class="row">
+                <p>
+                    <?php echo $row2['pseudo']; ?>
 
-                <a name='contact' href='index.php?contact=<?php echo $row2['request_id'] ?>' class=' btn btn-success
+                    <a name='contact' href='index.php?contact=<?php echo $row2['sender_id'] ?>' class=' btn btn-success
                     ml-4'>Contacter</a>
 
-                <a name='options' href='index.php?options=<?php echo $row2['request_id'] ?>' class=' btn btn-light
-                    ml-4'>Options</a></p>
-
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown">Options
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <a name="supprimer" class="dropdown-item"
+                                href='index.php?infos=<?php echo $row2['request_id'] ?>'>Informations</a>
+                            <a name="infos" class="dropdown-item"
+                                href='index.php?delete=<?php echo $row2['request_id'] ?>'>Supprimer</a>
+                        </ul>
+                    </div>
+                </p>
+            </div>
             <?php
         }
         ?>
