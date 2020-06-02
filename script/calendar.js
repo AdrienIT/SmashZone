@@ -100,11 +100,14 @@ function showCalendar(month, year) {
                         div.classList.add("color-" + liste_tournois[k]["color"].toString());
                         div.classList.add(liste_tournois[k]["order"]);
                         link = document.createElement("a")
+                        link.classList.add("link")
                         link.href = "view_tournoi.php?id=" + liste_tournois[k]["tournoi_id"].toString()
+                        divframe = document.createElement("div")
                         frame = document.createElement("iframe")
                         frame.src = "view_tournoi.php?id=" + liste_tournois[k]["tournoi_id"].toString()
-                        frame.classList.add("preview")
-                        link.appendChild(frame)
+                        divframe.classList.add("preview")
+                        divframe.appendChild(frame)
+                        link.appendChild(divframe)
                         link.appendChild(div)
                         cell.appendChild(link)
 

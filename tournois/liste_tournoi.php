@@ -48,7 +48,7 @@ if (isset($_POST["submit"])) {
     <script src="../script/jquery-jvectormap-2.0.5.min.js"></script>
     <script src="../script/map_fr.js"></script>
     <script src="../script/dep_fr.js"></script>
-    <script src="../script/hover.js"></script>
+
 
     <title>Liste des tournois</title>
 
@@ -277,9 +277,6 @@ if (isset($_POST["submit"])) {
             var liste_tournois = <?php echo json_encode($liste_tournois) ?>;
             showCalendar(currentMonth, currentYear);
         </script>
-
-
-
 </body>
 
 </html>
