@@ -11,7 +11,6 @@ $today = $today->format("Y-m-d");
 $max_date = new DateTime(date("Y-m-d"));
 $max_date->add(new DateInterval("P1Y"));
 $max_date = $max_date->format("Y-m-d");
-$_SESSION["club_id"] = 1;
 
 if (isset($_POST["submit"])) {
     if ($_POST["date_debut"] >= $_POST["date_fin"]) {

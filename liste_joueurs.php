@@ -8,9 +8,10 @@ if (!isset($_SESSION["user_id"])) {
     $connect = "Se connecter/S'inscrire";
 } else {
     $connect = "Mon compte";
+    $id = (int) $_SESSION["user_id"];
 }
 
-$id = (int) $_SESSION["user_id"];
+
 $token = bin2hex(openssl_random_pseudo_bytes(16));
 
 if (isset($_GET['contact'])) {
@@ -99,7 +100,12 @@ if (isset($_GET['contact'])) {
                         <th style="border: 1px solid black;">Prénom</td>
                         <th style="border: 1px solid black;">Classement</td>
                         <th style="border: 1px solid black;">Télephone</td>
+                            <?php
+                        if (!isset($_SESSION["user_id"])) {;
+                        } else {
+                        ?>
                         <th style="border: 1px solid black;">Amis ?</td>
+                            <?php } ?>
                     </tr>
                 <tbody>
                     <?php while ($u = $users->fetch()) { ?>
@@ -109,10 +115,15 @@ if (isset($_GET['contact'])) {
                         <td style="border: 1px solid black;"><?= $u['prenom'] ?></td>
                         <td style="border: 1px solid black;"><?= $u['classement'] ?></td>
                         <td style="border: 1px solid black;"><?= $u['telephone'] ?></td>
-                        <td style="border: 1px solid black;"><a type="submit" name='contact'
-                                href='liste_joueurs.php?contact=<?php echo $u['pseudo'] ?>'
-                                class="btn btn-primary">Envoyer une
-                                demande d'ami</a>
+                        <?php
+                        if (!isset($_SESSION["user_id"])) {;
+                        } else {
+                        ?>
+                        <td style='border: 1px solid black;'>
+                            <a type='submit' name='contact' href='liste_joueurs.php?contact=<?php echo $u['pseudo'] ?>'
+                                class=' btn btn-primary'>Envoyer une
+                                demande d'ami</a> </td> <?php } ?>
+
                     </tr>
                     <?php } ?>
                 </tbody>

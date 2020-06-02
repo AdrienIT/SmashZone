@@ -3,7 +3,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include_once('../config.php');
 session_start();
-$_SESSION["user_id"] = 1;
 if (isset($_POST["submit"])) {
     $title = "Résultats de votre recherche";
     $query = "SELECT t.tournoi_id, t.date_debut, t.date_fin, c.nom_club, t.age_min, t.age_max FROM tournois t INNER JOIN clubs c ON (t.club_id = c.club_id) 
