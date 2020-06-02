@@ -114,40 +114,39 @@ if (isset($_GET['refuse'])) {
                 ami</button>
             <p>Demandes d'amis</p>
             <?php
-        if (empty($queryfriend->fetch())) {
-            echo "<p> Aucune demande d'ami</p>";
-        } else {
+        if ($queryfriend->rowCount() == 0) {
+            echo "Aucune demande d'ami";
+        }
+        while ($row = $queryfriend->fetch()) {
         ?>
-            <p> <?php
-                while ($row = $queryfriend->fetch()) { ?>
-                <p><?php echo $row['pseudo']; ?> veut devenir votre ami
+            <p>
+                <?php echo $row['pseudo'];
+                ?> veut devenir votre ami
 
-                    <a name='accepter' href='index.php?accept=<?php echo $row['request_id'] ?>' class=' btn btn-primary
+                <a name='accepter' href='index.php?accept=<?php echo $row['request_id'] ?>' class=' btn btn-primary
                     ml-4'>Accepter</a>
 
-                    <a name='refuser' href='index.php?refuse=<?php echo $row['request_id'] ?>' class=' btn btn-danger
+                <a name='refuser' href='index.php?refuse=<?php echo $row['request_id'] ?>' class=' btn btn-danger
                     ml-4'>Refuser</a></p>
+            <?php } ?>
+            <p>Liste d'amis : </p>
+            <?php
+        if ($querypote->rowCount() == 0) {
+            echo "Vous n'avez pas d'ami, pleurez";
+        }
+        while ($row2 = $querypote->fetch()) {
+        ?> <p>
+                <?php echo $row2['pseudo']; ?>
 
-                <?php }
-            } ?>
-                <?php if (empty($querypote->fetch())) {
-                echo "<p> Vous n'avez pas d'ami, pleurez</p>";
-            } else {
-            ?> <p>
-                    <?php
-                    while ($row2 = $querypote->fetch()) { ?>
-                    <p><?php echo $row['pseudo']; ?>
-                        <a name='contact' href='index.php?contact=<?php echo $row['request_id'] ?>' class=' btn btn-success
+                <a name='contact' href='index.php?contact=<?php echo $row2['request_id'] ?>' class=' btn btn-success
                     ml-4'>Contacter</a>
 
-                        <a name='options' href='index.php?options=<?php echo $row['request_id'] ?>' class=' btn btn-light
+                <a name='options' href='index.php?options=<?php echo $row2['request_id'] ?>' class=' btn btn-light
                     ml-4'>Options</a></p>
 
-                    <?php
-                    }
-                    var_dump($row2);
-                }
-                ?>
+            <?php
+        }
+        ?>
 
         </div>
     </body>
