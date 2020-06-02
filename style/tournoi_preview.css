@@ -1,9 +1,16 @@
+iframe {
+    width: 25vw;
+    height: 30vh;
+    ;
+}
+
 .preview {
     display: none;
     position: absolute;
     z-index: +100;
     margin-top: 5%;
     margin-left: -7%;
+    background-color: white;
 }
 
 a:hover+.preview {
