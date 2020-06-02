@@ -10,6 +10,20 @@ if (!isset($_SESSION["user_id"])) {
     $connect = "Mon compte";
 }
 
+$id = (int) $_SESSION["user_id"];
+$token = bin2hex(openssl_random_pseudo_bytes(16));
+
+if (isset($_GET['contact'])) {
+    $ami = $_GET['contact'];
+    $addfriend = $db->prepare('INSERT INTO relationships (request_id,sender_id,receiver_name,status) VALUES (:request_id,:sender_id,:receiver_name,"En attente")');
+    $addfriend->bindParam(':request_id', $token);
+    $addfriend->bindParam(':sender_id', $id);
+    $addfriend->bindParam(':receiver_name', $ami);
+    $addfriend->execute();
+    header("location: liste_joueurs.php");
+    var_dump($addfriend);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +75,7 @@ if (!isset($_SESSION["user_id"])) {
                     </form>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='recherchejouer.php'" type="button">Tournois</button>
+                            onclick="location.href='tournois/liste_tournoi.php'" type="button">Tournois</button>
                     </form>
                     <form class="form-inline ml-5">
                         <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch"
@@ -95,8 +109,10 @@ if (!isset($_SESSION["user_id"])) {
                         <td style="border: 1px solid black;"><?= $u['prenom'] ?></td>
                         <td style="border: 1px solid black;"><?= $u['classement'] ?></td>
                         <td style="border: 1px solid black;"><?= $u['telephone'] ?></td>
-                        <td style="border: 1px solid black;"><button type="submit" class="btn btn-primary">Envoyer une
-                                demande d'ami</button>
+                        <td style="border: 1px solid black;"><a type="submit" name='contact'
+                                href='liste_joueurs.php?contact=<?php echo $u['pseudo'] ?>'
+                                class="btn btn-primary">Envoyer une
+                                demande d'ami</a>
                     </tr>
                     <?php } ?>
                 </tbody>
