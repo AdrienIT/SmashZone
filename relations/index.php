@@ -8,6 +8,7 @@ if (!isset($_SESSION["user_id"])) {
     header("Location: ../index.php");
 }
 
+
 $id = (int) $_SESSION["user_id"];
 
 $getusername = $db->prepare('SELECT pseudo FROM users WHERE user_id = :user_id');
@@ -25,8 +26,9 @@ $queryfriend = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id FROM relat
 $queryfriend->bindParam(':receiver_name', $username['0']);
 $queryfriend->execute();
 
-$querypote = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE r.status = "Ami" AND r.receiver_name = :receiver_name');
+$querypote = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id,r.receiver_name FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE (r.status = "Ami" AND r.receiver_name = :receiver_name) OR (r.status = "Ami" AND r.sender_id = :sender_id)');
 $querypote->bindParam(':receiver_name', $username['0']);
+$querypote->bindParam(':sender_id', $id);
 $querypote->execute();
 
 
@@ -90,9 +92,9 @@ if (isset($_GET['delete'])) {
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span> </button>
             <div class="collapse navbar-collapse rubriques" id="navbarNav">
-                <ul class=" navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-inline rubriquecolor">
-                        Effectuer une recherche :
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item rubriquecolor">
+                        Recherchez :
                     </li>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
@@ -100,72 +102,87 @@ if (isset($_GET['delete'])) {
                     </form>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='recherchejouer.php'" type="button">Joueurs</button>
+                            onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
                     </form>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
                             onclick="location.href='recherchejouer.php'" type="button">Tournois</button>
                     </form>
+                    <form class="form-inline">
+                        <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch"
+                            onclick="location.href='../offres/new_offer.php'" type="button">Poster une annonce</button>
+                    </form>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
+                <form class="nav-item">
                     <button class="btn btn-outline-info my-2 my-sm-0"
-                        onclick="location.href='../login_register/login.php'" type="button">Se
-                        connecter/S'inscrire</button>
+                        onclick="location.href='../login_register/home.php'" type="button">Retour au compte</button>
                 </form>
             </div>
         </nav>
+
         <div class="container">
             <h1> <img src=<?php echo "./" . $user['prenom'] . "/" . $user['prenom'] . ".png" ?>
                     style="overflow:hidden; -webkit-border-radius:50px; -moz-border-radius:50px; border-radius:50px; height:90px; width:90px">
                 <?php echo $user['prenom'] . " " . $user['nom'] ?></h1>
-            <button type="button" class="btn btn-primary" onclick="location.href='add_friend.php'">Ajouter un
-                ami</button>
-            <p>Demandes d'amis</p>
-            <?php
-        if ($queryfriend->rowCount() == 0) {
-            echo "Aucune demande d'ami";
-        }
-        while ($row = $queryfriend->fetch()) {
-        ?>
-            <p>
-                <?php echo $row['pseudo'];
-                ?> veut devenir votre ami
+            <div class="row justify-content-center mb-4">
+                <div class="col-auto text-center">
+                    <p>Demandes d'amis</p>
+                    <?php
+                if ($queryfriend->rowCount() == 0) {
+                    echo "Vous n'avez aucune demande d'ami";
+                }
+                while ($row = $queryfriend->fetch()) {
+                ?>
+                    <p>
+                        <?php echo $row['pseudo'];
+                        ?> veut devenir votre ami
 
-                <a name='accepter' href='index.php?accept=<?php echo $row['request_id'] ?>' class=' btn btn-primary
+                        <a name='accepter' href='index.php?accept=<?php echo $row['request_id'] ?>' class=' btn btn-primary
                     ml-4'>Accepter</a>
 
-                <a name='refuser' href='index.php?refuse=<?php echo $row['request_id'] ?>' class=' btn btn-danger
+                        <a name='refuser' href='index.php?refuse=<?php echo $row['request_id'] ?>' class=' btn btn-danger
                     ml-4'>Refuser</a></p>
-            <?php } ?>
-            <p>Liste d'amis : </p>
-            <?php
-        if ($querypote->rowCount() == 0) {
-            echo "Vous n'avez pas d'ami, pleurez";
-        }
-        while ($row2 = $querypote->fetch()) {
-        ?> <div class="row">
-                <p>
-                    <?php echo $row2['pseudo']; ?>
-
-                    <a name='contact' href='index.php?contact=<?php echo $row2['sender_id'] ?>' class=' btn btn-success
-                    ml-4'>Contacter</a>
-
-                    <div class="dropdown">
-                        <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown">Options
-                            <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <a name="supprimer" class="dropdown-item"
-                                href='index.php?infos=<?php echo $row2['request_id'] ?>'>Informations</a>
-                            <a name="infos" class="dropdown-item"
-                                href='index.php?delete=<?php echo $row2['request_id'] ?>'>Supprimer</a>
-                        </ul>
-                    </div>
-                </p>
+                    <?php } ?>
+                </div>
             </div>
-            <?php
-        }
-        ?>
+            <div class="row d-flex align-items-center mb-4" style="background: #457b9d;">
+                <div class="col-sm-10 text-center vosamis">
+                    <p>Vos amis :</p>
+                </div>
+                <div class="col-sm text-center">
+                    <button type="button" class="btn btn-primary" onclick="location.href='add_friend.php'">Ajouter un
+                        ami</button>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-auto"> <?php
+                                    if ($querypote->rowCount() == 0) {
+                                        echo "Vous n'avez pas d'ami, pleurez";
+                                    }
+                                    while ($row2 = $querypote->fetch()) {
+                                    ?> <div class="row">
+                        <p>
+                            <?php echo $row2['pseudo']; ?>
 
+                            <a name='contact' href='index.php?contact=<?php echo $row2['sender_id'] ?>' class=' btn btn-success ml-4
+                    mr-4'>Contacter</a>
+
+                            <div class="dropdown">
+                                <button class="btn btn-light dropdown-toggle" type="button"
+                                    data-toggle="dropdown">Options
+                                    <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <a name="supprimer" class="dropdown-item"
+                                        href='index.php?infos=<?php echo $row2['request_id'] ?>'>Informations</a>
+                                    <a name="infos" class="dropdown-item"
+                                        href='index.php?delete=<?php echo $row2['request_id'] ?>'>Supprimer</a>
+                                </ul>
+                            </div>
+                        </p>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
         </div>
     </body>
 

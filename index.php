@@ -74,6 +74,7 @@ if (!isset($_SESSION["user_id"])) {
                 </form>
             </div>
         </nav>
+
         <section>
             <div class="slide">
                 <div class="content">

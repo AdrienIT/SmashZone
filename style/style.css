@@ -275,3 +275,13 @@ display: block;
 .dropdown a:hover {background-color: #ddd;}
 
 .show {display: block;}
+
+.joueurborder {
+    border: 1px solid black;
+}
+
+.vosamis {
+    font-size: 24px;
+    color: white;
+    margin-top: 10px;
+}

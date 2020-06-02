@@ -52,8 +52,8 @@ $user = $query->fetch();
                 <span class="navbar-toggler-icon"></span> </button>
             <div class="collapse navbar-collapse rubriques" id="navbarNav">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-inline rubriquecolor">
-                        Effectuer une recherche :
+                    <li class="nav-item rubriquecolor">
+                        Recherchez :
                     </li>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
@@ -67,7 +67,7 @@ $user = $query->fetch();
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
                             onclick="location.href='recherchejouer.php'" type="button">Tournois</button>
                     </form>
-                    <form class="form-inline ml-5">
+                    <form class="form-inline">
                         <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch"
                             onclick="location.href='../offres/new_offer.php'" type="button">Poster une annonce</button>
                     </form>
