@@ -42,14 +42,20 @@ if (isset($_POST["submit"])) {
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="../style/offre.css">
     <link rel="stylesheet" href="../style/jquery-jvectormap-2.0.5.css">
+<<<<<<< HEAD
     <link rel="stylesheet" href="../style/tournoi_preview.css">
+=======
+>>>>>>> web_design
     <script src="../script/checkbox.js" type="text/javascript"></script>
     <script src="../script/jquery.js"></script>
     <script src="../script/jquery-jvectormap-2.0.5.min.js"></script>
     <script src="../script/map_fr.js"></script>
     <script src="../script/dep_fr.js"></script>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> web_design
     <title>Liste des tournois</title>
 
 </head>
@@ -59,7 +65,11 @@ if (isset($_POST["submit"])) {
     <div class="liste-tournoi">
         <h1>Calendrier des tournois</h1>
         <div class="filter">
+<<<<<<< HEAD
             <button onclick="toggleFilters()" id="filter_button">Afficher filtres</button>
+=======
+            <button onclick="toggleFilters()">Afficher filtres</button>
+>>>>>>> web_design
             <div class="filter">
                 <form method="post">
                     <label for="age_min">Âge minimum :</label>
@@ -277,6 +287,12 @@ if (isset($_POST["submit"])) {
             var liste_tournois = <?php echo json_encode($liste_tournois) ?>;
             showCalendar(currentMonth, currentYear);
         </script>
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> web_design
 </body>
 
 </html>
