@@ -26,3 +26,10 @@ a:hover+.preview {
         opacity: 1;
     }
 }
+
+@media (max-width: 500px) {
+    nav {
+        visibility: hidden;
+        margin-top: -55px;
+    }
+}

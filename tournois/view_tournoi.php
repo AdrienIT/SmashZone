@@ -29,13 +29,6 @@ $adresse = $tournoi_infos["adresse"] . " " . $tournoi_infos["postal_code"] . " "
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $tournoi_infos['nom_tournoi'] ?></title>
-</head>
-
-<body>
-
-</body>
-
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../style/favicon.ico" />
@@ -48,7 +41,7 @@ $adresse = $tournoi_infos["adresse"] . " " . $tournoi_infos["postal_code"] . " "
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <link href="../style/style.css" rel="stylesheet">
-    <title>Document</title>
+    <link href="../style/tournoi_preview.css" rel="stylesheet">
 </head>
 
 <body>
