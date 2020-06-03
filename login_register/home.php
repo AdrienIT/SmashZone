@@ -7,7 +7,7 @@ if (!isset($_SESSION["user_id"])) {
 
 $id = (int) $_SESSION["user_id"];
 
-$query = $db->prepare('SELECT prenom,nom,pseudo FROM users WHERE user_id = :user_id');
+$query = $db->prepare('SELECT prenom,nom,pseudo,email,ville,postal_code,date_creation,telephone,date_naissance,classement FROM users WHERE user_id = :user_id');
 $query->bindParam(':user_id', $id);
 $query->execute();
 
@@ -76,21 +76,66 @@ $user = $query->fetch();
         </nav>
 
         <div class="container">
-            <div class="d-flex flex-column justify-content-center">
-                <h1> <img src=<?php echo $user['pseudo'] . "/" . $user['pseudo'] . ".png" ?>
+            <div class="row">
+                <div class="col-sm-2">
+                    <img src=<?php echo $user['pseudo'] . "/" . $user['pseudo'] . ".png" ?> class="image"
                         style="overflow:hidden; -webkit-border-radius:50px; -moz-border-radius:50px; border-radius:50px; height:90px; width:90px">
-                    Bonjour <?php echo $user['prenom'] . " " . $user['nom'] ?></h1>
-                <button type="button" onclick="location.href='update.php'"
-                    class="btn btn-light col-xl-6 mx-auto justify-content-center mb-4">Editer le profil</button>
-                <button type="button" onclick="location.href='avatar.php'"
-                    class="btn btn-light col-xl-6 mx-auto justify-content-center mb-4">Changer la photo de
-                    profil</button>
-                <button type="button" onclick="location.href='logout.php'"
-                    class="btn btn-light col-xl-6 mx-auto justify-content-center mb-4">Se déconnecter</button>
-                <button type="button" onclick="location.href='../relations/index.php'"
-                    class="btn btn-light col-xl-6 mx-auto justify-content-center mb-4">Amis</button>
+                    <div class="middle">
+                        <a href="avatar.php">
+                            <div class="text"><i class="material-icons md-dark mr-2">edit</i></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <h1 class="text-left"> <?php echo $user['prenom'] . " " . $user['nom'] ?></h1>
+                    <h3 class="text-left"><?php echo $user['pseudo'] ?></h3>
+                    <hr>
+                    <div class="d-flex">
+                        <i class="material-icons md-dark mr-2">mail</i>
+                        <p>Adresse E-mail</p>
+                        <p class="ml-auto"><?php echo $user['email'] ?></p>
+                    </div>
+                    <div class="d-flex">
+                        <i class="material-icons md-dark mr-2">cake</i>
+                        <p>Date de naissance</p>
+                        <p class="ml-auto"><?php echo $user['date_naissance'] ?></p>
+                    </div>
+                    <div class="d-flex">
+                        <i class="material-icons md-dark mr-2">sports_tennis</i>
+                        <p>Classement</p>
+                        <p class="ml-auto"><?php echo $user['classement'] ?></p>
+                    </div>
+
+                    <div class="d-flex">
+                        <i class="material-icons md-dark mr-2">location_city</i>
+                        <p>Ville</p>
+                        <p class="ml-auto"><?php echo $user['ville'] ?></p>
+                    </div>
+                    <div class="d-flex">
+                        <i class="material-icons md-dark mr-2">money</i>
+                        <p>Code postal</p>
+                        <p class="ml-auto"><?php echo $user['postal_code'] ?></p>
+                    </div>
+                    <div class="d-flex">
+                        <i class="material-icons md-dark mr-2">phone</i>
+                        <p>Téléphone</p>
+                        <p class="ml-auto"><?php echo $user['telephone'] ?></p>
+                    </div>
+                    <div class="d-flex">
+                        <i class="material-icons md-dark mr-2">access_time</i>
+                        <p>Date de création</p>
+                        <p class="ml-auto"><?php echo $user['date_creation'] ?></p>
+                    </div>
+                    <button type="button" onclick="location.href='../relations/index.php'"
+                        class="btn btn-light btn-block justify-content-center">Amis</button>
+                </div>
+                <div class="col-sm-4">
+                    <button type="button" onclick="location.href='update.php'"
+                        class="btn btn-light col-xl-6 mx-auto justify-content-center mb-2">Editer le profil</button>
+                    <button type="button" onclick="location.href='logout.php'"
+                        class="btn btn-danger col-xl-6 mx-auto justify-content-center">Se déconnecter</button>
+                </div>
             </div>
-        </div>
     </body>
 
 </html>
