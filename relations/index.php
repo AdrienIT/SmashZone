@@ -11,23 +11,17 @@ if (!isset($_SESSION["user_id"])) {
 
 $id = (int) $_SESSION["user_id"];
 
-$getusername = $db->prepare('SELECT pseudo FROM users WHERE user_id = :user_id');
+$getusername = $db->prepare('SELECT user_id,pseudo,prenom,nom FROM users WHERE user_id = :user_id');
 $getusername->bindParam(':user_id', $id);
 $getusername->execute();
-$username = $getusername->fetch();
+$user = $getusername->fetch();
 
-$query = $db->prepare('SELECT prenom,nom FROM users WHERE user_id = :user_id');
-$query->bindParam(':user_id', $id);
-$query->execute();
-
-$user = $query->fetch();
-
-$queryfriend = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE r.status = "En attente" AND r.receiver_name = :receiver_name');
-$queryfriend->bindParam(':receiver_name', $username['0']);
+$queryfriend = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE r.status = "En attente" AND r.receiver_id = :receiver_id');
+$queryfriend->bindParam(':receiver_id', $user['user_id']);
 $queryfriend->execute();
 
-$querypote = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id,r.receiver_name FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE (r.status = "Ami" AND r.receiver_name = :receiver_name) OR (r.status = "Ami" AND r.sender_id = :sender_id)');
-$querypote->bindParam(':receiver_name', $username['0']);
+$querypote = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id,r.receiver_id FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE (r.status = "Ami" AND r.receiver_id = :receiver_id) OR (r.status = "Ami" AND r.sender_id = :sender_id)');
+$querypote->bindParam(':receiver_id', $user['user_id']);
 $querypote->bindParam(':sender_id', $id);
 $querypote->execute();
 

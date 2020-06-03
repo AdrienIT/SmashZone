@@ -21,13 +21,13 @@ $user = $query->fetch();
 if (isset($_GET['contact'])) {
     $ami = $_GET['contact'];
     $username = $user['pseudo'];
-    $checkIfAlreadyWaiting = $db->prepare('SELECT sender_id,receiver_name,status FROM relationships WHERE receiver_name = :receiver_name AND status = "En attente"');
-    $checkIfAlreadyFriend = $db->prepare('SELECT sender_id,receiver_name,status FROM relationships WHERE receiver_name = :receiver_name AND status = "Ami"');
-    $checkIfYourself = $db->prepare('SELECT sender_id,receiver_name,status FROM relationships WHERE receiver_name = :receiver_name');
+    $checkIfAlreadyWaiting = $db->prepare('SELECT sender_id,receiver_id,status FROM relationships WHERE receiver_id = :receiver_id AND status = "En attente"');
+    $checkIfAlreadyFriend = $db->prepare('SELECT sender_id,receiver_id,status FROM relationships WHERE receiver_id = :receiver_id AND status = "Ami"');
+    $checkIfYourself = $db->prepare('SELECT sender_id,receiver_id,status FROM relationships WHERE receiver_id = :receiver_id');
 
-    $checkIfAlreadyWaiting->bindParam(':receiver_name', $ami);
-    $checkIfAlreadyFriend->bindParam(':receiver_name', $ami);
-    $checkIfYourself->bindParam(':receiver_name', $username);
+    $checkIfAlreadyWaiting->bindParam(':receiver_id', $ami);
+    $checkIfAlreadyFriend->bindParam(':receiver_id', $ami);
+    $checkIfYourself->bindParam(':receiver_id', $username);
 
     $checkIfAlreadyWaiting->execute();
     $checkIfAlreadyFriend->execute();
@@ -40,9 +40,9 @@ if (isset($_GET['contact'])) {
     } elseif ($checkIfYourself->fetch() > 0) {
         echo "Mais vazi t'es teubé, tu t'es demandé toi-même en ami, trouve un travail";
     } else {
-        $addfriend = $db->prepare('INSERT INTO relationships (sender_id,receiver_name,status) VALUES (:sender_id,:receiver_name,"En attente")');
+        $addfriend = $db->prepare('INSERT INTO relationships (sender_id,receiver_id,status) VALUES (:sender_id,:receiver_id,"En attente")');
         $addfriend->bindParam(':sender_id', $id);
-        $addfriend->bindParam(':receiver_name', $ami);
+        $addfriend->bindParam(':receiver_id', $ami);
         $addfriend->execute();
         echo "Demande d'ami envoyée";
         header("location: liste_joueurs.php");
@@ -145,7 +145,7 @@ if (isset($_GET['contact'])) {
                         } else {
                         ?>
                         <td class="text-center">
-                            <a type='submit' name='contact' href='liste_joueurs.php?contact=<?php echo $u['pseudo'] ?>'
+                            <a type='submit' name='contact' href='liste_joueurs.php?contact=<?php echo $u['user_id'] ?>'
                                 class=' btn btn-primary'>Envoyer une
                                 demande d'ami</a> </td> <?php } ?>
 

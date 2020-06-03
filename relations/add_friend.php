@@ -6,7 +6,11 @@ session_start();
 
 if (!isset($_SESSION["user_id"])) {
     header("Location: ../index.php");
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
 }
+
 
 
 $id = (int) $_SESSION["user_id"];
@@ -17,8 +21,17 @@ if (isset($_POST['name'])) {
     $search = $_POST['name'];
     $messagetrouver = "Une demande d'ami a été envoyée";
     $messagepastrouver = "Cet utilisateur n'existe pas";
+    $messagedejaami = "Cet utilisateur est déjà votre ami !";
 
-    $query = $db->prepare('SELECT pseudo,email FROM users WHERE email = :email OR pseudo = :pseudo');
+    $querydejaami = $db->prepare('SELECT receiver_id FROM relationships WHERE receiver_id = :receiver_id');
+    $querydejaami->bindParam(':receiver_id', $recherche['user_id']);
+    $querydejaami->execute();
+    $queryami = $querydejaami->fetch();
+    // if ($queryami == 0) {
+    //     echo "Cet utilisateur est déjà votre ami !";
+    // } else {
+
+    $query = $db->prepare('SELECT user_id,pseudo,email FROM users WHERE email = :email OR pseudo = :pseudo');
     $query->bindParam(':email', $search);
     $query->bindParam(':pseudo', $search);
     $query->execute();
@@ -27,13 +40,11 @@ if (isset($_POST['name'])) {
     if ($recherche > 0) {
         echo "<pre> $messagetrouver </pre>";
 
-        $token = bin2hex(openssl_random_pseudo_bytes(16));
         $username = $_SESSION["user_id"];
 
-        $addfriend = $db->prepare('INSERT INTO relationships (request_id,sender_id,receiver_name,status) VALUES (:request_id,:sender_id,:receiver_name,"En attente")');
-        $addfriend->bindParam(':request_id', $token);
+        $addfriend = $db->prepare('INSERT INTO relationships (sender_id,receiver_id,status) VALUES (:sender_id,:receiver_id,"En attente")');
         $addfriend->bindParam(':sender_id', $id);
-        $addfriend->bindParam(':receiver_name', $search);
+        $addfriend->bindParam(':receiver_id', $recherche['user_id']);
         $addfriend->execute();
     } else {
         echo "<pre> $messagepastrouver </pre>";
@@ -95,8 +106,7 @@ if (isset($_POST['name'])) {
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <button class="btn btn-outline-info my-2 my-sm-0"
-                        onclick="location.href='../login_register/login.php'" type="button">Se
-                        connecter/S'inscrire</button>
+                        onclick="location.href='../login_register/login.php'" type="button"><?= $connect ?></button>
                 </form>
             </div>
         </nav>
