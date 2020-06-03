@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 iframe {
     width: 25vw;
     height: 30vh;
@@ -26,12 +25,4 @@ a:hover+.preview {
     to {
         opacity: 1;
     }
-=======
-.preview {
-    display: none;
-    position: absolute;
-    border: 1px solid #000;
-    width: 400px;
-    height: 400px;
->>>>>>> web_design
 }

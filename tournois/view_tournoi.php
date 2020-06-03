@@ -32,22 +32,7 @@ $adresse = $tournoi_infos["adresse"] . " " . $tournoi_infos["postal_code"] . " "
 </head>
 
 <body>
-    <h1><?= $tournoi_infos['nom_tournoi'] ?> : </h1>
 
-    <h2>Informations :</h2>
-    <ul>
-        <li>Club organisateur : <?= $tournoi_infos["nom_club"] ?></li>
-        <li>Adresse : <?= $adresse ?></li>
-        <li>Date de début : <?= $date_debut ?></li>
-        <li>Date de fin : <?= $date_fin ?></li>
-        <li>Catégorie d'age : <?= $cat_age ?></li>
-    </ul>
-    <h2>Contacter : </h2>
-    <ul>
-        <li>Téléphone : <?= $tournoi_infos["telephone"] ?></li>
-        <li>Email : <?= $tournoi_infos["email"] ?></li>
-    </ul>
-    <a href="">S'inscrire</a>
 </body>
 
 <head>
@@ -84,8 +69,22 @@ $adresse = $tournoi_infos["adresse"] . " " . $tournoi_infos["postal_code"] . " "
                 connecter/S'inscrire</button>
         </form>
     </nav>
+    <h1><?= $tournoi_infos['nom_tournoi'] ?> : </h1>
 
-    <?= var_dump($tournoi_infos) ?>
+    <h2>Informations :</h2>
+    <ul>
+        <li>Club organisateur : <?= $tournoi_infos["nom_club"] ?></li>
+        <li>Adresse : <?= $adresse ?></li>
+        <li>Date de début : <?= $date_debut ?></li>
+        <li>Date de fin : <?= $date_fin ?></li>
+        <li>Catégorie d'age : <?= $cat_age ?></li>
+    </ul>
+    <h2>Contacter : </h2>
+    <ul>
+        <li>Téléphone : <?= $tournoi_infos["telephone"] ?></li>
+        <li>Email : <?= $tournoi_infos["email"] ?></li>
+    </ul>
+    <a href="">S'inscrire</a>
 </body>
 
 </html>
