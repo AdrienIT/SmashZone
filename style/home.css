@@ -67,19 +67,23 @@ section .slide:hover .content {
 section .slide:nth-child(1) {
     background: url(https://images7.alphacoders.com/734/thumb-1920-734192.jpg);
     background-position: center center;
+    background-size: cover;
 }
 
 section .slide:nth-child(2) {
     background: url(https://img.bfmtv.com/i/0/0/5ea/abe13f89d109bc1ce425a90c57b14.jpg);
     background-position: center center;
+    background-size: cover;
 }
 
 section .slide:nth-child(3) {
     background: url(https://tennissquare.gr/wp-content/uploads/2018/06/aaa902da5f6f11b94b4685d3801dff79bd62b7e9_gallery-final-rafael-nadal-brandit-la-coupe-des-mousquetaires-roland-garros-2018-1.jpg);
     background-position: center center;
+    background-size: cover;
 }
 
 section .slide:nth-child(4) {
     background: url(https://m.fourseasons.com/alt/img-opt/~70.1530/publish/content/dam/fourseasons/images/web/BOR/BOR_1300_original.jpg);
     background-position: center center;
+    background-size: cover;
 }
