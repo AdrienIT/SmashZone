@@ -23,6 +23,7 @@ if (isset($_POST["submit"])) {
     $password_confirm = $_POST["password_confirm"];
     $prenom = htmlspecialchars($_POST["prenom"]);
     $nom = htmlspecialchars($_POST["nom"]);
+    $classement = htmlspecialchars($_POST["classement"]);
 
 
     $query1 = $db->prepare("SELECT pseudo FROM users WHERE pseudo = ? ");
@@ -44,7 +45,7 @@ if (isset($_POST["submit"])) {
                     echo $err;
                 } else {
                     $password = md5($password);
-                    $query = "INSERT INTO users(pseudo,email,ville,telephone,postal_code,password,date_naissance,prenom,nom) VALUES(:pseudo,:email,:ville,:telephone,:postal_code,:password,:date_naissance,:prenom,:nom)";
+                    $query = "INSERT INTO users(pseudo,email,ville,telephone,postal_code,password,date_naissance,prenom,nom,classement) VALUES(:pseudo,:email,:ville,:telephone,:postal_code,:password,:date_naissance,:prenom,:nom,:classement)";
                     $query = $db->prepare($query);
                     $query->bindParam(':pseudo', $pseudo);
                     $query->bindParam(':email', $email);
@@ -55,6 +56,7 @@ if (isset($_POST["submit"])) {
                     $query->bindParam(':postal_code', $postal_code);
                     $query->bindParam(':password', $password);
                     $query->bindParam(':date_naissance', $date_naissance);
+                    $query->bindParam(':classement', $classement);
                     if ($query->execute()) {
 
                         $id = (int) $_SESSION["user_id"];
@@ -141,11 +143,19 @@ if (isset($_POST["submit"])) {
                                     <div>Successful</div>
                                     <?php endif ?>
 
-                                    <div class="form-group">
-                                        <label for="pseudo">Nom d'utilisateur</label>
-                                        <input required type="text" <?php if (isset($pseudo)) : ?>
-                                            value="<?php echo $pseudo ?>" <?php endif ?> name="pseudo"
-                                            class="form-control">
+                                    <div class="row mb-4">
+                                        <div class="col">
+                                            <label for="pseudo">Nom d'utilisateur</label>
+                                            <input required type="text" <?php if (isset($pseudo)) : ?>
+                                                value="<?php echo $pseudo ?>" <?php endif ?> name="pseudo"
+                                                class="form-control">
+                                        </div>
+                                        <div class="col">
+                                            <label for="classement">Classement</label>
+                                            <input type="text" <?php if (isset($classement)) : ?>
+                                                value="<?php echo $classement ?>" <?php endif ?> name="classement"
+                                                class="form-control">
+                                        </div>
                                     </div>
                                     <div class="row mb-4">
                                         <div class="col">

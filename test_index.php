@@ -74,7 +74,6 @@ if (!isset($_SESSION["user_id"])) {
                 </form>
             </div>
         </nav>
-
         <section>
             <div class="slide">
                 <div class="content">
@@ -87,14 +86,14 @@ if (!isset($_SESSION["user_id"])) {
                 <div class="content">
                     <h2>Rencontrez de nouveaux partenaires</h2>
                     <p>Cherchez de nouveaux joueurs et organisez des rencontres amicales pour prendre du niveau ! <a
-                            href="offres/list_offers.php">Voir les offres</a></p>
+                            href="">Voir les offres</a></p>
                 </div>
             </div>
             <div class="slide">
                 <div class="content">
                     <h2>Triomphez dans les tournois</h2>
                     <p>Visitez les tournois organisés pas les clubs, inscrivez vous et rafflez tout sur votre passage !
-                        <a href="tournois/liste_tournoi.php">Voir le calendrier des tournois</a></p>
+                        <a href="">Voir le calendrier des tournois</a></p>
                 </div>
             </div>
             <div class="slide">
