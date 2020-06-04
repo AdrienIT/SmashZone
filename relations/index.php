@@ -144,7 +144,8 @@ if (isset($_GET['delete'])) {
                     <p>Vos amis :</p>
                 </div>
                 <div class="col-sm text-center">
-                    <button type="button" class="btn btn-primary" onclick="location.href='add_friend.php'">Ajouter un
+                    <button type="button" class="btn btn-primary" onclick="location.href='../liste_joueurs.php'">Ajouter
+                        un
                         ami</button>
                 </div>
             </div>
