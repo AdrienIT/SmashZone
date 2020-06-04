@@ -12,7 +12,6 @@ $query->bindParam(':user_id', $id);
 $query->execute();
 
 $user = $query->fetch();
-
 ?>
 
 <!DOCTYPE html>
