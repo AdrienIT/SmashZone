@@ -26,6 +26,12 @@ if (isset($_POST["submit"])) {
     $query->execute();
     $liste_tournois = $query->fetchAll();
 }
+
+if (!isset($_SESSION["user_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
 ?>
 <html>
 
@@ -36,10 +42,10 @@ if (isset($_POST["submit"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
     </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
-    </script>
+    <link rel="icon" href="../style/favicon.ico" />
     <link rel="stylesheet" href="../style/calendar.css">
     <link rel="stylesheet" href="../style/tournoi_preview.css">
     <link rel="stylesheet" href="../style/style.css">
@@ -50,8 +56,6 @@ if (isset($_POST["submit"])) {
     <script src="../script/jquery-jvectormap-2.0.5.min.js"></script>
     <script src="../script/map_fr.js"></script>
     <script src="../script/dep_fr.js"></script>
-
-
     <title>Liste des tournois</title>
 
 </head>
@@ -64,22 +68,35 @@ if (isset($_POST["submit"])) {
         </a>
         <button class="navbar-toggler ml-auto" type=" button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse rubriques" id="navbarNav">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item rubriquecolor">
+                    Recherchez :
+                </li>
+                <form class="form-inline">
+                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../offres/list_offers.php'" type="button">Partenaires</button>
+                </form>
+                <form class="form-inline">
+                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
+                </form>
+                <form class="form-inline">
+                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='liste_tournoi.php'" type="button">Tournois</button>
+                </form>
+                <form class="form-inline">
+                    <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch" onclick="location.href='../offres/new_offer.php'" type="button">Poster une annonce</button>
+                </form>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='../login_register/login.php'" type="button"><?= $connect ?></button>
+            </form>
         </div>
-        <form class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login_register/index.php'" type="button">Se
-                connecter/S'inscrire</button>
-        </form>
-        <form class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login_register/index.php'" type="button">Se
-                connecter/S'inscrire</button>
-        </form>
     </nav>
 
     <div class="filtres-tournoi"></div>
     <div class="liste-tournoi">
         <h1>Calendrier des tournois</h1>
         <div class="filter">
-            <button onclick="toggleFilters()">Afficher filtres</button>
+            <button class="btn btn-primary mb-4" onclick="toggleFilters()">Afficher filtres</button>
             <div class="filter">
                 <form method="post">
                     <label for="age_min">Âge minimum :</label>
@@ -198,7 +215,7 @@ if (isset($_POST["submit"])) {
                     </div>
                     <button name="submit" id="search" class="invisible"></button>
                 </form>
-                <button onclick="getDepData()">Rechercher</button>
+                <button class="btn btn-primary mb-4" onclick="getDepData()">Rechercher</button>
             </div>
         </div>
         <div class="container">
@@ -292,12 +309,12 @@ if (isset($_POST["submit"])) {
                     </select></form>
             </div>
         </div>
-        <script src="../script/calendar.js"></script>
-        <script>
-            var liste_tournois = <?php echo json_encode($liste_tournois) ?>;
-            showCalendar(currentMonth, currentYear);
-        </script>
-
+    </div>
+    <script src="../script/calendar.js"></script>
+    <script>
+        var liste_tournois = <?php echo json_encode($liste_tournois) ?> ;
+        showCalendar(currentMonth, currentYear);
+    </script>
 
 
 </body>
