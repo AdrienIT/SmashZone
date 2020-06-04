@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    position: absolute;
+    border-bottom: 2px solid #000;
+}
+
+section {
+    margin-top: -55px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    border: 2px solid #000;
+    z-index: -1;
+}
+
+section .slide {
+    position: relative;
+    background: #0f0;
+    height: 100%;
+    flex: 1;
+    border-right: 2px solid #000;
+    overflow: hidden;
+    transition: 0.5s ease-in-out;
+}
+
+section .slide:last-child {
+    border-right: none;
+}
+
+section .slide:hover {
+    flex-grow: 5;
+}
+
+section .slide .content {
+    position: absolute;
+    bottom: 0;
+    margin: 40px;
+    text-align: center;
+    padding: 30px;
+    background: #000;
+    border-radius: 50px;
+    color: white;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0s;
+    transform: translateY(100px)
+}
+
+.content {
+    width: 90%;
+}
+
+section .slide:hover .content {
+    visibility: visible;
+    opacity: 0.7;
+    transition: 0.5s;
+    transition-delay: 0.3s;
+    transform: translateY(0);
+}
+
+section .slide:nth-child(1) {
+    background: url(https://images7.alphacoders.com/734/thumb-1920-734192.jpg);
+    background-position: center center;
+    background-size: cover;
+}
+
+section .slide:nth-child(2) {
+    background: url(https://img.bfmtv.com/i/0/0/5ea/abe13f89d109bc1ce425a90c57b14.jpg);
+    background-position: center center;
+    background-size: cover;
+}
+
+section .slide:nth-child(3) {
+    background: url(https://tennissquare.gr/wp-content/uploads/2018/06/aaa902da5f6f11b94b4685d3801dff79bd62b7e9_gallery-final-rafael-nadal-brandit-la-coupe-des-mousquetaires-roland-garros-2018-1.jpg);
+    background-position: center center;
+    background-size: cover;
+}
+
+section .slide:nth-child(4) {
+    background: url(https://m.fourseasons.com/alt/img-opt/~70.1530/publish/content/dam/fourseasons/images/web/BOR/BOR_1300_original.jpg);
+    background-position: center center;
+    background-size: cover;
+}

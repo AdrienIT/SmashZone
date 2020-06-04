@@ -2,8 +2,13 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include_once('../config.php');
-/* session_start();
-$_SESSION["user_id"] = 1; */
+session_start();
+
+if (!isset($_SESSION["user_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
 
 $all_date = "lun_am-mar_am-mer_am-jeu_am-ven_am-sam_am-dim_am-lun_pm-mar_pm-mer_pm-jeu_pm-ven_pm-sam_pm-dim_pm";
 
@@ -100,8 +105,8 @@ if (isset($_POST["submit"])) {
                 <span class="navbar-toggler-icon"></span> </button>
             <div class="collapse navbar-collapse rubriques" id="navbarNav">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-inline rubriquecolor">
-                        Effectuer une recherche :
+                    <li class="nav-item rubriquecolor">
+                        Recherchez :
                     </li>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
@@ -109,21 +114,20 @@ if (isset($_POST["submit"])) {
                     </form>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='recherchejouer.php'" type="button">Joueurs</button>
+                            onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
                     </form>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
                             onclick="location.href='recherchejouer.php'" type="button">Tournois</button>
                     </form>
-                    <form class="form-inline ml-5">
+                    <form class="form-inline">
                         <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch"
                             onclick="location.href='new_offer.php'" type="button">Poster une annonce</button>
                     </form>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <button class="btn btn-outline-info my-2 my-sm-0"
-                        onclick="location.href='../login_register/login.php'" type="button">Se
-                        connecter/S'inscrire</button>
+                        onclick="location.href='../login_register/login.php'" type="button"><?= $connect ?></button>
                 </form>
             </div>
         </nav>
@@ -399,32 +403,62 @@ if (isset($_POST["submit"])) {
                 <button onclick="getDepData()" type="button" class="btn btn-primary text-center">Rechercher</button>
             </div>
 
-        </div>
-        <div class="list_offer">
-            <h2><?= $title ?></h2>
-            <?php foreach ($list_offers as $offre) {
-            $nom = $offre["nom"];
-            $prenom = $offre["prenom"];
-            if (strpos(strval($offre["classement"]), ".")) {
-                $classement = explode(".", strval($offre["classement"]));
-                $classement = $classement[0] . "/" . $classement[1];
-            } else {
-                $classement = strval($offre["classement"]);
-            }
-            $birth_date = new DateTime($offre["date_naissance"]);
-            $today = new DateTime(date("Y-m-d H:i:s"));
-            $age =  $today->diff($birth_date)->format("%Y");
-            $description = $offre["description"];
-            $publi = new DateTime(strval($offre["date_publication"]));
-            $date_publi = $publi->format("d/m/Y H:i:s"); ?>
-            <div class="offre">
-                <h3><?= $nom . " " . $prenom ?></h3>
-                <p><?= $age . " ans - " . $classement ?></p>
-                <i><?= $date_publi ?></i>
-                <p><?= $description ?></p>
-
+            <div class="list_offer">
+                <h2><?= $title ?></h2>
+                <?php foreach ($list_offers as $offre) {
+                $nom = $offre["nom"];
+                $prenom = $offre["prenom"];
+                if (strpos(strval($offre["classement"]), ".")) {
+                    $classement = explode(".", strval($offre["classement"]));
+                    $classement = $classement[0] . "/" . $classement[1];
+                } else {
+                    $classement = strval($offre["classement"]);
+                }
+                $birth_date = new DateTime($offre["date_naissance"]);
+                $today = new DateTime(date("Y-m-d H:i:s"));
+                $age =  $today->diff($birth_date)->format("%Y");
+                $description = $offre["description"];
+                $publi = new DateTime(strval($offre["date_publication"]));
+                $date_publi = $publi->format("d/m/Y H:i:s");
+                $dispo = "-" . $offre["disponibilite"];
+            ?>
+                <div class="offre">
+                    <h3><?= $nom . " " . $prenom ?></h3>
+                    <p><?= $age . " ans - " . $classement ?></p>
+                    <i><?= $date_publi ?></i>
+                    <p><?= $description ?></p>
+                    <table class="disponibilite_mini">
+                        <tr>
+                            <th>Lundi</th>
+                            <th>Mardi</th>
+                            <th>Mercredi</th>
+                            <th>Jeudi</th>
+                            <th>Vendredi</th>
+                            <th>Samedi</th>
+                            <th>Dimanche</th>
+                        </tr>
+                        <tr>
+                            <td class=<?php echo "_" . boolval(strpos($dispo, "lun_am")) ?>></td>
+                            <td class=<?php echo "_" . boolval(strpos($dispo, "mar_am")) ?>></td>
+                            <td class=<?php echo "_" . boolval(strpos($dispo, "mer_am")) ?>></td>
+                            <td class=<?php echo "_" . boolval(strpos($dispo, "jeu_am")) ?>></td>
+                            <td class=<?php echo "_" . boolval(strpos($dispo, "ven_am")) ?>></td>
+                            <td class=<?php echo "_" . boolval(strpos($dispo, "sam_am")) ?>></td>
+                            <td class=<?php echo "_" . boolval(strpos($dispo, "dim_am")) ?>></td>
+                        </tr>
+                        <tr>
+                            <td class=<?php echo "_" . boolval(strpos($dispo, "lun_pm")) ?>></td>
+                            <td class=<?php echo "_" . boolval(strpos($dispo, "mar_pm")) ?>></td>
+                            <td class=<?php echo "_" . boolval(strpos($dispo, "mer_pm")) ?>></td>
+                            <td class=<?php echo "_" . boolval(strpos($dispo, "jeu_pm")) ?>></td>
+                            <td class=<?php echo "_" . boolval(strpos($dispo, "ven_pm")) ?>></td>
+                            <td class=<?php echo "_" . boolval(strpos($dispo, "sam_pm")) ?>></td>
+                            <td class=<?php echo "_" . boolval(strpos($dispo, "dim_pm")) ?>></td>
+                        </tr>
+                    </table>
+                </div>
+                <?php } ?>
             </div>
-            <?php } ?>
         </div>
     </body>
 

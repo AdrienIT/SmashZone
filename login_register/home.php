@@ -7,7 +7,7 @@ if (!isset($_SESSION["user_id"])) {
 
 $id = (int) $_SESSION["user_id"];
 
-$query = $db->prepare('SELECT prenom,nom FROM users WHERE user_id = :user_id');
+$query = $db->prepare('SELECT prenom,nom,pseudo FROM users WHERE user_id = :user_id');
 $query->bindParam(':user_id', $id);
 $query->execute();
 
@@ -51,8 +51,8 @@ $user = $query->fetch();
                 <span class="navbar-toggler-icon"></span> </button>
             <div class="collapse navbar-collapse rubriques" id="navbarNav">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-inline rubriquecolor">
-                        Effectuer une recherche :
+                    <li class="nav-item rubriquecolor">
+                        Recherchez :
                     </li>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
@@ -60,13 +60,13 @@ $user = $query->fetch();
                     </form>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='recherchejouer.php'" type="button">Joueurs</button>
+                            onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
                     </form>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
                             onclick="location.href='recherchejouer.php'" type="button">Tournois</button>
                     </form>
-                    <form class="form-inline ml-5">
+                    <form class="form-inline">
                         <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch"
                             onclick="location.href='../offres/new_offer.php'" type="button">Poster une annonce</button>
                     </form>
@@ -76,7 +76,7 @@ $user = $query->fetch();
 
         <div class="container">
             <div class="d-flex flex-column justify-content-center">
-                <h1> <img src=<?php echo "./" . $user['prenom'] . "/" . $user['prenom'] . ".png" ?>
+                <h1> <img src=<?php echo $user['pseudo'] . "/" . $user['pseudo'] . ".png" ?>
                         style="overflow:hidden; -webkit-border-radius:50px; -moz-border-radius:50px; border-radius:50px; height:90px; width:90px">
                     Bonjour <?php echo $user['prenom'] . " " . $user['nom'] ?></h1>
                 <button type="button" onclick="location.href='update.php'"
@@ -86,6 +86,8 @@ $user = $query->fetch();
                     profil</button>
                 <button type="button" onclick="location.href='logout.php'"
                     class="btn btn-light col-xl-6 mx-auto justify-content-center mb-4">Se déconnecter</button>
+                <button type="button" onclick="location.href='../relations/index.php'"
+                    class="btn btn-light col-xl-6 mx-auto justify-content-center mb-4">Amis</button>
             </div>
         </div>
     </body>

@@ -2,13 +2,17 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include_once('../config.php');
-/* session_start();
-$_SESSION["user_id"] = 1;
+session_start();
 
 if (!isset($_SESSION["user_id"])) {
-    header("Location: ../index.php");
+    header("Location: ../login_register/login.php");
 }
- */
+if (!isset($_SESSION["user_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
+
 if (isset($_POST["submit"])) {
     $dispo = "";
     foreach ($_POST as $key => $val) {
@@ -68,8 +72,8 @@ if (isset($_POST["submit"])) {
                 <span class="navbar-toggler-icon"></span> </button>
             <div class="collapse navbar-collapse rubriques" id="navbarNav">
                 <ul class=" navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-inline rubriquecolor">
-                        Effectuer une recherche :
+                    <li class="nav-item rubriquecolor">
+                        Recherchez :
                     </li>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
@@ -77,21 +81,16 @@ if (isset($_POST["submit"])) {
                     </form>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='recherchejouer.php'" type="button">Joueurs</button>
+                            onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
                     </form>
                     <form class="form-inline">
                         <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
                             onclick="location.href='recherchejouer.php'" type="button">Tournois</button>
                     </form>
-                    <form class="form-inline ml-5">
-                        <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='new_offer.php'" type="button">Poster une annonce</button>
-                    </form>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <button class="btn btn-outline-info my-2 my-sm-0"
-                        onclick="location.href='../login_register/login.php'" type="button">Se
-                        connecter/S'inscrire</button>
+                        onclick="location.href='../login_register/login.php'" type="button"><?= $connect ?></button>
                 </form>
             </div>
         </nav>
@@ -99,7 +98,7 @@ if (isset($_POST["submit"])) {
         <h1>Postuler une demande de partenaire</h1>
         <div class="container">
             <form method="post" id="offer">
-                <p>Descritpion de votre demande</p>
+                <p>Description de votre demande</p>
                 <textarea class="form-control mb-4" name="description" form="offer" rows="5"
                     placeholder="Description"></textarea>
                 <p>Cochez vos disponibilités</p>
@@ -181,6 +180,30 @@ if (isset($_POST["submit"])) {
             <p><?= $msg ?></p>
             <?php } ?>
         </div>
+
+        <!-- <footer class="footer font-small pt-2" style="background-color: #264653; color: #2a9d8f">
+            <div class="container" style="background-color: #264653;">
+                <div class="row justify-content-around">
+                    <a href="http://endless.horse/">
+                        <img class="imgfooter" src=../style/contact.png />
+                    </a>
+                    <a href="http://corndog.io/">
+                        <img class="imgfooter" src=../style/github.png />
+                    </a>
+                    <a href="https://ynov-bordeaux.com/">
+                        <img class="imgfooter" src=../style/ynov.png />
+                    </a>
+                    <a href="https://twitter.com/FantHaxV1">
+                        <img class="imgfooter" src=../style/twitter.png />
+                    </a>
+                </div>
+            </div>
+            <div class="footer-copyright text-center py-3" style="background-color: #264653; color: white;">© 2020
+                Copyright
+                <a href="https://thatsthefinger.com/"> SmashZone</a>
+            </div>
+
+        </footer> -->
     </body>
 
 </html>
