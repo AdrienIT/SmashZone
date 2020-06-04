@@ -17,7 +17,6 @@ $id = (int) $_SESSION["user_id"];
 
 
 if (isset($_POST['name'])) {
-
     $search = $_POST['name'];
     $messagetrouver = "Une demande d'ami a été envoyée";
     $messagepastrouver = "Cet utilisateur n'existe pas";

@@ -17,6 +17,16 @@ $query->execute();
 
 $user = $query->fetch();
 
+// if (isset($_POST['recherche'])) {
+//     $search = $_POST['recherche'];
+//     $querysearch = $db->prepare('SELECT prenom,nom,pseudo FROM users WHERE prenom = :prenom OR nom = :nom OR pseudo = :pseudo IN (prenom,nom,pseudo)');
+//     $querysearch->bindParam(':prenom', $search);
+//     $querysearch->bindParam(':nom', $search);
+//     $querysearch->bindParam(':pseudo', $search);
+//     $querysearch->execute();
+// }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -83,6 +93,11 @@ $user = $query->fetch();
         </nav>
 
         <div class="container">
+            <form class="row d-flex" action="" method="post">
+                <input required type="text" name="recherche" class="form-control" placeholder="Rechercher un joueur">
+                <button name="submit" type="submit" class="invisible btn btn-outline-primary">Rechercher un
+                    joueur</button>
+            </form>
             <h1 class="mb-4 font-weight-bold">Liste des joueurs inscrits</h1>
             <table class="table">
                 <thead class="thead-dark text-center">
@@ -95,7 +110,21 @@ $user = $query->fetch();
                         <th>Profil</td>
                     </tr>
                 <tbody>
-                    <?php while ($u = $users->fetch()) { ?>
+                    <?php if (isset($_POST['recherche'])) {
+                    while ($qs = $querysearch->fetch()) { ?>
+                    <tr>
+                        <td><?= $qs['pseudo'] ?></td>
+                        <td><?= $qs['nom'] ?></td>
+                        <td><?= $qs['prenom'] ?></td>
+                        <td><?= $qs['classement'] ?></td>
+                        <td><?= $qs['telephone'] ?></td>
+                        <td class="text-center">
+                            <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $qs['user_id'] ?>'
+                                class=' btn btn-primary'>Voir le profil</a> </td> <?php } ?>
+
+                    </tr>
+                    <?php } else {
+                        while ($u = $users->fetch()) { ?>
                     <tr>
                         <td><?= $u['pseudo'] ?></td>
                         <td><?= $u['nom'] ?></td>
@@ -104,7 +133,9 @@ $user = $query->fetch();
                         <td><?= $u['telephone'] ?></td>
                         <td class="text-center">
                             <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $u['user_id'] ?>'
-                                class=' btn btn-primary'>Voir le profil</a> </td> <?php } ?>
+                                class=' btn btn-primary'>Voir le profil</a> </td>
+                        <?php }
+                    } ?>
 
                     </tr>
                 </tbody>

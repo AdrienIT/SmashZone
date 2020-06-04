@@ -28,24 +28,22 @@ $checkIfAlreadyWaiting->bindParam(':receiver_id', $idcontact);
 $checkIfAlreadyWaiting->bindParam(':sender_id', $id);
 $checkIfAlreadyWaiting->execute();
 
-if (isset($_GET['demande_ami'])) {
-    $ami = $_GET['demande_ami'];
+if (isset($_POST['demande_ami'])) {
     $addfriend = $db->prepare('INSERT INTO relationships (sender_id,receiver_id,status) VALUES (:sender_id,:receiver_id,"En attente")');
     $addfriend->bindParam(':sender_id', $id);
-    $addfriend->bindParam(':receiver_id', $ami);
+    $addfriend->bindParam(':receiver_id', $idcontact);
     $addfriend->execute();
     echo "Demande d'ami envoyée";
-    header("location: infos_joueur?contact=$idcontact.php");
+    header("Refresh:0");
 }
 
-if (isset($_GET['supprimer_ami'])) {
+if (isset($_POST['supprimer_ami'])) {
     $querydelete = $db->prepare('DELETE FROM relationships WHERE receiver_id = :receiver_id AND sender_id = :sender_id');
     $querydelete->bindParam(':receiver_id', $idcontact);
     $querydelete->bindParam(':sender_id', $id);
     $querydelete->execute();
-    header("location: infos_joueur?contact=$idcontact.php");
+    header("Refresh:0");
 }
-
 
 ?>
 
@@ -161,18 +159,21 @@ if (isset($_GET['supprimer_ami'])) {
                         <p class="ml-auto"><?php echo $user['date_creation'] ?></p>
                     </div>
                     <?php if (!isset($_SESSION["user_id"])) {;
-                } elseif ($checkIfAlreadyFriend->fetch() > 0) {  ?> <a type='submit' name='demande_ami'
-                        class="btn btn-danger btn-block justify-content-center">Supprimer des amis</a>
+                } elseif ($checkIfAlreadyFriend->fetch() > 0) {  ?>
+                    <form method="post">
+                        <input type='submit' name='supprimer_ami'
+                            class="btn btn-danger btn-block justify-content-center" value="Supprimer des amis" />
+                    </form>
                     <?php } elseif ($checkIfAlreadyWaiting->fetch() > 0) { ?>
-                    <form>
-                        <button type='submit' name='supprimer_ami' onlick="supprimer_demande();"
-                            class="btn btn-danger btn-block justify-content-center">Annuler la demande d'ami</button>
+                    <form method="post">
+                        <input type='submit' name='supprimer_ami'
+                            class="btn btn-danger btn-block justify-content-center" value="Annuler la demande d'ami" />
                     </form>
                     <?php
                 } elseif ($id == $idcontact) {;
-                } else { ?>
-                    <a type='submit' name='demande_ami' href='infos_joueur.php?demande_ami=<?php echo $idcontact ?>'
-                        class="btn btn-primary btn-block justify-content-center">Demander en ami</a>
+                } else { ?> <form method="post">
+                        <input type='submit' name='demande_ami' class="btn btn-primary btn-block justify-content-center"
+                            value="Demander en ami" /> </form>
                     <?php } ?>
                 </div>
             </div>
