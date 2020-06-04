@@ -17,14 +17,12 @@ $query->execute();
 
 $user = $query->fetch();
 
-// if (isset($_POST['recherche'])) {
-//     $search = $_POST['recherche'];
-//     $querysearch = $db->prepare('SELECT prenom,nom,pseudo FROM users WHERE prenom = :prenom OR nom = :nom OR pseudo = :pseudo IN (prenom,nom,pseudo)');
-//     $querysearch->bindParam(':prenom', $search);
-//     $querysearch->bindParam(':nom', $search);
-//     $querysearch->bindParam(':pseudo', $search);
-//     $querysearch->execute();
-// }
+if (isset($_POST['recherche'])) {
+    $search = $_POST['recherche'];
+    $querysearch = $db->prepare('SELECT * FROM users WHERE pseudo LIKE :recherche OR nom LIKE :recherche OR prenom LIKE :recherche');
+    $querysearch->bindValue(':recherche', '%' . $search . '%');
+    $querysearch->execute();
+}
 
 
 ?>
