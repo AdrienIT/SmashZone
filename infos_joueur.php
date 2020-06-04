@@ -33,7 +33,6 @@ if (isset($_POST['demande_ami'])) {
     $addfriend->bindParam(':sender_id', $id);
     $addfriend->bindParam(':receiver_id', $idcontact);
     $addfriend->execute();
-    echo "Demande d'ami envoyée";
     header("Refresh:0");
 }
 
