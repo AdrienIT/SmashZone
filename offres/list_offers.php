@@ -427,7 +427,7 @@ if (isset($_POST["submit"])) {
                     <p><?= $age . " ans - " . $classement ?></p>
                     <i><?= $date_publi ?></i>
                     <p><?= $description ?></p>
-                    <table class="disponibilite_mini">
+                    <table class="disponibilite_mini mb-4">
                         <tr>
                             <th>Lundi</th>
                             <th>Mardi</th>
@@ -456,6 +456,14 @@ if (isset($_POST["submit"])) {
                             <td class=<?php echo "_" . boolval(strpos($dispo, "dim_pm")) ?>></td>
                         </tr>
                     </table>
+                    <div class="row d-flex justify-content-center">
+                        <a type='submit' name='contact'
+                            href='../infos_joueur.php?contact=<?php echo $offre['user_id'] ?>'
+                            class=' btn btn-primary mr-4'>Voir le profil</a> </td>
+                        <a type='submit' name='message'
+                            href='../infos_joueur.php?contact=<?php echo $offre['user_id'] ?>'
+                            class=' btn btn-success'>Contacter</a> </td>
+                    </div>
                 </div>
                 <?php } ?>
             </div>
