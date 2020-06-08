@@ -18,7 +18,7 @@ $query->execute();
 $user = $query->fetch();
 
 
-$checkIfAlreadyFriend = $db->prepare('SELECT sender_id,receiver_id,status FROM relationships WHERE (receiver_id = :receiver_id OR sender_id = :sender_id) AND status = "Ami"');
+$checkIfAlreadyFriend = $db->prepare('SELECT sender_id,receiver_id,status FROM relationships WHERE (receiver_id = :receiver_id AND sender_id = :sender_id) AND status = "Ami"');
 $checkIfAlreadyFriend->bindParam(':receiver_id', $idcontact);
 $checkIfAlreadyFriend->bindParam(':sender_id', $id);
 $checkIfAlreadyFriend->execute();
