@@ -5,10 +5,14 @@ include_once('../config.php');
 session_start();
 
 if (!isset($_SESSION["user_id"])) {
-    $connect = "Se connecter/S'inscrire";
-} else {
-    $connect = "Mon compte";
+    header('location: login.php');
 }
+
+$querypote = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id,r.receiver_id FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE (r.status = "Ami" AND r.receiver_id = :receiver_id) OR (r.status = "Ami" AND r.sender_id = :sender_id)');
+$querypote->bindParam(':receiver_id', $user['user_id']);
+$querypote->bindParam(':sender_id', $id);
+$querypote->execute();
+
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +76,29 @@ if (!isset($_SESSION["user_id"])) {
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <button class="btn btn-outline-info my-2 my-sm-0"
-                        onclick="location.href='../login_register/login.php'" type="button"><?= $connect ?></button>
+                        onclick="location.href='../login_register/login.php'" type="button">Mon compte</button>
                 </form>
             </div>
         </nav>
+
+        <div class="container-fluid">
+            <div class="row d-flex">
+                <div class="col-2">
+                    <h2>Vos amis</h2>
+                    <hr>
+                    <?php
+                if ($querypote->rowCount() == 0) {
+                    echo "Vous n'avez pas d'ami, pleurez";
+                }
+                while ($row2 = $querypote->fetch()) {
+                ?>
+                    <p>
+                        <?php echo $row2['pseudo'];
+                } ?>
+                </div>
+                <div class="col">
+                    <p>lol</p>
+                </div>
+            </div>
+        </div>
+    </body>
