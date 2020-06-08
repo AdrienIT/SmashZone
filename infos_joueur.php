@@ -29,9 +29,10 @@ $checkIfAlreadyWaiting->bindParam(':sender_id', $id);
 $checkIfAlreadyWaiting->execute();
 
 if (isset($_POST['demande_ami'])) {
-    $addfriend = $db->prepare('INSERT INTO relationships (sender_id,receiver_id,status) VALUES (:sender_id,:receiver_id,"En attente")');
+    $addfriend = $db->prepare('INSERT INTO relationships (sender_id,receiver_id,status,receiver_name) VALUES (:sender_id,:receiver_id,"En attente",:receiver_name)');
     $addfriend->bindParam(':sender_id', $id);
     $addfriend->bindParam(':receiver_id', $idcontact);
+    $addfriend->bindParam(':receiver_name', $user['pseudo']);
     $addfriend->execute();
     header("Refresh:0");
 }
