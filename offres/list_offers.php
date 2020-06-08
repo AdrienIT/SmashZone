@@ -85,6 +85,7 @@ if (isset($_POST["submit"])) {
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
         </script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="../script/jquery.js"></script>
         <script src="../script/jquery-jvectormap-2.0.5.min.js"></script>
         <script src="../script/map_fr.js"></script>
@@ -425,8 +426,14 @@ if (isset($_POST["submit"])) {
             ?>
                 <div class="row">
                     <div class="card shadow offre text-center">
-                        <h3><?= $nom . " " . $prenom ?></h3>
-                        <p><?= $age . " ans - " . $classement ?></p>
+                        <h3><?= $nom ?> </h3>
+                        <h3><?= $prenom ?> </h3>
+                        <p><?= $age . " ans - " ?> <i class="material-icons md-dark">sports_tennis</i>
+                            <?php if ($offre['classement'] == 0) {
+                                echo "NC";
+                            } else {
+                                echo $classement;
+                            } ?></p>
                         <i><?= $date_publi ?></i>
                         <p class="offretaille"><?= $description ?></p>
                         <table class="disponibilite_mini mb-4">
@@ -463,7 +470,7 @@ if (isset($_POST["submit"])) {
                                 href='../infos_joueur.php?contact=<?php echo $offre['user_id'] ?>'
                                 class=' btn btn-primary mr-4'>Voir le profil</a> </td>
                             <a type='submit' name='message'
-                                href='../infos_joueur.php?contact=<?php echo $offre['user_id'] ?>'
+                                href='../relations/chat_prive.php?message=<?php echo $offre['user_id'] ?>'
                                 class=' btn btn-success'>Contacter</a> </td>
                         </div>
                     </div>
