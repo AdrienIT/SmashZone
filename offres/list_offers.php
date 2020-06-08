@@ -400,7 +400,8 @@ if (isset($_POST["submit"])) {
                     </table>
                     <button name="submit" id="search" class="invisible"></button>
                 </form>
-                <button onclick="getDepData()" type="button" class="btn btn-primary text-center">Rechercher</button>
+                <button onclick="getDepData()" type="button"
+                    class="btn btn-primary text-center mb-4">Rechercher</button>
             </div>
 
             <div class="list_offer">
@@ -422,50 +423,52 @@ if (isset($_POST["submit"])) {
                 $date_publi = $publi->format("d/m/Y H:i:s");
                 $dispo = "-" . $offre["disponibilite"];
             ?>
-                <div class="offre">
-                    <h3><?= $nom . " " . $prenom ?></h3>
-                    <p><?= $age . " ans - " . $classement ?></p>
-                    <i><?= $date_publi ?></i>
-                    <p><?= $description ?></p>
-                    <table class="disponibilite_mini mb-4">
-                        <tr>
-                            <th>Lundi</th>
-                            <th>Mardi</th>
-                            <th>Mercredi</th>
-                            <th>Jeudi</th>
-                            <th>Vendredi</th>
-                            <th>Samedi</th>
-                            <th>Dimanche</th>
-                        </tr>
-                        <tr>
-                            <td class=<?php echo "_" . boolval(strpos($dispo, "lun_am")) ?>></td>
-                            <td class=<?php echo "_" . boolval(strpos($dispo, "mar_am")) ?>></td>
-                            <td class=<?php echo "_" . boolval(strpos($dispo, "mer_am")) ?>></td>
-                            <td class=<?php echo "_" . boolval(strpos($dispo, "jeu_am")) ?>></td>
-                            <td class=<?php echo "_" . boolval(strpos($dispo, "ven_am")) ?>></td>
-                            <td class=<?php echo "_" . boolval(strpos($dispo, "sam_am")) ?>></td>
-                            <td class=<?php echo "_" . boolval(strpos($dispo, "dim_am")) ?>></td>
-                        </tr>
-                        <tr>
-                            <td class=<?php echo "_" . boolval(strpos($dispo, "lun_pm")) ?>></td>
-                            <td class=<?php echo "_" . boolval(strpos($dispo, "mar_pm")) ?>></td>
-                            <td class=<?php echo "_" . boolval(strpos($dispo, "mer_pm")) ?>></td>
-                            <td class=<?php echo "_" . boolval(strpos($dispo, "jeu_pm")) ?>></td>
-                            <td class=<?php echo "_" . boolval(strpos($dispo, "ven_pm")) ?>></td>
-                            <td class=<?php echo "_" . boolval(strpos($dispo, "sam_pm")) ?>></td>
-                            <td class=<?php echo "_" . boolval(strpos($dispo, "dim_pm")) ?>></td>
-                        </tr>
-                    </table>
-                    <div class="row d-flex justify-content-center">
-                        <a type='submit' name='contact'
-                            href='../infos_joueur.php?contact=<?php echo $offre['user_id'] ?>'
-                            class=' btn btn-primary mr-4'>Voir le profil</a> </td>
-                        <a type='submit' name='message'
-                            href='../infos_joueur.php?contact=<?php echo $offre['user_id'] ?>'
-                            class=' btn btn-success'>Contacter</a> </td>
+                <div class="row">
+                    <div class="card shadow offre text-center">
+                        <h3><?= $nom . " " . $prenom ?></h3>
+                        <p><?= $age . " ans - " . $classement ?></p>
+                        <i><?= $date_publi ?></i>
+                        <p class="offretaille"><?= $description ?></p>
+                        <table class="disponibilite_mini mb-4">
+                            <tr>
+                                <th>Lundi</th>
+                                <th>Mardi</th>
+                                <th>Mercredi</th>
+                                <th>Jeudi</th>
+                                <th>Vendredi</th>
+                                <th>Samedi</th>
+                                <th>Dimanche</th>
+                            </tr>
+                            <tr>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "lun_am")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "mar_am")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "mer_am")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "jeu_am")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "ven_am")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "sam_am")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "dim_am")) ?>></td>
+                            </tr>
+                            <tr>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "lun_pm")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "mar_pm")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "mer_pm")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "jeu_pm")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "ven_pm")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "sam_pm")) ?>></td>
+                                <td class=<?php echo "_" . boolval(strpos($dispo, "dim_pm")) ?>></td>
+                            </tr>
+                        </table>
+                        <div class="row d-flex justify-content-center">
+                            <a type='submit' name='contact'
+                                href='../infos_joueur.php?contact=<?php echo $offre['user_id'] ?>'
+                                class=' btn btn-primary mr-4'>Voir le profil</a> </td>
+                            <a type='submit' name='message'
+                                href='../infos_joueur.php?contact=<?php echo $offre['user_id'] ?>'
+                                class=' btn btn-success'>Contacter</a> </td>
+                        </div>
                     </div>
+                    <?php } ?>
                 </div>
-                <?php } ?>
             </div>
         </div>
     </body>
