@@ -8,7 +8,12 @@ if (!isset($_SESSION["user_id"])) {
     header('location: login.php');
 }
 
-$querypote = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id,r.receiver_id FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE (r.status = "Ami" AND r.receiver_id = :receiver_id) OR (r.status = "Ami" AND r.sender_id = :sender_id)');
+$id = (int) $_SESSION["user_id"];
+
+$idmessage = $_GET['message'];
+
+
+$querypote = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id,r.receiver_id,receiver_name FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE (r.status = "Ami" AND r.receiver_id = :receiver_id) OR (r.status = "Ami" AND r.sender_id = :sender_id)');
 $querypote->bindParam(':receiver_id', $user['user_id']);
 $querypote->bindParam(':sender_id', $id);
 $querypote->execute();
@@ -89,15 +94,17 @@ $querypote->execute();
                     <?php
                 if ($querypote->rowCount() == 0) {
                     echo "Vous n'avez pas d'ami, pleurez";
-                }
-                while ($row2 = $querypote->fetch()) {
+                } else {
+                    while ($row2 = $querypote->fetch()) {
                 ?>
                     <p>
-                        <?php echo $row2['pseudo'];
+                        <?php echo $row2['receiver_name'];
+                    }
                 } ?>
                 </div>
                 <div class="col">
                     <p>lol</p>
+                    <hr>
                 </div>
             </div>
         </div>
