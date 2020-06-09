@@ -163,11 +163,11 @@ if (isset($_GET['delete'])) {
                                             echo $row2['pseudo'];
                                         } ?>
 
-                            <!-- <a name='contact'
+                            <a name='contact'
                                 href='../relations/chat_prive.php?message=<?php echo $row2['receiver_id'] ?>' class=' btn btn-success ml-4
-                    mr-4'>Contacter</a> -->
+                    mr-4'>Contacter</a>
 
-                            <!-- <div class="dropdown">
+                            <div class="dropdown">
                                 <button class="btn btn-light dropdown-toggle" type="button"
                                     data-toggle="dropdown">Options
                                     <span class="caret"></span></button>
@@ -176,7 +176,7 @@ if (isset($_GET['delete'])) {
                                         href='../infos_joueur.php?contact=<?php echo $row2['receiver_id'] ?>'>Informations</a>
                                     <a name="supprimer" class="dropdown-item"
                                         href='index.php?delete=<?php echo $row2['request_id'] ?>'>Supprimer</a>
-                            </div> -->
+                            </div>
                         </p>
                     </div>
                     <?php } ?>

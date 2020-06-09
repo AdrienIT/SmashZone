@@ -103,7 +103,17 @@ $querypote->execute();
                 } ?>
                 </div>
                 <div class="col">
-                    <p>lol</p>
+                    <p>Discussion</p>
+                    <hr>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Message">
+                        <small id="emailHelp" class="form-text text-muted">Ne partagez jamais votre mot de passe avec
+                            qui que ce soit.</small>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <p>Match</p>
                     <hr>
                 </div>
             </div>
