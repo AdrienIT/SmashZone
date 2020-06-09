@@ -11,23 +11,17 @@ if (!isset($_SESSION["user_id"])) {
 
 $id = (int) $_SESSION["user_id"];
 
-$getusername = $db->prepare('SELECT pseudo FROM users WHERE user_id = :user_id');
+$getusername = $db->prepare('SELECT user_id,pseudo,prenom,nom FROM users WHERE user_id = :user_id');
 $getusername->bindParam(':user_id', $id);
 $getusername->execute();
-$username = $getusername->fetch();
+$user = $getusername->fetch();
 
-$query = $db->prepare('SELECT prenom,nom FROM users WHERE user_id = :user_id');
-$query->bindParam(':user_id', $id);
-$query->execute();
-
-$user = $query->fetch();
-
-$queryfriend = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE r.status = "En attente" AND r.receiver_name = :receiver_name');
-$queryfriend->bindParam(':receiver_name', $username['0']);
+$queryfriend = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE r.status = "En attente" AND r.receiver_id = :receiver_id');
+$queryfriend->bindParam(':receiver_id', $user['user_id']);
 $queryfriend->execute();
 
-$querypote = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id,r.receiver_name FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE (r.status = "Ami" AND r.receiver_name = :receiver_name) OR (r.status = "Ami" AND r.sender_id = :sender_id)');
-$querypote->bindParam(':receiver_name', $username['0']);
+$querypote = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id,r.receiver_id,receiver_name FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE (r.status = "Ami" AND r.receiver_id = :receiver_id) OR (r.status = "Ami" AND r.sender_id = :sender_id)');
+$querypote->bindParam(':receiver_id', $user['user_id']);
 $querypote->bindParam(':sender_id', $id);
 $querypote->execute();
 
@@ -150,7 +144,8 @@ if (isset($_GET['delete'])) {
                     <p>Vos amis :</p>
                 </div>
                 <div class="col-sm text-center">
-                    <button type="button" class="btn btn-primary" onclick="location.href='add_friend.php'">Ajouter un
+                    <button type="button" class="btn btn-primary" onclick="location.href='../liste_joueurs.php'">Ajouter
+                        un
                         ami</button>
                 </div>
             </div>
@@ -162,7 +157,11 @@ if (isset($_GET['delete'])) {
                                     while ($row2 = $querypote->fetch()) {
                                     ?> <div class="row">
                         <p>
-                            <?php echo $row2['pseudo']; ?>
+                            <?php if ($row2['sender_id'] == $id) {
+                                            echo $row2['receiver_name'];
+                                        } else {
+                                            echo $row2['pseudo'];
+                                        } ?>
 
                             <a name='contact' href='index.php?contact=<?php echo $row2['sender_id'] ?>' class=' btn btn-success ml-4
                     mr-4'>Contacter</a>
@@ -172,9 +171,9 @@ if (isset($_GET['delete'])) {
                                     data-toggle="dropdown">Options
                                     <span class="caret"></span></button>
                                 <ul class="dropdown-menu">
-                                    <a name="supprimer" class="dropdown-item"
-                                        href='index.php?infos=<?php echo $row2['request_id'] ?>'>Informations</a>
                                     <a name="infos" class="dropdown-item"
+                                        href='../infos_joueur.php?contact=<?php echo $row2['receiver_id'] ?>'>Informations</a>
+                                    <a name="supprimer" class="dropdown-item"
                                         href='index.php?delete=<?php echo $row2['request_id'] ?>'>Supprimer</a>
                                 </ul>
                             </div>

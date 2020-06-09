@@ -64,43 +64,67 @@ if (isset($_POST["submit"])) {
             <button class="navbar-toggler ml-auto" type=" button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span> </button>
+            <div class="collapse navbar-collapse rubriques" id="navbarNav">
+                <ul class=" navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item rubriquecolor">
+                        Recherchez :
+                    </li>
+                    <form class="form-inline">
+                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
+                            onclick="location.href='list_offers.php'" type="button">Partenaires</button>
+                    </form>
+                    <form class="form-inline">
+                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
+                            onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
+                    </form>
+                    <form class="form-inline">
+                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
+                            onclick="location.href='recherchejouer.php'" type="button">Tournois</button>
+                    </form>
+                </ul>
             </div>
-            <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login_register/index.php'"
-                    type="button">Se
-                    connecter/S'inscrire</button>
-            </form>
-            <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login_register/index.php'"
-                    type="button">Se
-                    connecter/S'inscrire</button>
-            </form>
         </nav>
 
-        <div class="creer_tournoi">
-            <h1>Créer un nouveau tournoi</h1>
-            <form method="post">
-                <input type="text" required name="nom" placeholder="NOM TOURNOI">
-                <br>
-                <label for="start">Date de début :</label>
-                <input type="date" id="start" name="date_debut" value="<?= $today ?>" min="1920-01-01"
-                    max="<?= $max_date ?>">
-                <br>
-                <label for="end">Date de fin</label>
-                <input type="date" id="end" name="date_fin" value="<?= $today ?>" min="1920-01-01"
-                    max="<?= $max_date ?>">
-                <br>
-                <label for="age_min">Âge minimum :</label>
-                <input type="number" id="age_min" name="age_min" min="3" max="100" value="3">
-                <label for="age_max">Âge maximum :</label>
-                <input type="number" id="age_max" name="age_max" min="3" max="100" value="100">
-                <br>
-                <button name="submit">Créer</button>
-                <?php if (isset($msg)) { ?>
-                <p><?= $msg ?></p>
-                <?php } ?>
-        </div>
-        </form>
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="creer_tournoi">
+                    <h1 class="mb-4">Créer un nouveau tournoi</h1>
+                    <form method="post">
+                        <div class="row mb-4">
+                            <label for="start">Nom du tournoi</label>
+                            <input type="text" required name="nom" class="form-control">
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <label for="start">Date de début :</label>
+                                <input type="date" id="start" name="date_debut" value="<?= $today ?>" min="1920-01-01"
+                                    class="form-control" max="<?= $max_date ?>">
+                            </div>
+                            <div class="col">
+                                <label for="end">Date de fin</label>
+                                <input type="date" id="end" name="date_fin" value="<?= $today ?>" min="1920-01-01"
+                                    class="form-control" max="<?= $max_date ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <label for="age_min">Âge minimum :</label>
+                                <input type="number" id="age_min" name="age_min" min="3" max="100" value="3"
+                                    class="form-control">
+                            </div>
+                            <div class="col">
+                                <label for="age_max">Âge maximum :</label>
+                                <input type="number" id="age_max" name="age_max" min="3" max="100" value="100"
+                                    class="form-control">
+                            </div>
+                        </div>
+                    </form>
+                    <button class="btn btn-success btn-block" name="submit">Créer</button>
+                    <?php if (isset($msg)) { ?>
+                    <p><?= $msg ?></p>
+                    <?php } ?>
+                </div>
+            </div>
         </div>
     </body>
 

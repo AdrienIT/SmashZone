@@ -17,36 +17,11 @@ $query->execute();
 
 $user = $query->fetch();
 
-
-if (isset($_GET['contact'])) {
-    $ami = $_GET['contact'];
-    $username = $user['pseudo'];
-    $checkIfAlreadyWaiting = $db->prepare('SELECT sender_id,receiver_name,status FROM relationships WHERE receiver_name = :receiver_name AND status = "En attente"');
-    $checkIfAlreadyFriend = $db->prepare('SELECT sender_id,receiver_name,status FROM relationships WHERE receiver_name = :receiver_name AND status = "Ami"');
-    $checkIfYourself = $db->prepare('SELECT sender_id,receiver_name,status FROM relationships WHERE receiver_name = :receiver_name');
-
-    $checkIfAlreadyWaiting->bindParam(':receiver_name', $ami);
-    $checkIfAlreadyFriend->bindParam(':receiver_name', $ami);
-    $checkIfYourself->bindParam(':receiver_name', $username);
-
-    $checkIfAlreadyWaiting->execute();
-    $checkIfAlreadyFriend->execute();
-    $checkIfYourself->execute();
-
-    if ($checkIfAlreadyWaiting->fetch() > 0) {
-        echo "Vous avez déjà envoyé une demande d'ami à cette utilisateur";
-    } elseif ($checkIfAlreadyFriend->fetch() > 0) {
-        echo "Vous êtes déjà ami avec cet utilisateur";
-    } elseif ($checkIfYourself->fetch() > 0) {
-        echo "Mais vazi t'es teubé, tu t'es demandé toi-même en ami, trouve un travail";
-    } else {
-        $addfriend = $db->prepare('INSERT INTO relationships (sender_id,receiver_name,status) VALUES (:sender_id,:receiver_name,"En attente")');
-        $addfriend->bindParam(':sender_id', $id);
-        $addfriend->bindParam(':receiver_name', $ami);
-        $addfriend->execute();
-        echo "Demande d'ami envoyée";
-        header("location: liste_joueurs.php");
-    }
+if (isset($_POST['recherche'])) {
+    $search = $_POST['recherche'];
+    $querysearch = $db->prepare('SELECT * FROM users WHERE pseudo LIKE :recherche OR nom LIKE :recherche OR prenom LIKE :recherche');
+    $querysearch->bindValue(':recherche', '%' . $search . '%');
+    $querysearch->execute();
 }
 
 
@@ -116,6 +91,11 @@ if (isset($_GET['contact'])) {
         </nav>
 
         <div class="container">
+            <form class="row d-flex" action="" method="post">
+                <input required type="text" name="recherche" class="form-control" placeholder="Rechercher un joueur">
+                <button name="submit" type="submit" class="invisible btn btn-outline-primary">Rechercher un
+                    joueur</button>
+            </form>
             <h1 class="mb-4 font-weight-bold">Liste des joueurs inscrits</h1>
             <table class="table">
                 <thead class="thead-dark text-center">
@@ -125,32 +105,37 @@ if (isset($_GET['contact'])) {
                         <th>Prénom</td>
                         <th>Classement</td>
                         <th>Télephone</td>
-                            <?php
-                        if (!isset($_SESSION["user_id"])) {;
-                        } else {
-                        ?>
-                        <th>Social</td>
-                            <?php } ?>
+                        <th>Profil</td>
                     </tr>
                 <tbody>
-                    <?php while ($u = $users->fetch()) { ?>
+                    <?php if (isset($_POST['recherche'])) {
+                    while ($qs = $querysearch->fetch()) { ?>
+                    <tr>
+                        <td><?= $qs['pseudo'] ?></td>
+                        <td><?= $qs['nom'] ?></td>
+                        <td><?= $qs['prenom'] ?></td>
+                        <td><?= $qs['classement'] ?></td>
+                        <td><?= $qs['telephone'] ?></td>
+                        <td class="text-center">
+                            <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $qs['user_id'] ?>'
+                                class=' btn btn-primary'>Voir le profil</a> </td> <?php } ?>
+
+                    </tr>
+                    <?php } else {
+                        while ($u = $users->fetch()) { ?>
                     <tr>
                         <td><?= $u['pseudo'] ?></td>
                         <td><?= $u['nom'] ?></td>
                         <td><?= $u['prenom'] ?></td>
                         <td><?= $u['classement'] ?></td>
                         <td><?= $u['telephone'] ?></td>
-                        <?php
-                        if (!isset($_SESSION["user_id"])) {;
-                        } else {
-                        ?>
                         <td class="text-center">
-                            <a type='submit' name='contact' href='liste_joueurs.php?contact=<?php echo $u['pseudo'] ?>'
-                                class=' btn btn-primary'>Envoyer une
-                                demande d'ami</a> </td> <?php } ?>
+                            <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $u['user_id'] ?>'
+                                class=' btn btn-primary'>Voir le profil</a> </td>
+                        <?php }
+                    } ?>
 
                     </tr>
-                    <?php } ?>
                 </tbody>
             </table>
         </div>
