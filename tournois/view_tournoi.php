@@ -22,6 +22,9 @@ $date_debut = strftime("%A %d %B %G", strtotime($tournoi_infos["date_debut"]));
 $date_fin = strftime("%A %d %B %G", strtotime($tournoi_infos["date_fin"]));
 
 $adresse = $tournoi_infos["adresse"] . " " . $tournoi_infos["postal_code"] . " " . $tournoi_infos["ville"];
+
+
+
 ?>
 <html>
 
@@ -95,7 +98,7 @@ $adresse = $tournoi_infos["adresse"] . " " . $tournoi_infos["postal_code"] . " "
             <li>Téléphone : <?= $tournoi_infos["telephone"] ?></li>
             <li>Email : <?= $tournoi_infos["email"] ?></li>
         </ul>
-        <a href="">S'inscrire</a>
+        <a href="inscription_tournoi.php?id=<?php echo $tournoi_id ?>"> s'inscrire </a>
     </body>
 
 </html>
