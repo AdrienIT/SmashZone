@@ -8,46 +8,30 @@ if (!isset($_SESSION["club_id"])) {
 
 $id = (int) $_SESSION["club_id"];
 
-$query = $db->prepare("SELECT * FROM users WHERE user_id = ? ");
+$query = $db->prepare("SELECT * FROM clubs WHERE club_id = ? ");
 $query->execute([$id]);
 $user = $query->fetch();
 
-if (isset($user["user_id"])) {
-    if (isset($_POST['newpseudo']) and !empty($_POST['newpseudo']) and $_POST['newpseudo'] != $user['pseudo']) {
+if (isset($user["club_id"])) {
+    if (isset($_POST['newpseudo']) and !empty($_POST['newpseudo']) and $_POST['newpseudo'] != $user['nom_club']) {
         $newpseudo = htmlspecialchars($_POST['newpseudo']);
-        $update_pseudo = $db->prepare("UPDATE users SET pseudo = :pseudo WHERE user_id = :id");
-        $update_pseudo->bindParam(":pseudo", $newpseudo);
+        $update_pseudo = $db->prepare("UPDATE clubs SET nom_club = :nom_club WHERE club_id = :id");
+        $update_pseudo->bindParam(":nom_club", $newpseudo);
         $update_pseudo->bindParam(":id", $id);
         $update_pseudo->execute();
         header('Location: update.php?id=' . $id);
     }
     if (isset($_POST['newmail']) and !empty($_POST['newmail']) and $_POST['newmail'] != $user['email']) {
         $new_email = htmlspecialchars($_POST['newmail']);
-        $update_email = $db->prepare('UPDATE users SET email = :email WHERE user_id = :id');
+        $update_email = $db->prepare('UPDATE clubs SET email = :email WHERE club_id = :id');
         $update_email->bindParam(":email", $new_email);
         $update_email->bindParam(":id", $id);
         $update_email->execute();
         header('Location: update.php?id=' . $id);
     }
-    if (isset($_POST['new_prenom']) and !empty($_POST['new_prenom']) and $_POST['new_prenom'] != $user['prenom']) {
-        $new_prenom = htmlspecialchars($_POST['new_prenom']);
-        $update_prenom = $db->prepare('UPDATE users SET prenom = :prenom WHERE user_id = :id');
-        $update_prenom->bindParam(":prenom", $new_prenom);
-        $update_prenom->bindParam(":id", $id);
-        $update_prenom->execute();
-        header('Location: update.php?id=' . $id);
-    }
-    if (isset($_POST['new_nom']) and !empty($_POST['new_nom']) and $_POST['new_nom'] != $user['nom']) {
-        $nom = htmlspecialchars($_POST['new_nom']);
-        $update_nom = $db->prepare('UPDATE users SET nom = :nom WHERE user_id = :id');
-        $update_nom->bindParam(":nom", $nom);
-        $update_nom->bindParam(":id", $id);
-        $update_nom->execute();
-        header('Location: update.php?id=' . $id);
-    }
     if (isset($_POST['new_ville']) and !empty($_POST['new_ville']) and $_POST['new_ville'] != $user['ville']) {
         $ville = htmlspecialchars($_POST['new_ville']);
-        $update_ville = $db->prepare('UPDATE users SET ville = :ville WHERE user_id = :id');
+        $update_ville = $db->prepare('UPDATE clubs SET ville = :ville WHERE club_id = :id');
         $update_ville->bindParam(":ville", $ville);
         $update_ville->bindParam(":id", $id);
         $update_ville->execute();
@@ -55,7 +39,7 @@ if (isset($user["user_id"])) {
     }
     if (isset($_POST['new_postal_code']) and !empty($_POST['new_postal_code']) and $_POST['new_postal_code'] != $user['postal_code']) {
         $ville = htmlspecialchars($_POST['new_postal_code']);
-        $update_postal_code = $db->prepare('UPDATE users SET postal_code = :postal_code WHERE user_id = :id');
+        $update_postal_code = $db->prepare('UPDATE clubs SET postal_code = :postal_code WHERE club_id = :id');
         $update_postal_code->bindParam(":postal_code", $postal_code);
         $update_postal_code->bindParam(":id", $id);
         $update_postal_code->execute();
@@ -63,7 +47,7 @@ if (isset($user["user_id"])) {
     }
     if (isset($_POST['new_telephone']) and !empty($_POST['new_telephone']) and $_POST['new_telephone'] != $user['telephone']) {
         $telephone = htmlspecialchars($_POST['new_telephone']);
-        $update_telephone = $db->prepare('UPDATE users SET telephone = :telephone WHERE user_id = :id');
+        $update_telephone = $db->prepare('UPDATE clubs SET telephone = :telephone WHERE club_id = :id');
         $update_telephone->bindParam(":telephone", $telephone);
         $update_telephone->bindParam(":id", $id);
         $update_telephone->execute();
@@ -73,7 +57,7 @@ if (isset($user["user_id"])) {
         $passwd1 = md5($_POST['newpasswd1']);
         $passwd2 = md5($_POST['newpasswd2']);
         if ($passwd1  == $passwd2) {
-            $update_password = $db->prepare('UPDATE users SET password = :password WHERE user_id = :id');
+            $update_password = $db->prepare('UPDATE clubs SET password = :password WHERE club_id = :id');
             $update_password->bindParam(":password", $passwd1);
             $update_password->bindParam(":id", $id);
             $update_password->execute();
@@ -100,13 +84,9 @@ if (isset($user["user_id"])) {
         <h1>Edition de profil</h1>
         <form method="POST" action="" enctype="multipart/form-data">
             <label>Username : </label>
-            <input type="text" name="newpseudo" placeholder="Pseudo" value="<?php echo $user['pseudo']; ?>"> <br> <br>
+            <input type="text" name="newpseudo" placeholder="Pseudo" value="<?php echo $user['nom_club']; ?>"> <br> <br>
             <label>E-Mail : </label>
             <input type="text" name="new_mail" placeholder="Mail" value="<?php echo $user['email']; ?>"> <br> <br>
-            <label>Prenom : </label>
-            <input type="text" name="new_prenom" placeholder="prenom" value="<?php echo $user['prenom']; ?>"> <br> <br>
-            <label>Nom : </label>
-            <input type="text" name="new_nom" placeholder="nom" value="<?php echo $user['nom']; ?>"> <br> <br>
             <label>Ville : </label>
             <input type="text" name="new_ville" placeholder="ville" value="<?php echo $user['ville']; ?>"> <br> <br>
             <label>Code Postal : </label>

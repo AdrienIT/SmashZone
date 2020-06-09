@@ -6,7 +6,7 @@ if (!isset($_SESSION["club_id"])) {
 }
 $id = (int) $_SESSION["club_id"];
 
-$query = $db->prepare("SELECT * FROM users WHERE club_id = :id ");
+$query = $db->prepare("SELECT * FROM clubs WHERE club_id = :id ");
 $query->bindParam(":id", $id);
 $query->execute();
 $user = $query->fetch();
