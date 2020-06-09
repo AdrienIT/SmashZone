@@ -1,16 +1,17 @@
 <?php
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include 'config.php';
-
 session_start();
+$all_notifs = "none";
 if (!isset($_SESSION["user_id"])) {
     $connect = "Se connecter/S'inscrire";
 } else {
     $connect = "Mon compte";
-}
-
-
-?>
+    $query = $db->prepare("SELECT n.*, u.pseudo FROM notifications n INNER JOIN users u ON (n.id_link = u.user_id) WHERE n.vu = 0 ORDER BY n.date ASC");
+    $query->execute();
+    $all_notifs = $query->fetchAll();
+} ?>
 
 <!DOCTYPE html>
 <html>
@@ -32,10 +33,13 @@ if (!isset($_SESSION["user_id"])) {
     <link href="style/style.css" rel="stylesheet">
     <link href="style/home.css" rel="stylesheet">
     <link href="style/notification.css" rel="stylesheet">
-
 </head>
 
-<body>
+<script>
+    var notifs = <?php echo json_encode($all_notifs) ?>
+</script>
+
+<body onload="loadNotifi(notifs)">
     <nav class="navbar navbar-expand-xl navbar-dark" style="background-color: #264653; margin-bottom: 0px; height: 55px;">
         <a class="logo" href="index.php">
             <div><img class="main" src="style/SmashZone2.png" /><img class="ball" src="style/SmashZoneIcon.png" />
@@ -61,24 +65,17 @@ if (!isset($_SESSION["user_id"])) {
                     <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch" onclick="location.href='offres/new_offer.php'" type="button">Poster une annonce</button>
                 </form>
             </ul>
-            <div class="icon" onclick="toggleNotifi()">
-                <i class="material-icons">notifications_none</i>
-                <span>1</span>
-            </div>
-            <div class="notifi-box" id="box">
-                <h2>Notifications <span>1</span></h2>
-                <div class="notifi-item">
-                    <img src="login_register/Malgache/Malgache.png" alt="img">
-                    <div class="text">
-                        <h4>Amis</h4>
-                        <p>Vous avez une nouvelle demande d'amis de la part de <b>Malgache</b></p>
-                    </div>
-                </div>
+            <div class="icon" onclick="toggleNotifi()" id="notif">
 
             </div>
-            <form class="nav-item">
-                <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login_register/login.php'" type="button"><?= $connect ?></button>
-            </form>
+            <div class="notifi-box" id="box">
+
+            </div>
+
+        </div>
+        <form class="nav-item">
+            <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login_register/login.php'" type="button"><?= $connect ?></button>
+        </form>
         </div>
     </nav>
 
