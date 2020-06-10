@@ -37,6 +37,7 @@
     background-color: #264653;
     border-radius: 5%;
     border: 1px solid #eee;
+    z-index: +100;
 }
 
 .notifi-box h2 {

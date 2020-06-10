@@ -4,10 +4,14 @@ include_once 'config.php';
 $users = $db->query('SELECT * FROM users');
 
 session_start();
+$all_notifs = "none";
 if (!isset($_SESSION["user_id"])) {
     $connect = "Se connecter/S'inscrire";
 } else {
     $connect = "Mon compte";
+    $query = $db->prepare("SELECT n.*, u.pseudo FROM notifications n INNER JOIN users u ON (n.id_link = u.user_id) WHERE n.vu = 0 ORDER BY n.date ASC");
+    $query->execute();
+    $all_notifs = $query->fetchAll();
     $id = (int) $_SESSION["user_id"];
 }
 
@@ -38,6 +42,8 @@ if (isset($_POST['recherche'])) {
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
@@ -45,9 +51,14 @@ if (isset($_POST['recherche'])) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <link href="style/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link href="style/notification.css" rel="stylesheet">
 </head>
+<script>
+    var notifs = <?php echo json_encode($all_notifs) ?>
+</script>
 
-<body>
+<body onload="loadNotifi(notifs)">
     <nav class="navbar navbar-expand-xl navbar-dark mb-4" style="background-color: #264653; margin-bottom: 0px; height: 55px;">
         <a class="logo" href="index.php">
             <div><img class="main" src="style/SmashZone2.png" /><img class="ball" src="style/SmashZoneIcon.png" />
@@ -70,15 +81,15 @@ if (isset($_POST['recherche'])) {
                     <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='tournois/liste_tournoi.php'" type="button">Tournois</button>
                 </form>
                 <form class="nav-item">
-                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='classement.php'" type="button">Classement</button>
-                </form>
-                <form class="nav-item">
-                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='liste_clubs.php'" type="button">Clubs</button>
-                </form>
-                <form class="nav-item">
                     <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch" onclick="location.href='offres/new_offer.php'" type="button">Poster une annonce</button>
                 </form>
             </ul>
+            <div class="icon" onclick="toggleNotifi()" id="notif">
+
+            </div>
+            <div class="notifi-box" id="box">
+
+            </div>
             <form class="nav-item">
                 <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login_register/login.php'" type="button"><?= $connect ?></button>
             </form>
@@ -132,6 +143,7 @@ if (isset($_POST['recherche'])) {
             </tbody>
         </table>
     </div>
+    <script src="script/notification.js"></script>
 </body>
 
 </html>

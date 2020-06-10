@@ -1,280 +1,285 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 html {
-margin: 0;
-padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .main {
-height: 30px;
-margin: 0px;
-padding: 0px;
-position: relative;
-top: 0;
-left: 0
+    height: 30px;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    top: 0;
+    left: 0
 }
 
 .main2 {
-width: 35%;
-padding: 0px;
-position: relative;
-top: 0;
-left: 0
+    width: 35%;
+    padding: 0px;
+    position: relative;
+    top: 0;
+    left: 0
 }
 
 .ball {
-height: 28px;
-position: absolute;
-margin: 0px;
-top: 0.5px;
-left: 113px;
+    height: 28px;
+    position: absolute;
+    margin: 0px;
+    top: 0.5px;
+    left: 113px;
 }
 
 .ball2 {
-height: 49%;
-position: absolute;
-margin: 0px;
-padding: 0px;
-top: 49%;
-left: 59.2%;
+    height: 49%;
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    top: 49.1%;
+    left: 59.05%;
 }
 
 .footer {
-position: absolute;
-width: 100%;
-bottom: 0;
-height: 115px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: 115px;
 }
 
 .imgfooter {
-height: 50px;
+    height: 50px;
 }
 
 .articleimg {
-width: 200px;
+    width: 200px;
 }
 
 .logo {
-position: absolute;
-padding: 0px;
-top: 13px;
-left: 13px;
+    position: absolute;
+    padding: 0px;
+    top: 13px;
+    left: 13px;
 }
 
 .logo2 {
-width: 100%;
-position: relative;
-padding: 0px;
-margin-bottom: 30px;
+    width: 100%;
+    position: relative;
+    padding: 0px;
+    margin-bottom: 30px;
 }
 
 .logo:hover .ball {
--webkit-animation: spin 2s linear infinite;
--moz-animation: spin 2s linear infinite;
-animation: spin 2s linear infinite;
+    -webkit-animation: spin 1s linear infinite;
+    -moz-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
 }
 
 .logo2:hover .ball2 {
--webkit-animation: spin 2s linear infinite;
--moz-animation: spin 2s linear infinite;
-animation: spin 2s linear infinite;
+    -webkit-animation: spin 1s linear infinite;
+    -moz-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
 }
 
 @-moz-keyframes spin {
-100% {
--moz-transform: rotate(360deg);
-}
+    100% {
+        -moz-transform: rotate(360deg);
+    }
 }
 
 @-webkit-keyframes spin {
-100% {
--webkit-transform: rotate(360deg);
-}
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 @keyframes spin {
-100% {
--webkit-transform: rotate(360deg);
-transform: rotate(360deg);
-}
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }
 
 body {
-font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 #logologin {
-display: block;
-margin-left: auto;
-margin-right: auto;
-height: 150px;
-margin-bottom: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 150px;
+    margin-bottom: 50px;
 }
 
 .rubriques {
-font-family: 'Open Sans', sans-serif;
-font-size: 25px;
-background-color: #264653;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    background-color: #264653;
 }
 
 .rubriquesearch {
-margin-left: 30px;
+    margin-left: 30px;
 }
 
 .rubriquecolor {
-color: white;
-margin-left: 235px;
+    color: white;
+    margin-left: 235px;
 }
 
 h1,
 h2,
 h3 {
-text-align: center;
+    text-align: center;
 }
 
 .new_offer,
 .filter {
-width: 1000px;
-top: 0;
-left: 0;
-margin: auto;
-display: block;
-text-align: center;
+    width: 1000px;
+    top: 0;
+    left: 0;
+    margin: auto;
+    display: block;
+    text-align: center;
 }
 
 table.tableoffer {
-font-family: "Open Sans", sans-serif;
-background-color: #EEEEEE;
-width: 100%;
-text-align: left;
-border-collapse: collapse;
+    font-family: "Open Sans", sans-serif;
+    background-color: #EEEEEE;
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
 }
 
 table.tableoffer td,
 table.tableoffer th {
-padding: 10px 10px;
+    padding: 10px 10px;
 }
 
 table.tableoffer tbody td {
-font-size: 15px;
+    font-size: 15px;
 }
 
 table.tableoffer tr:nth-child(even) {
-background: #D0E4F5;
+    background: #D0E4F5;
 }
 
 table.tableoffer th {
-background: #2A9D8F;
+    background: #2A9D8F;
 }
 
 table.tableoffer th {
-font-size: 15px;
+    font-size: 15px;
 }
 
 .hide {
-display: none;
+    display: none;
 }
 
 textarea {
-resize: none;
+    resize: none;
 }
 
 table.disponibilite {
-background: #f5f5f5;
-border-collapse: separate;
-box-shadow: inset 0 1px 0 #fff;
-font-size: 12px;
-line-height: 24px;
-margin: 30px auto;
-text-align: left;
-width: 1000px;
+    background: #f5f5f5;
+    border-collapse: separate;
+    box-shadow: inset 0 1px 0 #fff;
+    font-size: 12px;
+    line-height: 24px;
+    margin: 30px auto;
+    text-align: left;
+    width: 1000px;
 }
 
 .disponibilite th {
-width: 150px;
-background: url(https://jackrugile.com/images/misc/noise-diagonal.png), linear-gradient(#777, #444);
-border-left: 1px solid #555;
-border-right: 1px solid #777;
-border-top: 1px solid #555;
-border-bottom: 1px solid #333;
-box-shadow: inset 0 1px 0 #999;
-color: #fff;
-font-weight: bold;
-color: #FFFFFF;
+    width: 150px;
+    background: url(https://jackrugile.com/images/misc/noise-diagonal.png), linear-gradient(#777, #444);
+    border-left: 1px solid #555;
+    border-right: 1px solid #777;
+    border-top: 1px solid #555;
+    border-bottom: 1px solid #333;
+    box-shadow: inset 0 1px 0 #999;
+    color: #fff;
+    font-weight: bold;
+    color: #FFFFFF;
 }
 
 table.tableoffer th th:first-child {
-border-left: none;
+    border-left: none;
 }
 
 table.tableoffer td {
-font-size: 14px;
+    font-size: 14px;
 }
 
 table.tableoffer .links {
-text-align: right;
+    text-align: right;
 }
 
 table.tableoffer .links a {
-display: inline-block;
-background: #1C6EA4;
-color: #FFFFFF;
-padding: 2px 8px;
-border-radius: 5px;
+    display: inline-block;
+    background: #1C6EA4;
+    color: #FFFFFF;
+    padding: 2px 8px;
+    border-radius: 5px;
 }
 
 .disponibilite td {
-width: 150px;
-border-right: 1px solid #fff;
-border-left: 1px solid #e8e8e8;
-border-top: 1px solid #fff;
-border-bottom: 1px solid #e8e8e8;
-padding: 10px 15px;
-position: relative;
-transition: all 300ms;
+    width: 150px;
+    border-right: 1px solid #fff;
+    border-left: 1px solid #e8e8e8;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 10px 15px;
+    position: relative;
+    transition: all 300ms;
 }
 
 .disponibilite {
-background: url(https://jackrugile.com/images/misc/noise-diagonal.png);
+    background: url(https://jackrugile.com/images/misc/noise-diagonal.png);
 }
 
 .dropbtn {
-background-color: #3498DB;
-color: white;
-padding: 16px;
-font-size: 16px;
-border: none;
-cursor: pointer;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
 }
 
-.dropbtn:hover, .dropbtn:focus {
-background-color: #2980B9;
+.dropbtn:hover,
+.dropbtn:focus {
+    background-color: #2980B9;
 }
 
 .dropdown {
-position: relative;
-display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 
 .dropdown-content {
-display: none;
-position: absolute;
-background-color: #f1f1f1;
-min-width: 160px;
-overflow: auto;
-box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-z-index: 1;
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
 }
 
 .dropdown-content a {
-color: black;
-padding: 12px 16px;
-text-decoration: none;
-display: block;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
 
-.dropdown a:hover {background-color: #ddd;}
+.dropdown a:hover {
+    background-color: #ddd;
+}
 
-.show {display: block;}
+.show {
+    display: block;
+}
 
 .joueurborder {
     border: 1px solid black;
@@ -294,19 +299,19 @@ display: block;
     left: 35%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
-  }
-  
-  .container:hover .image {
+}
+
+.container:hover .image {
     opacity: 0.3;
-  }
-  
-  .container:hover .middle {
+}
+
+.container:hover .middle {
     opacity: 1;
-  }
-  
-  .text {
+}
+
+.text {
     background-color: rgba(76, 175, 79, 0);
     color: black;
     font-size: 16px;
     padding: 16px 32px;
-  }
+}

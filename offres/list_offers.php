@@ -3,11 +3,14 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include_once('../config.php');
 session_start();
-
+$all_notifs = "none";
 if (!isset($_SESSION["user_id"])) {
     $connect = "Se connecter/S'inscrire";
 } else {
     $connect = "Mon compte";
+    $query = $db->prepare("SELECT n.*, u.pseudo FROM notifications n INNER JOIN users u ON (n.id_link = u.user_id) WHERE n.vu = 0 ORDER BY n.date ASC");
+    $query->execute();
+    $all_notifs = $query->fetchAll();
 }
 
 $all_date = "lun_am-mar_am-mer_am-jeu_am-ven_am-sam_am-dim_am-lun_pm-mar_pm-mer_pm-jeu_pm-ven_pm-sam_pm-dim_pm";
@@ -87,10 +90,19 @@ if (isset($_POST["submit"])) {
     <script src="../script/map_fr.js"></script>
     <script src="../script/dep_fr.js"></script>
     <title>Liste des offres</title>
+    <link href="../style/style.css" rel="stylesheet">
+    <link href="../style/home.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link href="../style/notification.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style/calendar.css">
+    <link rel="stylesheet" href="../style/tournoi_preview.css">
 </head>
+<script>
+    var notifs = <?php echo json_encode($all_notifs) ?>
+</script>
 
-<body>
-    <nav class="navbar navbar-expand-xl navbar-dark" style="background-color: #264653; margin-bottom: 20px; height: 55px;">
+<body onload="loadNotifi(notifs)">
+    <nav class="navbar navbar-expand-xl navbar-dark" style="background-color: #264653; margin-bottom: 0px; height: 55px;">
         <a class="logo" href="../index.php">
             <div><img class="main" src="../style/SmashZone2.png" /><img class="ball" src="../style/SmashZoneIcon.png" />
             </div>
@@ -98,32 +110,34 @@ if (isset($_POST["submit"])) {
         <button class="navbar-toggler ml-auto" type=" button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span> </button>
         <div class="collapse navbar-collapse rubriques" id="navbarNav">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item rubriquecolor">
                     Recherchez :
                 </li>
-                <form class="form-inline">
-                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='list_offers.php'" type="button">Partenaires</button>
+                <form class="nav-item">
+                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../offres/list_offers.php'" type="button">Partenaires</button>
                 </form>
-                <form class="form-inline">
+                <form class="nav-item">
                     <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
                 </form>
-                <form class="form-inline">
-                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='recherchejouer.php'" type="button">Tournois</button>
+                <form class="nav-item">
+                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../tournois/liste_tournoi.php'" type="button">Tournois</button>
                 </form>
                 <form class="nav-item">
-                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../classement.php'" type="button">Classement</button>
-                </form>
-                <form class="nav-item">
-                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../liste_clubs.php'" type="button">Clubs</button>
-                </form>
-                <form class="form-inline">
-                    <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch" onclick="location.href='new_offer.php'" type="button">Poster une annonce</button>
+                    <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch" onclick="location.href='../offres/new_offer.php'" type="button">Poster une annonce</button>
                 </form>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='../login_register/login.php'" type="button"><?= $connect ?></button>
-            </form>
+            <div class="icon" onclick="toggleNotifi()" id="notif">
+
+            </div>
+            <div class="notifi-box" id="box">
+
+            </div>
+
+        </div>
+        <form class="nav-item">
+            <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='../login_register/login.php'" type="button"><?= $connect ?></button>
+        </form>
         </div>
     </nav>
 
@@ -467,6 +481,7 @@ if (isset($_POST["submit"])) {
                 </div>
         </div>
     </div>
+    <script src="../script/notification2.js"></script>
 </body>
 
 </html>
