@@ -5,8 +5,9 @@ var down = false;
 function destroy_notifs() {
     box.innerHTML = '';
     var h3 = document.createElement("h3");
-    h3.innerText = "Aucune nouvelle notification 😢"
-    box.appendChild(h3)
+    h3.innerText = "Aucune nouvelle notification 😢";
+    box.appendChild(h3);
+
 }
 
 
@@ -25,6 +26,20 @@ function toggleNotifi() {
         i.classList.add("material-icons");
         i.innerText = "notifications_none";
         notif_icon.appendChild(i)
+        $.ajax({
+            type: "POST",
+            url: 'unsee_query.php',
+            dataType: 'json',
+            data: { functionname: 'unsee_query' },
+
+            success: function(obj, textstatus) {
+                if (!('error' in obj)) {
+                    result = obj.result;
+                } else {
+                    console.log(obj.error);
+                }
+            }
+        });
 
     }
 }
@@ -33,39 +48,53 @@ function loadNotifi(notifs) {
 
     if (notifs != "none") {
 
-        var icon = document.getElementById("notif");
-        var i = document.createElement("i");
-        i.classList.add("material-icons");
-        i.innerText = "notifications_none";
-        var span1 = document.createElement("span");
-        span1.innerText = notifs.length;
-        icon.appendChild(i)
-        icon.appendChild(span1);
+        if (notifs.length == 0) {
 
-        var title = document.createElement("h2");
-        title.innerText = "Notifications ";
-        var span2 = document.createElement("span");
-        span2.innerText = notifs.length;
-        title.appendChild(span2);
-        box.appendChild(title);
+            var icon = document.getElementById("notif");
+            var i = document.createElement("i");
+            i.classList.add("material-icons");
+            i.innerText = "notifications_none";
+            icon.appendChild(i)
+            box.innerHTML = '';
+            var h3 = document.createElement("h3");
+            h3.innerText = "Aucune nouvelle notification 😢";
+            box.appendChild(h3);
+        } else {
 
-        for (var i = 0; i < notifs.length; i++) {
+            var icon = document.getElementById("notif");
+            var i = document.createElement("i");
+            i.classList.add("material-icons");
+            i.innerText = "notifications_none";
+            var span1 = document.createElement("span");
+            span1.innerText = notifs.length;
+            icon.appendChild(i)
+            icon.appendChild(span1);
 
-            var item = document.createElement("div");
-            item.classList.add("notifi-item");
-            var img = document.createElement("img");
-            img.src = "login_register/" + notifs[i]["pseudo"] + "/" + notifs[i]["pseudo"] + ".png";
-            var text = document.createElement("div");
-            text.classList.add("text");
-            var notif_title = document.createElement("h4");
-            notif_title.innerText = notifs[i]["type"];
-            var desc = document.createElement("p");
-            desc.innerText = notifs[i]["description"];
-            text.appendChild(notif_title);
-            text.appendChild(desc);
-            item.appendChild(img);
-            item.appendChild(text)
-            box.appendChild(item)
+            var title = document.createElement("h2");
+            title.innerText = "Notifications ";
+            var span2 = document.createElement("span");
+            span2.innerText = notifs.length;
+            title.appendChild(span2);
+            box.appendChild(title);
+
+            for (var i = 0; i < notifs.length; i++) {
+
+                var item = document.createElement("div");
+                item.classList.add("notifi-item");
+                var img = document.createElement("img");
+                img.src = "login_register/" + notifs[i]["pseudo"] + "/" + notifs[i]["pseudo"] + ".png";
+                var text = document.createElement("div");
+                text.classList.add("contains_text");
+                var notif_title = document.createElement("h4");
+                notif_title.innerText = notifs[i]["type"];
+                var desc = document.createElement("p");
+                desc.innerText = notifs[i]["description"];
+                text.appendChild(notif_title);
+                text.appendChild(desc);
+                item.appendChild(img);
+                item.appendChild(text)
+                box.appendChild(item)
+            }
         }
     }
 }
