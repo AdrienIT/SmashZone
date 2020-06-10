@@ -76,13 +76,13 @@
     border-radius: 50%;
 }
 
-.notifi-item .text h4 {
+.notifi-item .contains_text h4 {
     color: #777;
     font-size: 16px;
     margin-top: 10px;
 }
 
-.notifi-item .text p {
+.notifi-item .contains_text p {
     color: #aaa;
     font-size: 12px;
 }

@@ -11,7 +11,9 @@ if (!isset($_SESSION["user_id"])) {
     $query = $db->prepare("SELECT n.*, u.pseudo FROM notifications n INNER JOIN users u ON (n.id_link = u.user_id) WHERE n.vu = 0 ORDER BY n.date ASC");
     $query->execute();
     $all_notifs = $query->fetchAll();
-} ?>
+}
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -30,11 +32,11 @@ if (!isset($_SESSION["user_id"])) {
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link href="style/style.css" rel="stylesheet">
     <link href="style/home.css" rel="stylesheet">
     <link href="style/notification.css" rel="stylesheet">
 </head>
-
 <script>
     var notifs = <?php echo json_encode($all_notifs) ?>
 </script>
@@ -112,6 +114,7 @@ if (!isset($_SESSION["user_id"])) {
         </div>
         </div>
         <script src="script/notification.js"></script>
+
 </body>
 
 </html>
