@@ -26,42 +26,51 @@ if (isset($_POST["submit"])) {
     $query->execute();
     $liste_tournois = $query->fetchAll();
 }
-
+$all_notifs = "none";
 if (!isset($_SESSION["user_id"])) {
     $connect = "Se connecter/S'inscrire";
 } else {
     $connect = "Mon compte";
+    $query = $db->prepare("SELECT n.*, u.pseudo FROM notifications n INNER JOIN users u ON (n.id_link = u.user_id) WHERE n.vu = 0 ORDER BY n.date ASC");
+    $query->execute();
+    $all_notifs = $query->fetchAll();
 }
 ?>
 <html>
 
 <head>
     <meta charset="UTF-8">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
-    </script>
+    <title>Liste des tournois</title>
     <link rel="icon" href="../style/favicon.ico" />
-    <link rel="stylesheet" href="../style/calendar.css">
-    <link rel="stylesheet" href="../style/tournoi_preview.css">
-    <link rel="stylesheet" href="../style/style.css">
+
     <link rel="stylesheet" href="../style/offre.css">
     <link rel="stylesheet" href="../style/jquery-jvectormap-2.0.5.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="../script/checkbox.js" type="text/javascript"></script>
     <script src="../script/jquery.js"></script>
     <script src="../script/jquery-jvectormap-2.0.5.min.js"></script>
     <script src="../script/map_fr.js"></script>
     <script src="../script/dep_fr.js"></script>
-    <title>Liste des tournois</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
 
+    <link href="../style/style.css" rel="stylesheet">
+    <link href="../style/home.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link href="../style/notification.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style/calendar.css">
+    <link rel="stylesheet" href="../style/tournoi_preview.css">
 </head>
+<script>
+    var notifs = <?php echo json_encode($all_notifs) ?>
+</script>
 
-<body onload="toggleFilters()">
-    <nav class="navbar navbar-expand-xl navbar-dark" style="background-color: #264653; margin-bottom: 20px; height: 55px;">
+<body onload="loadNotifi(notifs)">
+    <nav class="navbar navbar-expand-xl navbar-dark" style="background-color: #264653; margin-bottom: 0px; height: 55px;">
         <a class="logo" href="../index.php">
             <div><img class="main" src="../style/SmashZone2.png" /><img class="ball" src="../style/SmashZoneIcon.png" />
             </div>
@@ -69,34 +78,43 @@ if (!isset($_SESSION["user_id"])) {
         <button class="navbar-toggler ml-auto" type=" button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span> </button>
         <div class="collapse navbar-collapse rubriques" id="navbarNav">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item rubriquecolor">
                     Recherchez :
                 </li>
-                <form class="form-inline">
+                <form class="nav-item">
                     <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../offres/list_offers.php'" type="button">Partenaires</button>
                 </form>
-                <form class="form-inline">
+                <form class="nav-item">
                     <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
                 </form>
-                <form class="form-inline">
-                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='liste_tournoi.php'" type="button">Tournois</button>
+                <form class="nav-item">
+                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../tournois/liste_tournoi.php'" type="button">Tournois</button>
                 </form>
-                <form class="form-inline">
+                <form class="nav-item">
                     <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch" onclick="location.href='../offres/new_offer.php'" type="button">Poster une annonce</button>
                 </form>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='../login_register/login.php'" type="button"><?= $connect ?></button>
-            </form>
+            <div class="icon" onclick="toggleNotifi()" id="notif">
+
+            </div>
+            <div class="notifi-box" id="box">
+
+            </div>
+
+        </div>
+        <form class="nav-item">
+            <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='../login_register/login.php'" type="button"><?= $connect ?></button>
+        </form>
         </div>
     </nav>
+
 
     <div class="filtres-tournoi"></div>
     <div class="liste-tournoi">
         <h1>Calendrier des tournois</h1>
         <div class="filter">
-            <button class="btn btn-primary mb-4" onclick="toggleFilters()">Afficher filtres</button>
+            <button class="btn btn-primary mb-4" onclick="toggleFilters()">Afficher/cacher filtres</button>
             <div class="filter">
                 <form method="post">
                     <label for="age_min">Âge minimum :</label>
@@ -310,9 +328,10 @@ if (!isset($_SESSION["user_id"])) {
             </div>
         </div>
     </div>
+    <script src="../script/notification2.js"></script>
     <script src="../script/calendar.js"></script>
     <script>
-        var liste_tournois = <?php echo json_encode($liste_tournois) ?> ;
+        var liste_tournois = <?php echo json_encode($liste_tournois) ?>;
         showCalendar(currentMonth, currentYear);
     </script>
 
