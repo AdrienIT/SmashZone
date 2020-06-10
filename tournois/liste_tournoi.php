@@ -82,6 +82,12 @@ if (!isset($_SESSION["user_id"])) {
                 <form class="form-inline">
                     <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='liste_tournoi.php'" type="button">Tournois</button>
                 </form>
+                <form class="nav-item">
+                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../classement.php'" type="button">Classement</button>
+                </form>
+                <form class="nav-item">
+                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../liste_clubs.php'" type="button">Clubs</button>
+                </form>
                 <form class="form-inline">
                     <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch" onclick="location.href='../offres/new_offer.php'" type="button">Poster une annonce</button>
                 </form>

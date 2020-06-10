@@ -1,7 +1,7 @@
 <?php
 include_once 'config.php';
 
-$users = $db->query('SELECT * FROM users');
+$users = $db->query('SELECT * FROM clubs');
 
 session_start();
 if (!isset($_SESSION["user_id"])) {
@@ -11,15 +11,15 @@ if (!isset($_SESSION["user_id"])) {
     $id = (int) $_SESSION["user_id"];
 }
 
-$query = $db->prepare('SELECT prenom,nom,pseudo FROM users WHERE user_id = :user_id');
-$query->bindParam(':user_id', $id);
+$query = $db->prepare('SELECT nom_club,telephone FROM clubs WHERE club_id = :club_id');
+$query->bindParam(':club_id', $id);
 $query->execute();
 
 $user = $query->fetch();
 
 if (isset($_POST['recherche'])) {
     $search = $_POST['recherche'];
-    $querysearch = $db->prepare('SELECT * FROM users WHERE pseudo LIKE :recherche OR nom LIKE :recherche OR prenom LIKE :recherche');
+    $querysearch = $db->prepare('SELECT * FROM clubs WHERE nom_club LIKE :recherche');
     $querysearch->bindValue(':recherche', '%' . $search . '%');
     $querysearch->execute();
 }
@@ -28,7 +28,7 @@ if (isset($_POST['recherche'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -89,16 +89,13 @@ if (isset($_POST['recherche'])) {
         <form class="row d-flex" action="" method="post">
             <input required type="text" name="recherche" class="form-control" placeholder="Rechercher un joueur">
             <button name="submit" type="submit" class="invisible btn btn-outline-primary">Rechercher un
-                joueur</button>
+                club</button>
         </form>
-        <h1 class="mb-4 font-weight-bold">Liste des joueurs inscrits</h1>
+        <h1 class="mb-4 font-weight-bold">Liste des clubs</h1>
         <table class="table">
             <thead class="thead-dark text-center">
                 <tr class="joueurborder">
-                    <th>Pseudo</td>
-                    <th>Nom</td>
-                    <th>Prénom</td>
-                    <th>Classement</td>
+                    <th>Nom du club</td>
                     <th>Télephone</td>
                     <th>Profil</td>
                 </tr>
@@ -106,25 +103,19 @@ if (isset($_POST['recherche'])) {
                 <?php if (isset($_POST['recherche'])) {
                     while ($qs = $querysearch->fetch()) { ?>
                         <tr>
-                            <td><?= $qs['pseudo'] ?></td>
-                            <td><?= $qs['nom'] ?></td>
-                            <td><?= $qs['prenom'] ?></td>
-                            <td><?= $qs['classement'] ?></td>
+                            <td><?= $qs['nom_club'] ?></td>
                             <td><?= $qs['telephone'] ?></td>
                             <td class="text-center">
-                                <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $qs['user_id'] ?>' class=' btn btn-primary'>Voir le profil</a> </td> <?php } ?>
+                                <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $qs['club_id'] ?>' class=' btn btn-primary'>Voir le profil</a> </td> <?php } ?>
 
                         </tr>
                         <?php } else {
                         while ($u = $users->fetch()) { ?>
                             <tr>
-                                <td><?= $u['pseudo'] ?></td>
-                                <td><?= $u['nom'] ?></td>
-                                <td><?= $u['prenom'] ?></td>
-                                <td><?= $u['classement'] ?></td>
+                                <td><?= $u['nom_club'] ?></td>
                                 <td><?= $u['telephone'] ?></td>
                                 <td class="text-center">
-                                    <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $u['user_id'] ?>' class=' btn btn-primary'>Voir le profil</a> </td>
+                                    <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $u['club_id'] ?>' class=' btn btn-primary'>Voir le profil</a> </td>
                         <?php }
                     } ?>
 
