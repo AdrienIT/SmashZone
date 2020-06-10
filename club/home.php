@@ -78,6 +78,7 @@ $user = $query->fetch();
                 <div class="col-auto">
                     <h1> Bonjour <?php echo $user['nom_club'] ?></h1>
                     <a class="btn btn-light btn-block" href="update.php">Editer le club</a> <br> <br>
+                    <a class="btn btn-light btn-block" href="mes_tournois.php">Mes Tournois</a> <br> <br>
                     <a class="btn btn-light btn-block" href="avatar.php">Photo du club</a> <br> <br>
                     <a class="btn btn-danger btn-block" href="logout.php">Se Déconnecter</a>
                 </div>
