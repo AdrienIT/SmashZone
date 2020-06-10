@@ -18,6 +18,21 @@ $querypote->bindParam(':receiver_id', $user['user_id']);
 $querypote->bindParam(':sender_id', $id);
 $querypote->execute();
 
+$querymessage = $db->prepare('SELECT * FROM messages WHERE (message_sender = :message_sender AND message_receiver = :message_receiver) OR (message_sender = :message_receiver AND message_receiver = :message_sender)');
+$querymessage->bindParam(':message_sender', $id);
+$querymessage->bindParam(':message_receiver', $idmessage);
+$querymessage->execute();
+$fetchmessage = $querymessage->fetchAll();
+
+if (isset($_POST['messagebox'])) {
+    $message = htmlspecialchars($_POST['messagebox']);
+    $insermessage = $db->prepare('INSERT INTO messages (message_sender,message_receiver,content) VALUES (:message_sender,:message_receiver,:content) ORDER BY message_time');
+    $insermessage->bindValue(':message_sender', $id);
+    $insermessage->bindValue(':message_receiver', $idmessage);
+    $insermessage->bindValue(':content', $message);
+    $insermessage->execute();
+    header("Refresh:0");
+}
 ?>
 
 <!DOCTYPE html>
@@ -33,8 +48,6 @@ $querypote->execute();
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
             integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
@@ -87,7 +100,7 @@ $querypote->execute();
         </nav>
 
         <div class="container-fluid">
-            <div class="row d-flex">
+            <div class="row">
                 <div class="col-2">
                     <h2>Vos amis</h2>
                     <hr>
@@ -97,25 +110,46 @@ $querypote->execute();
                 } else {
                     while ($row2 = $querypote->fetch()) {
                 ?>
-                    <p>
-                        <?php echo $row2['receiver_name'];
-                    }
+                    <div class="row pl-2">
+                        <a class='listepotes text-decoration-none'
+                            href='chat_prive.php?message=<?php echo $row2['3'] ?>'>
+                            <?php echo $row2['receiver_name'] ?> </a> </div>
+                    <?php }
                 } ?>
                 </div>
+
                 <div class="col">
                     <p>Discussion</p>
                     <hr>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            placeholder="Message">
-                        <small id="emailHelp" class="form-text text-muted">Ne partagez jamais votre mot de passe avec
-                            qui que ce soit.</small>
+                    <?php foreach ($fetchmessage as $m) {
+                    $contenu = $m['content'];
+                    if ($m['message_sender'] == $id) { ?>
+                    <div class="col">
+                        <?php
+                            echo "<p class='messagesender mb-2 mt-2'>" . $contenu . "</p>"; ?>
                     </div>
+                    <?php
+                    } else { ?>
+                    <div class="col"> <?php echo "<p class='messagereceiver mb-2 mt-2'>" . $contenu . "</p>"; ?>
+                    </div>
+                    <?php }
+                } ?>
+                    <form class="input-group" method="post">
+                        <input required type="messagebox" class="form-control" name="messagebox"
+                            aria-describedby="messagebox" placeholder="Message">
+                        <button type="submit" name="submit" class="btn btn-primary">Envoyer</button>
+                    </form>
+                    <small id="messageNotice" class="form-text text-muted">Ne partagez jamais votre mot de passe
+                        avec
+                        qui que ce soit.</small>
                 </div>
+
                 <div class="col-2">
                     <p>Match</p>
                     <hr>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
     </body>

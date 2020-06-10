@@ -18,7 +18,7 @@ $query->execute();
 $user = $query->fetch();
 
 if (isset($_POST['recherche'])) {
-    $search = $_POST['recherche'];
+    $search = htmlspecialchars($_POST['recherche']);
     $querysearch = $db->prepare('SELECT * FROM users WHERE pseudo LIKE :recherche OR nom LIKE :recherche OR prenom LIKE :recherche');
     $querysearch->bindValue(':recherche', '%' . $search . '%');
     $querysearch->execute();
@@ -58,7 +58,7 @@ if (isset($_POST['recherche'])) {
                 <div><img class="main" src="style/SmashZone2.png" /><img class="ball" src="style/SmashZoneIcon.png" />
                 </div>
             </a>
-            <button class="navbar-toggler ml-auto" type=" button" data-toggle="collapse" data-target="#navbarNav"
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span> </button>
             <div class="collapse navbar-collapse rubriques" id="navbarNav">
