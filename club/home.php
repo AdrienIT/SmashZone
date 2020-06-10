@@ -76,6 +76,7 @@ $user = $query->fetch();
         <div class="container text-center">
             <div class="row justify-content-center">
                 <div class="col-auto">
+                    <img src=<?php echo $user['nom_club'] . "/" . $user['nom_club'] . ".png" ?>
                     <h1> Bonjour <?php echo $user['nom_club'] ?></h1>
                     <a class="btn btn-light btn-block" href="update.php">Editer le club</a> <br> <br>
                     <a class="btn btn-light btn-block" href="mes_tournois.php">Mes Tournois</a> <br> <br>

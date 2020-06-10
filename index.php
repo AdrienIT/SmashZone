@@ -62,6 +62,9 @@ if (!isset($_SESSION["user_id"])) {
                     <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='tournois/liste_tournoi.php'" type="button">Tournois</button>
                 </form>
                 <form class="nav-item">
+                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='classement.php'" type="button">Classement</button>
+                </form>
+                <form class="nav-item">
                     <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch" onclick="location.href='offres/new_offer.php'" type="button">Poster une annonce</button>
                 </form>
             </ul>
