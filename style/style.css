@@ -8,9 +8,6 @@ html {
     height: 30px;
     margin: 0px;
     padding: 0px;
-    position: relative;
-    top: 0;
-    left: 0
 }
 
 .main2 {
@@ -23,10 +20,9 @@ html {
 
 .ball {
     height: 28px;
-    position: absolute;
+    position: relative;
     margin: 0px;
-    top: 0.5px;
-    left: 113px;
+    left: -115px;
 }
 
 .ball2 {
@@ -38,26 +34,12 @@ html {
     left: 59.05%;
 }
 
-.footer {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    height: 115px;
-}
-
 .imgfooter {
     height: 50px;
 }
 
 .articleimg {
     width: 200px;
-}
-
-.logo {
-    position: absolute;
-    padding: 0px;
-    top: 13px;
-    left: 13px;
 }
 
 .logo2 {
@@ -67,7 +49,7 @@ html {
     margin-bottom: 30px;
 }
 
-.logo:hover .ball {
+.main:hover .ball {
     -webkit-animation: spin 1s linear infinite;
     -moz-animation: spin 1s linear infinite;
     animation: spin 1s linear infinite;
@@ -110,19 +92,14 @@ body {
     margin-bottom: 50px;
 }
 
-.rubriques {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 25px;
-    background-color: #264653;
-}
-
 .rubriquesearch {
     margin-left: 30px;
 }
 
 .rubriquecolor {
     color: white;
-    margin-left: 235px;
+    font-size: 25px;
+    margin: 0px;
 }
 
 h1,
