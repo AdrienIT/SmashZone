@@ -79,7 +79,6 @@ if (isset($_POST["submit"])) {
     <!-- -->
 
     <!-- Scripts au chargement de la page -->
-    <link href="../style/style.css" rel="stylesheet">
     <link href="../style/offre.css" rel="stylesheet">
     <script src="../script/checkbox.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../style/jquery-jvectormap-2.0.5.css">
@@ -113,15 +112,11 @@ if (isset($_POST["submit"])) {
 
 </head>
 
-<script>
-    var notifs = <?php echo json_encode($all_notifs) ?>
-</script>
-
 <body onload="loadNotifi(notifs)">
 
     <!-- Barre de navigation -->
     <nav class="navbar navbar-expand-xl navbar-dark mb-4" style="background-color: #264653; height: 55px;">
-        <a class="navbar-brand main" href="index.php">
+        <a class="navbar-brand main" href="../index.php">
             <img class="main" src="../style/SmashZone2.png" /><img class="ball" src="../style/SmashZoneIcon.png" />
         </a>
 
