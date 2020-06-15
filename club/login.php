@@ -16,7 +16,7 @@ if (isset($_POST["submit"])) {
 
 	if (count($user) > 0) {
 		$_SESSION['club_id'] = $user['club_id'];
-		header('Location: http://localhost/smashzone/club/home.php');
+		header('Location: home.php');
 	} else {
 		$err = "nom_club / Password incorrect";
 		echo $err;
