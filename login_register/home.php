@@ -100,12 +100,13 @@ $all_notifs = $query->fetchAll();
                 <div class="d-flex">
                     <i class="material-icons md-dark mr-2">cake</i>
                     <p>Date de naissance</p>
-                    <p class="ml-auto"><?php echo $user['date_naissance'] ?></p>
+                    <p class="ml-auto"><?php $date = new DateTime($user['date_naissance']);
+                                        echo $date->format('d/m/Y') ?></p>
                 </div>
                 <div class="d-flex">
                     <i class="material-icons md-dark mr-2">sports_tennis</i>
                     <p>Classement</p>
-                    <p class="ml-auto"><?php echo $user['classement'] ?></p>
+                    <p class="ml-auto"><?php echo str_replace(".", "/", (string) $user['classement']) ?></p>
                 </div>
 
                 <div class="d-flex">
@@ -126,7 +127,8 @@ $all_notifs = $query->fetchAll();
                 <div class="d-flex">
                     <i class="material-icons md-dark mr-2">access_time</i>
                     <p>Date de création</p>
-                    <p class="ml-auto"><?php echo $user['date_creation'] ?></p>
+                    <p class="ml-auto"><?php $date = new DateTime($user['date_creation']);
+                                        echo $date->format('d/m/Y') ?></p>
                 </div>
                 <button type="button" onclick="location.href='../relations/index.php'" class="btn btn-light btn-block justify-content-center">Amis</button>
             </div>
