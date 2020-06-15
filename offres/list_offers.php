@@ -70,7 +70,7 @@ if (isset($_POST["submit"])) {
 <html>
 
 <head>
-    <title>SmashZone</title>
+    <title>Offres de partenaires</title>
 
     <!-- Important ! -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
