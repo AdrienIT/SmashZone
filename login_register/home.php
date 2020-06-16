@@ -121,40 +121,40 @@ $all_notifs = $query->fetchAll();
                 <h3 class="text-left"><?php echo $user['pseudo'] ?></h3>
                 <hr>
                 <div class="d-flex">
-                    <i class="material-icons md-dark mr-2">mail</i>
-                    <p>Adresse E-mail</p>
+                    <i class="material-icons md-dark mr-2 text-dark">mail</i>
+                    <p class="infosjoueurs">Adresse E-mail</p>
                     <p class="ml-auto"><?php echo $user['email'] ?></p>
                 </div>
                 <div class="d-flex">
-                    <i class="material-icons md-dark mr-2">cake</i>
-                    <p>Date de naissance</p>
+                    <i class="material-icons md-dark mr-2 text-dark">cake</i>
+                    <p class="infosjoueurs">Date de naissance</p>
                     <p class="ml-auto"><?php $date = new DateTime($user['date_naissance']);
                                         echo $date->format('d/m/Y') ?></p>
                 </div>
                 <div class="d-flex">
-                    <i class="material-icons md-dark mr-2">sports_tennis</i>
-                    <p>Classement</p>
+                    <i class="material-icons md-dark mr-2 text-dark">sports_tennis</i>
+                    <p class="infosjoueurs">Classement</p>
                     <p class="ml-auto"><?php echo str_replace(".", "/", (string) $user['classement']) ?></p>
                 </div>
 
                 <div class="d-flex">
-                    <i class="material-icons md-dark mr-2">location_city</i>
-                    <p>Ville</p>
+                    <i class="material-icons md-dark mr-2 text-dark">location_city</i>
+                    <p class="infosjoueurs">Ville</p>
                     <p class="ml-auto"><?php echo $user['ville'] ?></p>
                 </div>
                 <div class="d-flex">
-                    <i class="material-icons md-dark mr-2">money</i>
-                    <p>Code postal</p>
+                    <i class="material-icons md-dark mr-2 text-dark">money</i>
+                    <p class="infosjoueurs">Code postal</p>
                     <p class="ml-auto"><?php echo $user['postal_code'] ?></p>
                 </div>
                 <div class="d-flex">
-                    <i class="material-icons md-dark mr-2">phone</i>
-                    <p>Téléphone</p>
+                    <i class="material-icons md-dark mr-2 text-dark">phone</i>
+                    <p class="infosjoueurs">Téléphone</p>
                     <p class="ml-auto"><?php echo $user['telephone'] ?></p>
                 </div>
                 <div class="d-flex">
-                    <i class="material-icons md-dark mr-2">access_time</i>
-                    <p>Date de création</p>
+                    <i class="material-icons md-dark mr-2 text-dark">access_time</i>
+                    <p class="infosjoueurs">Date de création</p>
                     <p class="ml-auto"><?php $date = new DateTime($user['date_creation']);
                                         echo $date->format('d/m/Y') ?></p>
                 </div>
