@@ -123,9 +123,9 @@ if (isset($_POST['recherche'])) {
                 <?php if (isset($_POST['recherche'])) {
                     while ($qs = $querysearch->fetch()) { ?>
                 <tr>
-                    <td><?=$u['pseudo']?></td>
-                    <td><?=$u['classement']?></td>
-                    <td><?=$u['victoire']?></td>
+                    <td><?=$qs['pseudo']?></td>
+                    <td><?=$qs['classement']?></td>
+                    <td><?=$qs['victoire']?></td>
                     <td class="text-center">
                         <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $qs['user_id'] ?>'
                             class=' btn btn-primary'>Voir le profil</a> </td> <?php } ?>
@@ -133,11 +133,11 @@ if (isset($_POST['recherche'])) {
                 </tr>
                 <?php } else { ?>
             </tbody>
-            <?php foreach($fetch_liste as $u) { ?>
+            <?php foreach($fetch_liste as $qs) { ?>
             <tr class="text-center">
-                <td><?=$u['pseudo']?></td>
-                <td><?=$u['classement']?></td>
-                <td><?=$u['victoire']?></td>
+                <td><?=$qs['pseudo']?></td>
+                <td><?=$qs['classement']?></td>
+                <td><?=$qs['victoire']?></td>
                 <td class="text-center">
                             <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $u['user_id'] ?>'
                                 class=' btn btn-primary'>Voir le profil</a> </td>
