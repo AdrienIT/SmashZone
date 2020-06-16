@@ -20,12 +20,8 @@ if (isset($_GET['delete']) and !empty($_GET['delete'])) {
 <html lang="fr">
 
 <head>
-<<<<<<< HEAD
-    <title>Gérer users</title>
-=======
     <title>Liste utilisateurs</title>
 
->>>>>>> web_design
     <!-- Important ! -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../style/favicon.ico" />
