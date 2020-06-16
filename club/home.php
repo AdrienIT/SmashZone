@@ -71,7 +71,7 @@ if (file_exists(str_replace(" ", "_", $user['nom_club']))) {
     <div class="container text-center">
         <div class="row justify-content-center">
             <div class="col-auto">
-                <img src=<?= $img_src ?>>
+                <img class="imgdeprofil" src=<?= $img_src ?>>
                 <h1> Bonjour <?php echo $user['nom_club'] ?></h1>
                 <a class="btn btn-light btn-block" href="update.php">Editer le club</a> <br> <br>
                 <a class="btn btn-light btn-block" href="mes_tournois.php">Mes Tournois</a> <br> <br>
