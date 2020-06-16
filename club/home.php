@@ -51,18 +51,52 @@ if (file_exists(str_replace(" ", "_", $user['nom_club']))) {
         </div>
     </nav>
 
-    <div class="container text-center">
-        <div class="row justify-content-center">
-            <div class="col-auto">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2">
                 <img class="imgdeprofil" src=<?= $img_src ?>>
-                <h1> Bonjour <?php echo $user['nom_club'] ?></h1>
-                <a class="btn btn-light btn-block" href="update.php">Editer le club</a> <br> <br>
-                <a class="btn btn-light btn-block" href="mes_tournois.php">Mes Tournois</a> <br> <br>
-                <a class="btn btn-light btn-block" href="avatar.php">Photo du club</a> <br> <br>
-                <a class="btn btn-danger btn-block" href="logout.php">Se Déconnecter</a>
+                <div class="overlay">
+                    <a href="avatar.php">
+                        <i class="material-icons text-dark md-dark text mr-2">edit</i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <h1 class="text-left"> <?php echo $user['nom_club']?></h1>
+                <hr>
+                <div class="d-flex">
+                    <i class="material-icons md-dark mr-2 text-dark">mail</i>
+                    <p class="infosjoueurs">Adresse E-mail</p>
+                    <p class="ml-auto"><?php echo $user['email'] ?></p>
+                </div>
+                <div class="d-flex">
+                    <i class="material-icons md-dark mr-2 text-dark">location_city</i>
+                    <p class="infosjoueurs">Ville</p>
+                    <p class="ml-auto"><?php echo $user['ville'] ?></p>
+                </div>
+                <div class="d-flex">
+                    <i class="material-icons md-dark mr-2 text-dark">money</i>
+                    <p class="infosjoueurs">Code postal</p>
+                    <p class="ml-auto"><?php echo $user['postal_code'] ?></p>
+                </div>
+                <div class="d-flex">
+                    <i class="material-icons md-dark mr-2 text-dark">phone</i>
+                    <p class="infosjoueurs">Téléphone</p>
+                    <p class="ml-auto"><?php echo $user['telephone'] ?></p>
+                </div>
+                <div class="d-flex">
+                    <i class="material-icons md-dark mr-2 text-dark">access_time</i>
+                    <p class="infosjoueurs">Date de création</p>
+                    <p class="ml-auto"><?php $date = new DateTime($user['date_creation']);
+                                        echo $date->format('d/m/Y') ?></p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" onclick="location.href='update.php'" class="btn btn-light col-xl-6 mx-auto justify-content-center mb-2">Editer le club</button>
+                <button type="button" onclick="location.href='mes_tournois.php'" class="btn btn-primary col-xl-6 mx-auto justify-content-center mb-2">Mes tournois</button>
+                <button type="button" onclick="location.href='logout.php'" class="btn btn-danger col-xl-6 mx-auto justify-content-center">Se déconnecter</button>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 
 </html>

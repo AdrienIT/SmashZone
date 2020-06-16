@@ -20,7 +20,12 @@ if (isset($_GET['delete']) and !empty($_GET['delete'])) {
 <html lang="fr">
 
 <head>
+<<<<<<< HEAD
     <title>Gérer users</title>
+=======
+    <title>Liste utilisateurs</title>
+
+>>>>>>> web_design
     <!-- Important ! -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../style/favicon.ico" />
@@ -91,31 +96,34 @@ if (isset($_GET['delete']) and !empty($_GET['delete'])) {
     </nav>
     <!-- Fin barre de navigation -->
 
-    <div class="container">
-        <h1 class="mb-4 font-weight-bold">Liste des joueurs inscrits</h1>
-        <a class="btn btn-light mb-2" href="index.php">
-            < Retour à la page d'administration</a> <table class="table">
-                <thead class="thead-dark text-center">
-                    <tr class="joueurborder">
-                        <th>ID Utilisateur</td>
-                        <th>Pseudo</td>
-                        <th>Supprimer</td>
-                        <th>Editer</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($u = $users->fetch()) { ?>
-                        <tr>
-                            <td> <?= $u['user_id'] ?> </td>
-                            <td> <?= $u['pseudo'] ?> </td>
-                            <td class="text-center"> <a class="btn btn-danger" href="users.php?delete=<?= $u['user_id'] ?>">Supprimer</a> </td>
-                            <td class="text-center"> <a class="btn btn-primary" href="update_user.php?id=<?= $u['user_id'] ?>">Editer le
-                                    compte</a> </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-                </table>
-    </div>
-</body>
+        <div class="container">
+            <h1 class="mb-4 font-weight-bold">Liste des joueurs inscrits</h1>
+            <a class="btn btn-light mb-2" href="home.php">
+                < Retour à la page d'administration</a>
+                    <table class="table">
+                        <thead class="thead-dark text-center">
+                            <tr class="joueurborder">
+                                <th>ID Utilisateur</td>
+                                <th>Pseudo</td>
+                                <th>Supprimer</td>
+                                <th>Editer</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($u = $users->fetch()) { ?>
+                            <tr>
+                                <td> <?= $u['user_id'] ?> </td>
+                                <td> <?= $u['pseudo'] ?> </td>
+                                <td class="text-center"> <a class="btn btn-danger"
+                                        href="users.php?delete=<?= $u['user_id'] ?>">Supprimer</a> </td>
+                                <td class="text-center"> <a class="btn btn-primary"
+                                        href="update_user.php?id=<?= $u['user_id'] ?>">Editer le
+                                        compte</a> </td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+        </div>
+    </body>
 
 </html>

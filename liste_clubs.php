@@ -4,7 +4,7 @@ include_once 'config.php';
 $users = $db->query('SELECT * FROM clubs');
 
 session_start();
-if (!isset($_SESSION["user_id"])) {
+if (!isset($_SESSION["user_id"]) && (!isset($_SESSION["admin_id"]) && (!isset($_SESSION["club_id"])))) {
     $connect = "Se connecter/S'inscrire";
 } else {
     $connect = "Mon compte";
@@ -140,6 +140,9 @@ if (isset($_POST['recherche'])) {
             </tbody>
         </table>
     </div>
+    <!-- Script à charger à la fin uniquement -->
+    <script src="script/notification2.js"></script>
+        <!-- -->
 </body>
 
 </html>

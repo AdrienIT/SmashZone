@@ -213,7 +213,7 @@ if (isset($user["user_id"])) {
                                 <div class="col">
                                     <label for="nom">Classement</label>
                                     <br>
-                                    <select name="classement" id="classement">
+                                    <select name="classement" id="classement" class="form-control">
                                         <option value="40" <?php if (isset($classement) && $classement == "40") {
                                                                 echo "selected";
                                                             } ?>>--Aucun--</option>

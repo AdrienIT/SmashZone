@@ -2,23 +2,11 @@
 include_once "config.php";
 session_start();
 
-if (!isset($_SESSION["user_id"])) {
+if (!isset($_SESSION["user_id"]) && (!isset($_SESSION["admin_id"]) && (!isset($_SESSION["club_id"])))) {
     $connect = "Se connecter/S'inscrire";
 } else {
     $connect = "Mon compte";
     $id = (int) $_SESSION["user_id"];
-}
-
-if (!isset($_SESSION["admin_id"])) {
-    $connect = "Se connecter/S'inscrire";
-} else {
-    $connect = "Mon compte";
-}
-
-if (!isset($_SESSION["club_id"])) {
-    $connect = "Se connecter/S'inscrire";
-} else {
-    $connect = "Mon compte";
 }
 
 $idcontact = $_GET['contact'];

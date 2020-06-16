@@ -133,7 +133,9 @@ $clubs = $db->query('SELECT * FROM clubs');
                         <td> <a class="btn btn-primary" href="update_club.php?id=<?= $e['club_id'] ?>">Editer le
                                 compte</a> </td>
                     </tr>
-                <?php } ?>
+                    <?php } ?>
 
-                <a class="btn btn-light mb-2" href="index.php">
-                    < Retour à la page d'administration</a> </body> </html>
+                    <a class="btn btn-light mb-2" href="home.php">
+                        < Retour à la page d'administration</a>
+    </body>
+</html>

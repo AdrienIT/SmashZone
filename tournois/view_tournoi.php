@@ -3,19 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include_once('../config.php');
 session_start();
-if (!isset($_SESSION["user_id"])) {
-    $connect = "Se connecter/S'inscrire";
-} else {
-    $connect = "Mon compte";
-}
-
-if (!isset($_SESSION["admin_id"])) {
-    $connect = "Se connecter/S'inscrire";
-} else {
-    $connect = "Mon compte";
-}
-
-if (!isset($_SESSION["club_id"])) {
+if (!isset($_SESSION["user_id"]) && (!isset($_SESSION["admin_id"]) && (!isset($_SESSION["club_id"])))) {
     $connect = "Se connecter/S'inscrire";
 } else {
     $connect = "Mon compte";

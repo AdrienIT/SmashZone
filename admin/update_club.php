@@ -75,7 +75,7 @@ if (isset($user["club_id"])) {
 <html lang="fr">
 
 <head>
-    <title>Profil de <?php echo $user['pseudo'] ?></title>
+    <title>Edition club</title>
 
     <!-- Important ! -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -158,27 +158,68 @@ if (isset($user["club_id"])) {
         </div>
     </nav>
     <!-- Fin barre de navigation -->
-    
-        <h1>Edition de profil</h1>
-        <form method="POST" action="" enctype="multipart/form-data">
-            <label>Nom du club : </label>
-            <input type="text" name="new_nom_club" placeholder="Nom" value="<?php echo $user['nom_club']; ?>"> <br> <br>
-            <label>E-Mail : </label>
-            <input type="text" name="new_mail" placeholder="Mail" value="<?php echo $user['email']; ?>"> <br> <br>
-            <label>Ville : </label>
-            <input type="text" name="new_ville" placeholder="ville" value="<?php echo $user['ville']; ?>"> <br> <br>
-            <label>Code Postal : </label>
-            <input type="text" name="new_postal_code" placeholder="postal_code"
-                value="<?php echo $user['postal_code']; ?>"> <br> <br>
-            <label>Telephone : </label>
-            <input type="numbers" max="10" name="new_telephone" placeholder="telephone"
-                value="<?php echo $user['telephone']; ?>"> <br> <br>
-            <label>Mot de passe : </label>
-            <input type="password" name="newpasswd1" placeholder="Password"> <br> <br>
-            <label>Confirmation - Mot de passe</label>
-            <input type="password" name="newpasswd2" placeholder="Password"> <br> <br>
-            <input type="submit" value="Mettre à jour le profil !">
-        </form>
-        <a href="home.php">Retour au profil</a>
+    <main>
+        <div class="container">
+            <div class="d-flex justify-content-center">
+                <div class="col-sm">
+                    <div class="login-wrapper my-auto">
+                        <h1 class="login-title">Edition du profil</h1>
+                        <form method="post">
+                            <?php if (isset($err)) : ?>
+                                <div><?php echo $err ?></div>
+                            <?php endif ?>
 
+                            <?php if (isset($success)) : ?>
+                                <div>Successful</div>
+                            <?php endif ?>
+
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <label for="pseudo">Nom d'utilisateur</label>
+                                    <input type="text" name="newpseudo" placeholder="Nom d'utilisateur" class="form-control" value="<?php echo $user['nom_club']; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <label for="email">E-mail</label>
+                                    <input type="text" name="new_mail" placeholder="E-mail" class="form-control" value="<?php echo $user['email']; ?>">
+                                </div>
+                                <div class="col">
+                                    <label for="telephone">Numéro de téléphone</label>
+                                    <input type="numbers" max="10" name="new_telephone" placeholder="Numéro de téléphone" class="form-control" value="<?php echo $user['telephone']; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <label for="ville">Ville</label>
+                                    <input type="text" name="new_ville" placeholder="Ville" class="form-control" value="<?php echo $user['ville']; ?>">
+                                </div>
+                                <div class="col">
+                                    <label for="postal_code">Code postal</label>
+                                    <input type="text" name="new_postal_code" placeholder="Code postal" class="form-control" value="<?php echo $user['postal_code']; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <label for="password">Mot de passe</label>
+                                    <input type="password" name="newpasswd1" placeholder="Ancien mot de passe" class="form-control">
+                                </div>
+                                <div class="col">
+                                    <label for="password_confirm">Confirmer le mot de passe</label>
+                                    <input type="password" name="newpasswd2" placeholder="Nouveau mot de passe" class="form-control">
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center flex-column mb-2">
+                                <input type="submit" name="submit" class="btn btn-info btn-lg" value="Mettre à jour le profil"></button>
+                            </div>
+                        </form>
+                        <a href="home.php">Annuler</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+
+</body>
 </html>

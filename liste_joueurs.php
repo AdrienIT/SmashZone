@@ -5,7 +5,7 @@ $users = $db->query('SELECT * FROM users');
 
 session_start();
 $all_notifs = "none";
-if (!isset($_SESSION["user_id"])) {
+if (!isset($_SESSION["user_id"]) && (!isset($_SESSION["admin_id"]) && (!isset($_SESSION["club_id"])))) {
     $connect = "Se connecter/S'inscrire";
 } else {
     $connect = "Mon compte";
@@ -14,18 +14,6 @@ if (!isset($_SESSION["user_id"])) {
     $query->execute();
     $all_notifs = $query->fetchAll();
     $id = (int) $_SESSION["user_id"];
-}
-
-if (!isset($_SESSION["admin_id"])) {
-    $connect = "Se connecter/S'inscrire";
-} else {
-    $connect = "Mon compte";
-}
-
-if (!isset($_SESSION["club_id"])) {
-    $connect = "Se connecter/S'inscrire";
-} else {
-    $connect = "Mon compte";
 }
 
 $query = $db->prepare('SELECT prenom,nom,pseudo FROM users WHERE user_id = :user_id');
