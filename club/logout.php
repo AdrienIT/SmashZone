@@ -1,5 +1,5 @@
 <?php
 session_start();
 session_unset();
-header('Location: ../login_register/index.php');
+header('Location: ../login_register/login.php');
 exit();

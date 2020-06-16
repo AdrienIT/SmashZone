@@ -70,9 +70,13 @@ function showCalendar(month, year) {
                 let cell = document.createElement("td");
 
                 for (k = 0; k < liste_tournois.length; k++) {
+                    normal_month = parseInt(month) + 1
+                    normal_date = parseInt(date) + 1
+                    full_date = new Date(year + "-" + normal_month + "-" + normal_date)
                     debut = new Date(liste_tournois[k]["date_debut"]);
                     fin = new Date(liste_tournois[k]["date_fin"]);
-                    if (date >= debut.getDate() && year >= debut.getFullYear() && month >= debut.getMonth() && date <= fin.getDate() && year <= fin.getFullYear() && month <= fin.getMonth()) {
+                    fin.setDate(fin.getDate() + 1)
+                    if (full_date >= debut && full_date <= fin) {
                         div = document.createElement('div')
                         if (typeof liste_tournois[k]["order"] === 'undefined') {
                             for (var l = 1; l <= 100; l++) {
@@ -93,7 +97,7 @@ function showCalendar(month, year) {
                             div.classList.add("start");
                             let cellText = document.createTextNode(liste_tournois[k]["nom_club"]);
                             div.appendChild(cellText);
-                        } else if (date === fin.getDate() && year === fin.getFullYear() && month === fin.getMonth()) {
+                        } else if (full_date.getDate() === fin.getDate() && full_date.getFullYear() === fin.getFullYear() && full_date.getMonth() === fin.getMonth()) {
                             div.classList.add("end");
                         }
                         div.classList.add("line")

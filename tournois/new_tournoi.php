@@ -26,7 +26,7 @@ if (isset($_POST["submit"])) {
         $insert->bindParam(":age_min", $_POST["age_min"]);
         $insert->bindParam(":age_max", $_POST["age_max"]);
         $insert->execute();
-        $msg = "Votre offre a été publiée avec succès !";
+        $msg = "Votre tournoi a été crée avec succès !";
     }
 }
 ?>
@@ -44,20 +44,15 @@ if (isset($_POST["submit"])) {
     <link href="../style/offre.css" rel="stylesheet">
     <script src="../script/checkbox.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../style/jquery-jvectormap-2.0.5.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script src="../script/jquery.js"></script>
     <script src="../script/jquery-jvectormap-2.0.5.min.js"></script>
@@ -82,89 +77,78 @@ if (isset($_POST["submit"])) {
             <img class="main" src="../style/SmashZone2.png" /><img class="ball" src="../style/SmashZoneIcon.png" />
         </a>
 
-        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
-            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03" style="background-color: #264653;">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0 float-right text-right">
                 <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='../offres/list_offers.php'"
-                        type="button">Partenaires</button>
+                    <button class="btn btn-outline-warning" onclick="location.href='../offres/list_offers.php'" type="button">Partenaires</button>
                 </li>
                 <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='../liste_joueurs.php'"
-                        type="button">Joueurs</button>
+                    <button class="btn btn-outline-warning" onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
                 </li>
                 <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='../tournois/liste_tournoi.php'"
-                        type="button">Tournois</button>
+                    <button class="btn btn-outline-warning" onclick="location.href='../tournois/liste_tournoi.php'" type="button">Tournois</button>
                 </li>
                 <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='../classement.php'"
-                        type="button">Classement</button>
+                    <button class="btn btn-outline-warning" onclick="location.href='../classement.php'" type="button">Classement</button>
                 </li>
                 <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='../liste_clubs.php'"
-                        type="button">Clubs</button>
+                    <button class="btn btn-outline-warning" onclick="location.href='../liste_clubs.php'" type="button">Clubs</button>
                 </li>
                 <li class="nav-item">
-                    <button class="btn btn-outline-light" onclick="location.href='../offres/new_offer.php'"
-                        type="button">Poster une annonce</button>
+                    <button class="btn btn-outline-light" onclick="location.href='../offres/new_offer.php'" type="button">Poster une annonce</button>
                 </li>
             </ul>
 
             <div class="icon" onclick="toggleNotifi()" id="notif"></div>
             <div class="notifi-box" id="box">
             </div>
-            <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='../login_register/login.php'"
-                type="button"><?= $connect ?></button>
+            <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='../club/home.php'" type="button">Mon club</button>
         </div>
     </nav>
     <!-- Fin barre de navigation -->
 
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="creer_tournoi">
-                    <h1 class="mb-4">Créer un nouveau tournoi</h1>
-                    <form method="post">
-                        <div class="row mb-4">
-                            <label for="start">Nom du tournoi</label>
-                            <input type="text" required name="nom" class="form-control">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="creer_tournoi">
+                <h1 class="mb-4">Créer un nouveau tournoi</h1>
+                <form method="post">
+                    <div class="row mb-4">
+                        <label for="start">Nom du tournoi</label>
+                        <input type="text" required name="nom" class="form-control">
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <label for="start">Date de début :</label>
+                            <input type="date" id="start" name="date_debut" value="<?= $today ?>" min="1920-01-01" class="form-control" max="<?= $max_date ?>">
                         </div>
-                        <div class="row mb-4">
-                            <div class="col">
-                                <label for="start">Date de début :</label>
-                                <input type="date" id="start" name="date_debut" value="<?= $today ?>" min="1920-01-01"
-                                    class="form-control" max="<?= $max_date ?>">
-                            </div>
-                            <div class="col">
-                                <label for="end">Date de fin</label>
-                                <input type="date" id="end" name="date_fin" value="<?= $today ?>" min="1920-01-01"
-                                    class="form-control" max="<?= $max_date ?>">
-                            </div>
+                        <div class="col">
+                            <label for="end">Date de fin</label>
+                            <input type="date" id="end" name="date_fin" value="<?= $today ?>" min="1920-01-01" class="form-control" max="<?= $max_date ?>">
                         </div>
-                        <div class="row mb-4">
-                            <div class="col">
-                                <label for="age_min">Âge minimum :</label>
-                                <input type="number" id="age_min" name="age_min" min="3" max="100" value="3"
-                                    class="form-control">
-                            </div>
-                            <div class="col">
-                                <label for="age_max">Âge maximum :</label>
-                                <input type="number" id="age_max" name="age_max" min="3" max="100" value="100"
-                                    class="form-control">
-                            </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <label for="age_min">Âge minimum :</label>
+                            <input type="number" id="age_min" name="age_min" min="3" max="100" value="3" class="form-control">
                         </div>
-                    </form>
+                        <div class="col">
+                            <label for="age_max">Âge maximum :</label>
+                            <input type="number" id="age_max" name="age_max" min="3" max="100" value="100" class="form-control">
+                        </div>
+                    </div>
                     <button class="btn btn-success btn-block" name="submit">Créer</button>
-                    <?php if (isset($msg)) { ?>
+                </form>
+
+                <?php if (isset($msg)) { ?>
                     <p><?= $msg ?></p>
-                    <?php } ?>
-                </div>
+                <?php } ?>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 
 </html>
