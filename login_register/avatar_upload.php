@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
 } else {
     die('Fichier avec une mauvaise extension');
 }
-
+header("location: home.php");
 ?>
 
 <a href="home.php">retour</a>

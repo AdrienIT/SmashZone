@@ -8,7 +8,8 @@ if (!isset($_SESSION["user_id"])) {
     $connect = "Se connecter/S'inscrire";
 } else {
     $connect = "Mon compte";
-    $query = $db->prepare("SELECT n.*, u.pseudo FROM notifications n INNER JOIN users u ON (n.id_link = u.user_id) WHERE n.vu = 0 ORDER BY n.date ASC");
+    $query = $db->prepare("SELECT n.*, u.pseudo FROM notifications n INNER JOIN users u ON (n.id_link = u.user_id) WHERE n.vu = 0 AND n.user_id = :id ORDER BY n.date ASC");
+    $query->bindParam(":id", $_SESSION["user_id"]);
     $query->execute();
     $all_notifs = $query->fetchAll();
 }

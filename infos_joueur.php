@@ -132,7 +132,7 @@ if (isset($_POST['supprimer_ami'])) {
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-sm-2">
-                <img src=<?php if (file_exists($user["pseudo"])) {
+                <img src=<?php if (file_exists("login_register/" . $user["pseudo"])) {
                                 echo "login_register/" . $user['pseudo'] . "/" . $user['pseudo'] . ".png";
                             } else {
                                 echo "login_register/default-user.png";

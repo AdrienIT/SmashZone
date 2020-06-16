@@ -66,20 +66,15 @@ if (isset($_GET['delete'])) {
 
     <!-- Scripts au chargement de la page -->
     <script src="../script/checkbox.js" type="text/javascript"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link href="../style/style.css" rel="stylesheet">
     <link href="../style/home.css" rel="stylesheet">
@@ -99,36 +94,29 @@ if (isset($_GET['delete'])) {
             <img class="main" src="../style/SmashZone2.png" /><img class="ball" src="../style/SmashZoneIcon.png" />
         </a>
 
-        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
-            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03" style="background-color: #264653;">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0 float-right text-right">
                 <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='../offres/list_offers.php'"
-                        type="button">Partenaires</button>
+                    <button class="btn btn-outline-warning" onclick="location.href='../offres/list_offers.php'" type="button">Partenaires</button>
                 </li>
                 <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='../liste_joueurs.php'"
-                        type="button">Joueurs</button>
+                    <button class="btn btn-outline-warning" onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
                 </li>
                 <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='../tournois/liste_tournoi.php'"
-                        type="button">Tournois</button>
+                    <button class="btn btn-outline-warning" onclick="location.href='../tournois/liste_tournoi.php'" type="button">Tournois</button>
                 </li>
                 <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='../classement.php'"
-                        type="button">Classement</button>
+                    <button class="btn btn-outline-warning" onclick="location.href='../classement.php'" type="button">Classement</button>
                 </li>
                 <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='../liste_clubs.php'"
-                        type="button">Clubs</button>
+                    <button class="btn btn-outline-warning" onclick="location.href='../liste_clubs.php'" type="button">Clubs</button>
                 </li>
                 <li class="nav-item">
-                    <button class="btn btn-outline-light" onclick="location.href='../offres/new_offer.php'"
-                        type="button">Poster une annonce</button>
+                    <button class="btn btn-outline-light" onclick="location.href='../offres/new_offer.php'" type="button">Poster une annonce</button>
                 </li>
             </ul>
 
@@ -140,15 +128,19 @@ if (isset($_GET['delete'])) {
     </nav>
     <!-- Fin barre de navigation -->
 
-        <div class="container">
-            <a href="../login_register/home.php" class="text-decoration-none text-dark">
-            <h1> <img src=<?php echo "../login_register/" . $user['pseudo'] . "/" . $user['pseudo'] . ".png" ?> style="overflow:hidden; -webkit-border-radius:50px; -moz-border-radius:50px; border-radius:50px; height:90px; width:90px">
+    <div class="container">
+        <a href="../login_register/home.php" class="text-decoration-none text-dark">
+            <h1> <img src=<?php if (file_exists("../login_register/" . $user["pseudo"])) {
+                                echo "../login_register/" . $user['pseudo'] . "/" . $user['pseudo'] . ".png";
+                            } else {
+                                echo "../login_register/default-user.png";
+                            } ?> style="overflow:hidden; -webkit-border-radius:50px; -moz-border-radius:50px; border-radius:50px; height:90px; width:90px">
                 <?php echo $user['prenom'] . " " . $user['nom'] ?></h1>
-</a>
-            <div class="row justify-content-center mb-4">
-                <div class="col-auto text-center">
-                    <p>Demandes d'amis</p>
-                    <?php
+        </a>
+        <div class="row justify-content-center mb-4">
+            <div class="col-auto text-center">
+                <p>Demandes d'amis</p>
+                <?php
                 if ($queryfriend->rowCount() == 0) {
                     echo "Vous n'avez aucune demande d'ami";
                 }
@@ -163,21 +155,21 @@ if (isset($_GET['delete'])) {
 
                         <a name='refuser' href='index.php?refuse=<?php echo $row['request_id'] ?>' class=' btn btn-danger
                     ml-4'>Refuser</a></p>
-                    <?php } ?>
-                </div>
+                <?php } ?>
             </div>
-            <div class="row d-flex align-items-center mb-4" style="background: #457b9d;">
-                <div class="col-sm-10 text-center vosamis">
-                    <p>Vos amis :</p>
-                </div>
-                <div class="col-sm text-center">
-                    <button type="button" class="btn btn-primary" onclick="location.href='../liste_joueurs.php'">Ajouter
-                        un
-                        ami</button>
-                </div>
+        </div>
+        <div class="row d-flex align-items-center mb-4" style="background: #457b9d;">
+            <div class="col-sm-10 text-center vosamis">
+                <p>Vos amis :</p>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-auto"> <?php
+            <div class="col-sm text-center">
+                <button type="button" class="btn btn-primary" onclick="location.href='../liste_joueurs.php'">Ajouter
+                    un
+                    ami</button>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-auto"> <?php
                                     if ($querypote->rowCount() == 0) {
                                         echo "Vous n'avez pas d'ami, pleurez";
                                     }
@@ -190,29 +182,27 @@ if (isset($_GET['delete'])) {
                                             echo $row2['pseudo'];
                                         } ?>
 
-                            <a name='contact'
-                                href='../relations/chat_prive.php?message=<?php if ($row2['receiver_id'] == $id) {
-                                    echo $row2['send_id']; } else {
-                                 echo $row2['receiver_id']; }?>' class=' btn btn-success ml-4
+                            <a name='contact' href='../relations/chat_prive.php?message=<?php if ($row2['receiver_id'] == $id) {
+                                                                                            echo $row2['send_id'];
+                                                                                        } else {
+                                                                                            echo $row2['receiver_id'];
+                                                                                        } ?>' class=' btn btn-success ml-4
                     mr-4'>Contacter</a>
 
                             <div class="dropdown">
-                                <button class="btn btn-light dropdown-toggle" type="button"
-                                    data-toggle="dropdown">Options
+                                <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown">Options
                                     <span class="caret"></span></button>
                                 <ul class="dropdown-menu">
-                                    <a name="infos" class="dropdown-item"
-                                        href='../infos_joueur.php?contact=<?php echo $row2['receiver_id'] ?>'>Informations</a>
-                                    <a name="supprimer" class="dropdown-item"
-                                        href='index.php?delete=<?php echo $row2['request_id'] ?>'>Supprimer</a>
+                                    <a name="infos" class="dropdown-item" href='../infos_joueur.php?contact=<?php echo $row2['receiver_id'] ?>'>Informations</a>
+                                    <a name="supprimer" class="dropdown-item" href='index.php?delete=<?php echo $row2['request_id'] ?>'>Supprimer</a>
                             </div>
                         </p>
                     </div>
-                    <?php } ?>
-                </div>
+                <?php } ?>
             </div>
         </div>
-        <script src="../script/notification2.js"></script>
-    </body>
+    </div>
+    <script src="../script/notification2.js"></script>
+</body>
 
 </html>
