@@ -74,33 +74,125 @@ if (isset($user["club_id"])) {
 <!DOCTYPE html>
 <html lang="fr">
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Edition de profil</title>
-        <link rel="icon" href="../style/favicon.ico" />
-    </head>
+<head>
+    <title>Profil de <?php echo $user['pseudo'] ?></title>
 
-    <body>
-        <h1>Edition de profil</h1>
-        <form method="POST" action="" enctype="multipart/form-data">
-            <label>Username : </label>
-            <input type="text" name="newpseudo" placeholder="Pseudo" value="<?php echo $user['nom_club']; ?>"> <br> <br>
-            <label>E-Mail : </label>
-            <input type="text" name="new_mail" placeholder="Mail" value="<?php echo $user['email']; ?>"> <br> <br>
-            <label>Ville : </label>
-            <input type="text" name="new_ville" placeholder="ville" value="<?php echo $user['ville']; ?>"> <br> <br>
-            <label>Code Postal : </label>
-            <input type="text" name="new_postal_code" placeholder="postal_code"
-                value="<?php echo $user['postal_code']; ?>"> <br> <br>
-            <label>Telephone : </label>
-            <input type="numbers" max="10" name="new_telephone" placeholder="telephone"
-                value="<?php echo $user['telephone']; ?>"> <br> <br>
-            <label>Mot de passe : </label>
-            <input type="password" name="newpasswd1" placeholder="Password"> <br> <br>
-            <label>Confirmation - Mot de passe</label>
-            <input type="password" name="newpasswd2" placeholder="Password"> <br> <br>
-            <input type="submit" value="Mettre à jour le profil !">
-        </form>
-        <a href="home.php">Retour au profil</a>
+    <!-- Important ! -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../style/favicon.ico" />
+    <meta charset="utf-8">
+    <!-- -->
+
+    <!-- Scripts au chargement de la page -->
+    <script src="../script/checkbox.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+    <link href="../style/style.css" rel="stylesheet">
+    <link href="../style/home.css" rel="stylesheet">
+    <link href="../style/notification.css" rel="stylesheet">
+    <script>
+        var notifs = <?php echo json_encode($all_notifs) ?>
+    </script>
+    <!-- Scripts au chargement de la page -->
+
+</head>
+
+<body onload="loadNotifi(notifs)">
+
+    <!-- Barre de navigation -->
+    <nav class="navbar navbar-expand-xl navbar-dark mb-4" style="background-color: #264653; height: 55px;">
+        <a class="navbar-brand main" href="../index.php">
+            <img class="main" src="../style/SmashZone2.png" /><img class="ball" src="../style/SmashZoneIcon.png" />
+        </a>
+
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03" style="background-color: #264653;">
+
+            <div class="icon" onclick="toggleNotifi()" id="notif"></div>
+            <div class="notifi-box" id="box">
+            </div>
+
+        </div>
+    </nav>
+    <!-- Fin barre de navigation -->
+
+    <main>
+        <div class="container">
+            <div class="d-flex justify-content-center">
+                <div class="col-sm">
+                    <div class="login-wrapper my-auto">
+                        <h1 class="login-title">Edition du profil</h1>
+                        <form method="post">
+                            <?php if (isset($err)) : ?>
+                                <div><?php echo $err ?></div>
+                            <?php endif ?>
+
+                            <?php if (isset($success)) : ?>
+                                <div>Successful</div>
+                            <?php endif ?>
+
+                            <div class="row mb-4">
+                                    <label for="pseudo">Nom du club</label>
+                                    <input type="text" name="newpseudo" placeholder="Nom d'utilisateur" class="form-control" value="<?php echo $user['nom_club']; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <label for="email">E-mail</label>
+                                    <input type="text" name="new_mail" placeholder="E-mail" class="form-control" value="<?php echo $user['email']; ?>">
+                                </div>
+                                <div class="col">
+                                    <label for="telephone">Numéro de téléphone</label>
+                                    <input type="numbers" max="10" name="new_telephone" placeholder="Numéro de téléphone" class="form-control" value="<?php echo $user['telephone']; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <label for="ville">Ville</label>
+                                    <input type="text" name="new_ville" placeholder="Ville" class="form-control" value="<?php echo $user['ville']; ?>">
+                                </div>
+                                <div class="col">
+                                    <label for="postal_code">Code postal</label>
+                                    <input type="text" name="new_postal_code" placeholder="Code postal" class="form-control" value="<?php echo $user['postal_code']; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <label for="password">Mot de passe</label>
+                                    <input type="password" name="newpasswd1" placeholder="Ancien mot de passe" class="form-control">
+                                </div>
+                                <div class="col">
+                                    <label for="password_confirm">Confirmer le mot de passe</label>
+                                    <input type="password" name="newpasswd2" placeholder="Nouveau mot de passe" class="form-control">
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center flex-column mb-2">
+                                <input type="submit" name="submit" class="btn btn-info btn-lg" value="Mettre à jour le profil"></button>
+                            </div>
+                        </form>
+                        <a href="home.php">Retour</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
 
 </html>
