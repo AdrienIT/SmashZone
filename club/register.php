@@ -17,6 +17,7 @@ if (isset($_POST["submit"])) {
     $ville = htmlspecialchars($_POST['ville']);
     $telephone = (int) htmlspecialchars($_POST['telephone']);
     $postal_code = (int) htmlspecialchars($_POST['postal_code']);
+    $adresse = htmlspecialchars($_POST['adresse']);
     $password = $_POST["password"];
     $password_confirm = $_POST["password_confirm"];
     $confirme = 0;
@@ -41,12 +42,13 @@ if (isset($_POST["submit"])) {
                     echo $err;
                 } else {
                     $password = md5($password);
-                    $query = "INSERT INTO clubs(nom_club,email,ville,telephone,postal_code,password,confirme) VALUES(:nom_club,:email,:ville,:telephone,:postal_code,:password,:confirme)";
+                    $query = "INSERT INTO clubs(nom_club,email,ville,telephone,postal_code,adresse,password,confirme) VALUES(:nom_club,:email,:ville,:telephone,:postal_code,:adresse,:password,:confirme)";
                     $query = $db->prepare($query);
                     $query->bindParam(':nom_club', $nom_club);
                     $query->bindParam(':email', $email);
                     $query->bindParam(':ville', $ville);
                     $query->bindParam(':telephone', $telephone);
+                    $query->bindParam(':adresse', $adresse);
                     $query->bindParam(':postal_code', $postal_code);
                     $query->bindParam(':password', $password);
                     $query->bindParam(':confirme', $confirme);
@@ -137,6 +139,12 @@ if (isset($_POST["submit"])) {
                                         <label for="pseudo">Nom du club</label>
                                         <input required type="text" <?php if (isset($nom_club)) : ?>
                                             value="<?php echo $nom_club ?>" <?php endif ?> name="nom_club"
+                                            class="form-control">
+                                    </div>
+                                    <div class="col">
+                                        <label for="adresse">Adresse du club</label>
+                                        <input required type="text" <?php if (isset($adresse)) : ?>
+                                            value="<?php echo $adresse ?>" <?php endif ?> name="adresse"
                                             class="form-control">
                                     </div>
                                 </div>

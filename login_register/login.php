@@ -1,16 +1,29 @@
 <?php
 include_once '../config.php';
 session_start();
+
 if (isset($_SESSION["user_id"])) {
     header('location: home.php');
+}
+
+if (isset($_SESSION["admin_id"])) {
+    header('location: ../admin/home.php');
+}
+
+if (isset($_SESSION["club_id"])) {
+    header('location: ../club/home.php');
 }
 
 if (isset($_POST["submit"])) {
     $pseudo = htmlspecialchars($_POST["pseudo"]);
     $password = md5($_POST["password"]);
 
-    $query1 = $db->prepare("SELECT * FROM users WHERE pseudo = ? AND password = ? ");
-    $query1->execute([$pseudo, $password]);
+    var_dump($pseudo);
+
+    $query1 = $db->prepare("SELECT * FROM users WHERE pseudo = :pseudo AND password = :password");
+    $query1->bindParam(':pseudo', $pseudo);
+    $query1->bindParam(':password', $password);
+    $query1->execute();
     $user = $query1->fetch();
 
 
@@ -18,12 +31,7 @@ if (isset($_POST["submit"])) {
         $_SESSION['user_id'] = $user['user_id'];
         header('Location: home.php');
     } else {
-        $err = "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-          <span aria-hidden='true'>&times;</span>
-        </button>
-      </div>";
+        $err = "<pre>C'est con frere</pre>";
     }
 }
 ?>

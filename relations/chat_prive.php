@@ -17,11 +17,9 @@ $query->bindParam(':user_id', $id);
 $query->execute();
 $user = $query->fetch();
 
-$querypote = $db->prepare('SELECT r.send_id,u.pseudo,r.request_id,r.receiver_id,receiver_name FROM relationships r JOIN users u ON u.user_id = r.send_id WHERE (r.status = "Ami" AND r.receiver_id = :receiver_id) OR (r.status = "Ami" AND r.send_id = :send_id)');
+$querypote = $db->prepare('SELECT r.send_id,u.pseudo,r.request_id,r.receiver_id,receiver_name FROM relationships r JOIN users u ON u.user_id = r.send_id WHERE (r.status = "Ami" AND r.receiver_id = :receiver_id) OR (r.status = "Ami" AND r.send_id = :send_id) OR (r.status = "Ami" AND r.receiver_id = :send_id) OR (r.status = "Ami" AND r.send_id = :receiver_id)');
 $querypote->bindParam(':send_id', $user['user_id']);
 $querypote->bindParam(':receiver_id', $id);
-$querypote->bindParam(':receiver_id', $user['user_id']);
-$querypote->bindParam(':send_id', $id);
 $querypote->execute();
 
 $querymessage = $db->prepare('SELECT * FROM messages WHERE (message_sender = :message_sender AND message_receiver = :message_receiver) OR (message_sender = :message_receiver AND message_receiver = :message_sender)');
@@ -171,12 +169,12 @@ if (isset($_POST['messagebox'])) {
                     </div>
                     <?php }
                 } ?>
-                    <form class="input-group" method="post">
+                    <form class="input-group fixed-bottom pb-5 pl-4 pr-4" method="post">
                         <input required type="messagebox" class="form-control" name="messagebox"
                             aria-describedby="messagebox" placeholder="Message">
                         <button type="submit" name="submit" class="btn btn-primary">Envoyer</button>
                     </form>
-                    <small id="messageNotice" class="form-text text-muted">Ne partagez jamais votre mot de passe
+                    <small id="messageNotice" class="form-text text-muted fixed-bottom pb-4 pl-4">Ne partagez jamais votre mot de passe
                         avec
                         qui que ce soit.</small>
                 </div>

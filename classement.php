@@ -13,6 +13,18 @@ if (!isset($_SESSION["user_id"])) {
     $all_notifs = $query->fetchAll();
 } 
 
+if (!isset($_SESSION["admin_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
+
+if (!isset($_SESSION["club_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
+
 $query_classement = $db->prepare('SELECT user_id, pseudo, classement, victoire FROM users ORDER BY victoire DESC');
 $query_classement->execute();
 

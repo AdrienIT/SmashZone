@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 include 'config.php';
 session_start();
 $all_notifs = "none";
+
 if (!isset($_SESSION["user_id"])) {
     $connect = "Se connecter/S'inscrire";
 } else {
@@ -11,6 +12,18 @@ if (!isset($_SESSION["user_id"])) {
     $query = $db->prepare("SELECT n.*, u.pseudo FROM notifications n INNER JOIN users u ON (n.id_link = u.user_id) WHERE n.vu = 0 ORDER BY n.date ASC");
     $query->execute();
     $all_notifs = $query->fetchAll();
+}
+
+if (!isset($_SESSION["admin_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
+
+if (!isset($_SESSION["club_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
 }
 
 ?>

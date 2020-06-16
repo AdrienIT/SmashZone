@@ -1,17 +1,11 @@
 <?php
-include_once 'config.php';
-
-$users = $db->query('SELECT * FROM users');
-
+include_once "config.php";
 session_start();
-$all_notifs = "none";
+
 if (!isset($_SESSION["user_id"])) {
     $connect = "Se connecter/S'inscrire";
 } else {
     $connect = "Mon compte";
-    $query = $db->prepare("SELECT n.*, u.pseudo FROM notifications n INNER JOIN users u ON (n.id_link = u.user_id) WHERE n.vu = 0 ORDER BY n.date ASC");
-    $query->execute();
-    $all_notifs = $query->fetchAll();
     $id = (int) $_SESSION["user_id"];
 }
 
@@ -27,20 +21,13 @@ if (!isset($_SESSION["club_id"])) {
     $connect = "Mon compte";
 }
 
-$query = $db->prepare('SELECT prenom,nom,pseudo FROM users WHERE user_id = :user_id');
-$query->bindParam(':user_id', $id);
+$idcontact = $_GET['contact'];
+
+$query = $db->prepare('SELECT nom_club,email,ville,postal_code,telephone FROM clubs WHERE club_id = :club_id');
+$query->bindParam(':club_id', $idcontact);
 $query->execute();
 
 $user = $query->fetch();
-
-if (isset($_POST['recherche'])) {
-    $search = htmlspecialchars($_POST['recherche']);
-    $querysearch = $db->prepare('SELECT * FROM users WHERE pseudo LIKE :recherche OR nom LIKE :recherche OR prenom LIKE :recherche');
-    $querysearch->bindValue(':recherche', '%' . $search . '%');
-    $querysearch->execute();
-}
-
-
 ?>
 
 <!DOCTYPE html>
@@ -131,59 +118,61 @@ if (isset($_POST['recherche'])) {
     <!-- Fin barre de navigation -->
 
         <div class="container">
-            <form class="row d-flex" action="" method="post">
-                <input required type="text" name="recherche" class="form-control" placeholder="Rechercher un joueur">
-                <button name="submit" type="submit" class="invisible btn btn-outline-primary">Rechercher un
-                    joueur</button>
-            </form>
-            <h1 class="mb-4 font-weight-bold">Liste des joueurs inscrits</h1>
-            <table class="table">
-                <thead class="thead-dark text-center">
-                    <tr class="joueurborder">
-                        <th>Pseudo</td>
-                        <th>Nom</td>
-                        <th>Prénom</td>
-                        <th>Classement</td>
-                        <th>Télephone</td>
-                        <th>Profil</td>
-                    </tr>
-                <tbody>
-                    <?php if (isset($_POST['recherche'])) {
-                    while ($qs = $querysearch->fetch()) { ?>
-                    <tr>
-                        <td><?= $qs['pseudo'] ?></td>
-                        <td><?= $qs['nom'] ?></td>
-                        <td><?= $qs['prenom'] ?></td>
-                        <td><?= $qs['classement'] ?></td>
-                        <td><?= $qs['telephone'] ?></td>
-                        <td class="text-center">
-                            <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $qs['user_id'] ?>'
-                                class=' btn btn-primary'>Voir le profil</a> </td> <?php } ?>
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-2">
+                    <img src=<?php echo "clubs" . "/" . $user['nom_club'] . "/" . $user['nom_club'] . ".png" ?>
+                        style="overflow:hidden; -webkit-border-radius:50px; -moz-border-radius:50px; border-radius:50px; height:90px; width:90px">
+                    <a href="avatar.php">
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <h1 class="text-left"> <?php echo $user['nom_club'] ?></h1>
+                    <h3 class="text-left"><?php echo $user['nom_club'] ?></h3>
+                    <hr>
+                    <div class="d-flex">
+                        <i class="material-icons md-dark mr-2">mail</i>
+                        <p>Adresse E-mail</p>
+                        <p class="ml-auto"><?php echo $user['email'] ?></p>
+                    </div>
 
-                    </tr>
-                    <?php } else {
-                        while ($u = $users->fetch()) { ?>
-                    <tr class="text-center">
-                        <td><?= $u['pseudo'] ?></td>
-                        <td><?= $u['nom'] ?></td>
-                        <td><?= $u['prenom'] ?></td>
-                        <td><?= $u['classement'] ?></td>
-                        <td> <?php if ($u['telephone'] == 0) {
+                    <div class="d-flex">
+                        <i class="material-icons md-dark mr-2">location_city</i>
+                        <p>Ville</p>
+                        <p class="ml-auto"><?php echo $user['ville'] ?></p>
+                    </div>
+                    <div class="d-flex">
+                        <i class="material-icons md-dark mr-2">money</i>
+                        <p>Code postal</p>
+                        <p class="ml-auto"><?php echo $user['postal_code'] ?></p>
+                    </div>
+                    <div class="d-flex">
+                        <i class="material-icons md-dark mr-2">phone</i>
+                        <p>Téléphone</p>
+                        <p class="ml-auto"><?php if ($user['telephone'] == 0) {
                                 echo "Non renseigné";
                             } else {
-                                echo $u['telephone'];
-                            } ?></td>
-                        <td class="text-center">
-                            <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $u['user_id'] ?>'
-                                class=' btn btn-primary'>Voir le profil</a> </td>
-                        <?php }
-                    } ?>
-
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <script src="script/notification.js"></script>
+                                echo $user['telephone'];
+                            } ?></p>
+                    </div>
+                    <?php if (!isset($_SESSION["user_id"])) {;
+                } elseif ($checkIfAlreadyFriend->fetch() > 0) {  ?>
+                    <form method="post">
+                        <input type='submit' name='supprimer_ami'
+                            class="btn btn-danger btn-block justify-content-center" value="Supprimer des amis" />
+                    </form>
+                    <?php } elseif ($checkIfAlreadyWaiting->fetch() > 0) { ?>
+                    <form method="post">
+                        <input type='submit' name='supprimer_ami'
+                            class="btn btn-danger btn-block justify-content-center" value="Annuler la demande d'ami" />
+                    </form>
+                    <?php
+                } elseif ($id == $idcontact) {;
+                } else { ?> <form method="post">
+                        <input type='submit' name='demande_ami' class="btn btn-primary btn-block justify-content-center"
+                            value="Demander en ami" /> </form>
+                    <?php } ?>
+                </div>
+            </div>
     </body>
 
 </html>

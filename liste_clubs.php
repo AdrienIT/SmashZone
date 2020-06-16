@@ -11,6 +11,18 @@ if (!isset($_SESSION["user_id"])) {
     $id = (int) $_SESSION["user_id"];
 }
 
+if (!isset($_SESSION["admin_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
+
+if (!isset($_SESSION["club_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
+
 $query = $db->prepare('SELECT nom_club,telephone FROM clubs WHERE club_id = :club_id');
 $query->bindParam(':club_id', $id);
 $query->execute();
@@ -135,7 +147,7 @@ if (isset($_POST['recherche'])) {
                             <td><?= $qs['nom_club'] ?></td>
                             <td><?= $qs['telephone'] ?></td>
                             <td class="text-center">
-                                <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $qs['club_id'] ?>' class=' btn btn-primary'>Voir le profil</a> </td> <?php } ?>
+                                <a type='submit' name='contact' href='infos_clubs.php?contact=<?php echo $qs['club_id'] ?>' class=' btn btn-primary'>Voir le profil</a> </td> <?php } ?>
 
                         </tr>
                         <?php } else {
@@ -144,7 +156,7 @@ if (isset($_POST['recherche'])) {
                                 <td><?= $u['nom_club'] ?></td>
                                 <td><?= $u['telephone'] ?></td>
                                 <td class="text-center">
-                                    <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $u['club_id'] ?>' class=' btn btn-primary'>Voir le profil</a> </td>
+                                    <a type='submit' name='contact' href='infos_clubs.php?contact=<?php echo $u['club_id'] ?>' class=' btn btn-primary'>Voir le profil</a> </td>
                         <?php }
                     } ?>
 
