@@ -1,9 +1,7 @@
 <?php
-include_once 'config.php';
-
-$users = $db->query('SELECT * FROM clubs');
-
+include_once "config.php";
 session_start();
+
 if (!isset($_SESSION["user_id"])) {
     $connect = "Se connecter/S'inscrire";
 } else {
@@ -11,24 +9,17 @@ if (!isset($_SESSION["user_id"])) {
     $id = (int) $_SESSION["user_id"];
 }
 
-$query = $db->prepare('SELECT nom_club,telephone FROM clubs WHERE club_id = :club_id');
-$query->bindParam(':club_id', $id);
+$idcontact = $_GET['contact'];
+
+$query = $db->prepare('SELECT nom_club,email,ville,postal_code,telephone FROM clubs WHERE club_id = :club_id');
+$query->bindParam(':club_id', $idcontact);
 $query->execute();
 
 $user = $query->fetch();
-
-if (isset($_POST['recherche'])) {
-    $search = $_POST['recherche'];
-    $querysearch = $db->prepare('SELECT * FROM clubs WHERE nom_club LIKE :recherche');
-    $querysearch->bindValue(':recherche', '%' . $search . '%');
-    $querysearch->execute();
-}
-
-
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 
 <head>
     <title>SmashZone</title>
@@ -114,44 +105,62 @@ if (isset($_POST['recherche'])) {
     </nav>
     <!-- Fin barre de navigation -->
 
-    <div class="container">
-        <form class="row d-flex" action="" method="post">
-            <input required type="text" name="recherche" class="form-control" placeholder="Rechercher un joueur">
-            <button name="submit" type="submit" class="invisible btn btn-outline-primary">Rechercher un
-                club</button>
-        </form>
-        <h1 class="mb-4 font-weight-bold">Liste des clubs</h1>
-        <table class="table">
-            <thead class="thead-dark text-center">
-                <tr class="joueurborder">
-                    <th>Nom du club</td>
-                    <th>Télephone</td>
-                    <th>Profil</td>
-                </tr>
-            <tbody>
-                <?php if (isset($_POST['recherche'])) {
-                    while ($qs = $querysearch->fetch()) { ?>
-                        <tr>
-                            <td><?= $qs['nom_club'] ?></td>
-                            <td><?= $qs['telephone'] ?></td>
-                            <td class="text-center">
-                                <a type='submit' name='contact' href='infos_clubs.php?contact=<?php echo $qs['club_id'] ?>' class=' btn btn-primary'>Voir le profil</a> </td> <?php } ?>
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-2">
+                    <img src=<?php echo "clubs" . "/" . $user['nom_club'] . "/" . $user['nom_club'] . ".png" ?>
+                        style="overflow:hidden; -webkit-border-radius:50px; -moz-border-radius:50px; border-radius:50px; height:90px; width:90px">
+                    <a href="avatar.php">
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <h1 class="text-left"> <?php echo $user['nom_club'] ?></h1>
+                    <h3 class="text-left"><?php echo $user['nom_club'] ?></h3>
+                    <hr>
+                    <div class="d-flex">
+                        <i class="material-icons md-dark mr-2">mail</i>
+                        <p>Adresse E-mail</p>
+                        <p class="ml-auto"><?php echo $user['email'] ?></p>
+                    </div>
 
-                        </tr>
-                        <?php } else {
-                        while ($u = $users->fetch()) { ?>
-                            <tr>
-                                <td><?= $u['nom_club'] ?></td>
-                                <td><?= $u['telephone'] ?></td>
-                                <td class="text-center">
-                                    <a type='submit' name='contact' href='infos_clubs.php?contact=<?php echo $u['club_id'] ?>' class=' btn btn-primary'>Voir le profil</a> </td>
-                        <?php }
-                    } ?>
-
-                            </tr>
-            </tbody>
-        </table>
-    </div>
-</body>
+                    <div class="d-flex">
+                        <i class="material-icons md-dark mr-2">location_city</i>
+                        <p>Ville</p>
+                        <p class="ml-auto"><?php echo $user['ville'] ?></p>
+                    </div>
+                    <div class="d-flex">
+                        <i class="material-icons md-dark mr-2">money</i>
+                        <p>Code postal</p>
+                        <p class="ml-auto"><?php echo $user['postal_code'] ?></p>
+                    </div>
+                    <div class="d-flex">
+                        <i class="material-icons md-dark mr-2">phone</i>
+                        <p>Téléphone</p>
+                        <p class="ml-auto"><?php if ($user['telephone'] == 0) {
+                                echo "Non renseigné";
+                            } else {
+                                echo $user['telephone'];
+                            } ?></p>
+                    </div>
+                    <?php if (!isset($_SESSION["user_id"])) {;
+                } elseif ($checkIfAlreadyFriend->fetch() > 0) {  ?>
+                    <form method="post">
+                        <input type='submit' name='supprimer_ami'
+                            class="btn btn-danger btn-block justify-content-center" value="Supprimer des amis" />
+                    </form>
+                    <?php } elseif ($checkIfAlreadyWaiting->fetch() > 0) { ?>
+                    <form method="post">
+                        <input type='submit' name='supprimer_ami'
+                            class="btn btn-danger btn-block justify-content-center" value="Annuler la demande d'ami" />
+                    </form>
+                    <?php
+                } elseif ($id == $idcontact) {;
+                } else { ?> <form method="post">
+                        <input type='submit' name='demande_ami' class="btn btn-primary btn-block justify-content-center"
+                            value="Demander en ami" /> </form>
+                    <?php } ?>
+                </div>
+            </div>
+    </body>
 
 </html>
