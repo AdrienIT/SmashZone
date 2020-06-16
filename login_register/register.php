@@ -160,7 +160,7 @@ if (isset($_POST["submit"])) {
                                 <div class="col">
                                     <label for="classement">Classement</label>
                                     <br>
-                                    <select name="classement" id="classement">
+                                    <select name="classement" id="classement" class="form-control">
                                         <option value="40" <?php if (isset($classement) && $classement == "40") {
                                                                 echo "selected";
                                                             } ?>>--Aucun--</option>
