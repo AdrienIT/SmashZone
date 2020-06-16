@@ -23,7 +23,7 @@ if (!isset($_SESSION["club_id"])) {
 
 $idcontact = $_GET['contact'];
 
-$query = $db->prepare('SELECT nom_club,email,ville,postal_code,telephone FROM clubs WHERE club_id = :club_id');
+$query = $db->prepare('SELECT nom_club,email,ville,postal_code,telephone,adresse FROM clubs WHERE club_id = :club_id');
 $query->bindParam(':club_id', $idcontact);
 $query->execute();
 
@@ -130,47 +130,35 @@ $user = $query->fetch();
                     <h3 class="text-left"><?php echo $user['nom_club'] ?></h3>
                     <hr>
                     <div class="d-flex">
-                        <i class="material-icons md-dark mr-2">mail</i>
-                        <p>Adresse E-mail</p>
+                        <i class="material-icons md-dark mr-2 text-dark">mail</i>
+                        <p class="infosjoueurs">Adresse E-mail</p>
                         <p class="ml-auto"><?php echo $user['email'] ?></p>
                     </div>
 
                     <div class="d-flex">
-                        <i class="material-icons md-dark mr-2">location_city</i>
-                        <p>Ville</p>
+                        <i class="material-icons md-dark mr-2 text-dark">location_city</i>
+                        <p class="infosjoueurs">Ville</p>
                         <p class="ml-auto"><?php echo $user['ville'] ?></p>
                     </div>
                     <div class="d-flex">
-                        <i class="material-icons md-dark mr-2">money</i>
-                        <p>Code postal</p>
+                        <i class="material-icons md-dark mr-2 text-dark">money</i>
+                        <p class="infosjoueurs">Code postal</p>
                         <p class="ml-auto"><?php echo $user['postal_code'] ?></p>
                     </div>
                     <div class="d-flex">
-                        <i class="material-icons md-dark mr-2">phone</i>
-                        <p>Téléphone</p>
+                        <i class="material-icons md-dark mr-2 text-dark">phone</i>
+                        <p class="infosjoueurs">Téléphone</p>
                         <p class="ml-auto"><?php if ($user['telephone'] == 0) {
                                 echo "Non renseigné";
                             } else {
                                 echo $user['telephone'];
                             } ?></p>
                     </div>
-                    <?php if (!isset($_SESSION["user_id"])) {;
-                } elseif ($checkIfAlreadyFriend->fetch() > 0) {  ?>
-                    <form method="post">
-                        <input type='submit' name='supprimer_ami'
-                            class="btn btn-danger btn-block justify-content-center" value="Supprimer des amis" />
-                    </form>
-                    <?php } elseif ($checkIfAlreadyWaiting->fetch() > 0) { ?>
-                    <form method="post">
-                        <input type='submit' name='supprimer_ami'
-                            class="btn btn-danger btn-block justify-content-center" value="Annuler la demande d'ami" />
-                    </form>
-                    <?php
-                } elseif ($id == $idcontact) {;
-                } else { ?> <form method="post">
-                        <input type='submit' name='demande_ami' class="btn btn-primary btn-block justify-content-center"
-                            value="Demander en ami" /> </form>
-                    <?php } ?>
+                    <div class="d-flex">
+                        <i class="material-icons md-dark mr-2 text-dark">money</i>
+                        <p class="infosjoueurs">Adresse</p>
+                        <p class="ml-auto"><?php echo $user['adresse'] ?></p>
+                    </div>
                 </div>
             </div>
     </body>
