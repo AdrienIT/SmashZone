@@ -77,6 +77,8 @@ $u = $query->fetchAll();
             <div class="notifi-box" id="box">
             </div>
 
+            <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='home.php'" type="button">Retour</button>
+
         </div>
     </nav>
     <!-- Fin barre de navigation -->
@@ -102,34 +104,15 @@ $u = $query->fetchAll();
                 </tr>
                 <?php } else { ?>
             </tbody>
-            <?php foreach($fetch_liste as $u) { ?>
+            <?php foreach ($u as $tournois) { ?>
             <tr class="text-center">
-                <td><?=$u['pseudo']?></td>
-                <td><?=$u['classement']?></td>
-                <td><?=$u['victoire']?></td>
-                <td class="text-center">
-                            <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $u['user_id'] ?>'
-                                class=' btn btn-primary'>Voir le profil</a> </td>
-            </tr>
-            <?php } }?>
-        </table>
-
-    <table>
-        <tr>
-            <td>Nom du tournoi</td>
-            <td>Gagnant ?</td>
-        </tr>
-        <?php foreach ($u as $tournois) { ?>
-            <tr>
-
-                <td><?= $tournois['nom_tournoi'] ?></td>
+            <td><?= $tournois['nom_tournoi'] ?></td>
                 <td><?= $tournois['date_debut'] ?></td>
                 <td><?= $tournois['date_fin'] ?></td>
                 <td> <a href="choix_gagnant.php?tournoi_id=<?php echo $tournois['tournoi_id'] ?>">Choisir un gagnant</a> </td>
-
             </tr>
-        <?php } ?>
-    </table>
+            <?php } }?>
+        </table>
 </body>
 
 </html>

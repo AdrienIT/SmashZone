@@ -2,7 +2,7 @@
 include_once "../config.php";
 session_start();
 if (!isset($_SESSION["club_id"])) {
-    header('location: login.php');
+    header('location: ../login_register/login.php');
 }
 
 $id = (int) $_SESSION["club_id"];
