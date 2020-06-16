@@ -8,6 +8,19 @@ if (!isset($_SESSION["user_id"])) {
 } else {
     $connect = "Mon compte";
 }
+
+if (!isset($_SESSION["admin_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
+
+if (!isset($_SESSION["club_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
+
 $tournoi_id = $_GET["id"];
 $get_infos = $db->prepare("SELECT * FROM tournois t INNER JOIN clubs c ON (t.club_id = c.club_id) WHERE t.tournoi_id = :id");
 $get_infos->bindParam(":id", $tournoi_id);
