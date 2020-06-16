@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include_once "config.php";
 session_start();
 
@@ -29,6 +31,11 @@ $checkIfAlreadyWaiting->bindParam(':send_id', $id);
 $checkIfAlreadyWaiting->execute();
 
 if (isset($_POST['demande_ami'])) {
+    $addnotif = $db->prepare('INSERT INTO notifications (user_id, type, description, id_link) VALUES (:user_id, "Amis", "Vous avez une nouvelle demande d\'amis", :link)');
+    $addnotif->bindParam(':user_id', $idcontact);
+    $addnotif->bindParam(':link', $id);
+    $addnotif->execute();
+
     $addfriend = $db->prepare('INSERT INTO relationships (send_id,receiver_id,status,receiver_name) VALUES (:send_id,:receiver_id,"En attente",:receiver_name)');
     $addfriend->bindParam(':send_id', $id);
     $addfriend->bindParam(':receiver_id', $idcontact);
