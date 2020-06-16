@@ -36,7 +36,7 @@ if (file_exists(str_replace(" ", "_", $user['nom_club']))) {
     </script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="../style/style.css" rel="stylesheet">
-    <title>Homepage</title>
+    <title>Accueil club</title>
 </head>
 
 <body>
@@ -48,23 +48,6 @@ if (file_exists(str_replace(" ", "_", $user['nom_club']))) {
         <button class="navbar-toggler ml-auto" type=" button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span> </button>
         <div class="collapse navbar-collapse rubriques" id="navbarNav">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item rubriquecolor">
-                    Recherchez :
-                </li>
-                <form class="form-inline">
-                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../offres/list_offers.php'" type="button">Partenaires</button>
-                </form>
-                <form class="form-inline">
-                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
-                </form>
-                <form class="form-inline">
-                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='recherchejouer.php'" type="button">Tournois</button>
-                </form>
-                <form class="form-inline">
-                    <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch" onclick="location.href='../offres/new_offer.php'" type="button">Poster une annonce</button>
-                </form>
-            </ul>
         </div>
     </nav>
 
