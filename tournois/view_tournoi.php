@@ -8,6 +8,19 @@ if (!isset($_SESSION["user_id"])) {
 } else {
     $connect = "Mon compte";
 }
+
+if (!isset($_SESSION["admin_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
+
+if (!isset($_SESSION["club_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
+
 $tournoi_id = $_GET["id"];
 $get_infos = $db->prepare("SELECT * FROM tournois t INNER JOIN clubs c ON (t.club_id = c.club_id) WHERE t.tournoi_id = :id");
 $get_infos->bindParam(":id", $tournoi_id);
@@ -27,6 +40,13 @@ $date_debut = strftime("%A %d %B %G", strtotime($tournoi_infos["date_debut"]));
 $date_fin = strftime("%A %d %B %G", strtotime($tournoi_infos["date_fin"]));
 
 $adresse = $tournoi_infos["adresse"] . " " . $tournoi_infos["postal_code"] . " " . $tournoi_infos["ville"];
+
+
+if (file_exists(str_replace(" ", "_", "../club/" . $tournoi_infos['nom_club']))) {
+    $img_src = str_replace(" ", "_", "../club/" . $tournoi_infos['nom_club']) . str_replace(" ", "_", "/" . $tournoi_infos['nom_club']) . ".png";
+} else {
+    $img_src = "default-club.png";
+}
 
 ?>
 <html>
@@ -58,9 +78,9 @@ $adresse = $tournoi_infos["adresse"] . " " . $tournoi_infos["postal_code"] . " "
     <script src="../script/jquery-jvectormap-2.0.5.min.js"></script>
     <script src="../script/map_fr.js"></script>
     <script src="../script/dep_fr.js"></script>
-    <link href="../style/tournoi_preview.css" rel="stylesheet">
 
     <link href="../style/style.css" rel="stylesheet">
+    <link href="../style/tournoi_preview.css" rel="stylesheet">
     <link href="../style/home.css" rel="stylesheet">
     <link href="../style/notification.css" rel="stylesheet">
     <!-- Scripts au chargement de la page -->
@@ -70,7 +90,7 @@ $adresse = $tournoi_infos["adresse"] . " " . $tournoi_infos["postal_code"] . " "
 <body>
 
     <!-- Barre de navigation -->
-    <nav class="navbar navbar-expand-xl navbar-dark mb-4" style="background-color: #264653; height: 55px;">
+    <nav class="navbar navbar-expand-xl navbar-dark" style="background-color: #264653; height: 55px;">
         <a class="navbar-brand main" href="../index.php">
             <img class="main" src="../style/SmashZone2.png" /><img class="ball" src="../style/SmashZoneIcon.png" />
         </a>
@@ -109,22 +129,47 @@ $adresse = $tournoi_infos["adresse"] . " " . $tournoi_infos["postal_code"] . " "
     </nav>
     <!-- Fin barre de navigation -->
 
-    <h1><?= $tournoi_infos['nom_tournoi'] ?> : </h1>
+    <div class="container d-flex justify-content-center">
+        <div class="col-sm-10 aretrecir">
+            <div class="row d-flex justify-content-center">
+                <i class="material-icons md-dark text-dark iconeretreci">emoji_events</i>
+                <h1><?= $tournoi_infos['nom_tournoi'] ?> </h1>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <img class="imgdeprofil" src=<?= $img_src ?>>
+                <p class="mt-4">Organisé par <?= $tournoi_infos["nom_club"] ?></p>
+            </div>
+            <div class="row">
+            </div>
+            <hr class="relever">
+            <div class="d-flex">
+                <i class="material-icons md-dark mr-2 text-dark iconeretreci">location_city</i>
+                <p class="infosjoueurs">Adresse</p>
+                <p class="ml-auto"><?= $adresse ?></p>
+            </div>
+            <div class="d-flex">
+                <i class="material-icons md-dark mr-2 text-dark iconeretreci">access_time</i>
+                <p class="infosjoueurs">Date de fin</p>
+                <p class="ml-auto"><?= $date_fin ?></p>
+            </div>
+            <div class="d-flex">
+                <i class="material-icons md-dark mr-2 text-dark iconeretreci">face</i>
+                <p class="infosjoueurs">Catégorie d'age</p>
+                <p class="ml-auto"><?= $cat_age ?></p>
+            </div>
+            <div class="d-flex">
+                <i class="material-icons md-dark mr-2 text-dark iconeretreci">phone</i>
+                <p class="infosjoueurs">Numéro de téléphone</p>
+                <p class="ml-auto"><?= $tournoi_infos["telephone"] ?></p>
+            </div>
+            <div class="d-flex">
+                <i class="material-icons md-dark mr-2 text-dark iconeretreci">email</i>
+                <p class="infosjoueurs">E-mail</p>
+                <p class="ml-auto"><?= $tournoi_infos["email"] ?></p>
+            </div>
+            <a class="btn btn-primary text-light"> S'inscrire </a>
+        </div>
+    </div>
+    </body>
 
-    <h2>Informations :</h2>
-    <ul>
-        <li>Club organisateur : <?= $tournoi_infos["nom_club"] ?></li>
-        <li>Adresse : <?= $adresse ?></li>
-        <li>Date de début : <?= $date_debut ?></li>
-        <li>Date de fin : <?= $date_fin ?></li>
-        <li>Catégorie d'age : <?= $cat_age ?></li>
-    </ul>
-    <h2>Contacter : </h2>
-    <ul>
-        <li>Téléphone : <?= $tournoi_infos["telephone"] ?></li>
-        <li>Email : <?= $tournoi_infos["email"] ?></li>
-    </ul>
-    <a href="inscription_tournoi.php?id=<?php echo $tournoi_id ?>"> s'inscrire </a>
-</body>
-
-</html>
+    </html>

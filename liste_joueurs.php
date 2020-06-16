@@ -16,6 +16,18 @@ if (!isset($_SESSION["user_id"])) {
     $id = (int) $_SESSION["user_id"];
 }
 
+if (!isset($_SESSION["admin_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
+
+if (!isset($_SESSION["club_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
+
 $query = $db->prepare('SELECT prenom,nom,pseudo FROM users WHERE user_id = :user_id');
 $query->bindParam(':user_id', $id);
 $query->execute();

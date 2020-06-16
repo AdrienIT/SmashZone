@@ -17,7 +17,7 @@ $classement = $user['classement'];
 if ($classement == 'NULL') {
     $classement = 40;
 } else {
-    $classement = $user['classement'];;
+    $classement = $user['classement'];
 }
 
 if (isset($user["user_id"])) {
