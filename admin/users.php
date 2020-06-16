@@ -10,6 +10,7 @@ if (isset($_GET['delete']) and !empty($_GET['delete'])) {
     $delete = (int) $_GET['delete'];
     $req = $db->prepare('DELETE FROM users WHERE user_id = ?');
     $req->execute(array($delete));
+    header('Location: users.php');
 }
 
 

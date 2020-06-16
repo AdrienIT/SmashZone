@@ -56,17 +56,14 @@ if (isset($_POST['recherche'])) {
     <!-- -->
 
     <!-- Scripts au chargement de la page -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -88,102 +85,92 @@ if (isset($_POST['recherche'])) {
             <img class="main" src="style/SmashZone2.png" /><img class="ball" src="style/SmashZoneIcon.png" />
         </a>
 
-        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
-            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03" style="background-color: #264653;">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0 float-right text-right">
                 <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='offres/list_offers.php'"
-                        type="button">Partenaires</button>
+                    <button class="btn btn-outline-warning" onclick="location.href='offres/list_offers.php'" type="button">Partenaires</button>
                 </li>
                 <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='liste_joueurs.php'"
-                        type="button">Joueurs</button>
+                    <button class="btn btn-outline-warning" onclick="location.href='liste_joueurs.php'" type="button">Joueurs</button>
                 </li>
                 <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='tournois/liste_tournoi.php'"
-                        type="button">Tournois</button>
+                    <button class="btn btn-outline-warning" onclick="location.href='tournois/liste_tournoi.php'" type="button">Tournois</button>
                 </li>
                 <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='classement.php'"
-                        type="button">Classement</button>
+                    <button class="btn btn-outline-warning" onclick="location.href='classement.php'" type="button">Classement</button>
                 </li>
                 <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='liste_clubs.php'"
-                        type="button">Clubs</button>
+                    <button class="btn btn-outline-warning" onclick="location.href='liste_clubs.php'" type="button">Clubs</button>
                 </li>
                 <li class="nav-item">
-                    <button class="btn btn-outline-light" onclick="location.href='offres/new_offer.php'"
-                        type="button">Poster une annonce</button>
+                    <button class="btn btn-outline-light" onclick="location.href='offres/new_offer.php'" type="button">Poster une annonce</button>
                 </li>
             </ul>
 
             <div class="icon" onclick="toggleNotifi()" id="notif"></div>
             <div class="notifi-box" id="box">
             </div>
-            <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login_register/login.php'"
-                type="button"><?= $connect ?></button>
+            <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='login_register/login.php'" type="button"><?= $connect ?></button>
         </div>
     </nav>
     <!-- Fin barre de navigation -->
 
-        <div class="container">
-            <form class="row d-flex" action="" method="post">
-                <input required type="text" name="recherche" class="form-control" placeholder="Rechercher un joueur">
-                <button name="submit" type="submit" class="invisible btn btn-outline-primary">Rechercher un
-                    joueur</button>
-            </form>
-            <h1 class="mb-4 font-weight-bold">Liste des joueurs inscrits</h1>
-            <table class="table">
-                <thead class="thead-dark text-center">
-                    <tr class="joueurborder">
-                        <th>Pseudo</td>
-                        <th>Nom</td>
-                        <th>Prénom</td>
-                        <th>Classement</td>
-                        <th>Télephone</td>
-                        <th>Profil</td>
-                    </tr>
-                <tbody>
-                    <?php if (isset($_POST['recherche'])) {
+    <div class="container">
+        <form class="row d-flex" action="" method="post">
+            <input required type="text" name="recherche" class="form-control" placeholder="Rechercher un joueur">
+            <button name="submit" type="submit" class="invisible btn btn-outline-primary">Rechercher un
+                joueur</button>
+        </form>
+        <h1 class="mb-4 font-weight-bold">Liste des joueurs inscrits</h1>
+        <table class="table">
+            <thead class="thead-dark text-center">
+                <tr class="joueurborder">
+                    <th>Pseudo</td>
+                    <th>Nom</td>
+                    <th>Prénom</td>
+                    <th>Classement</td>
+                    <th>Télephone</td>
+                    <th>Profil</td>
+                </tr>
+            <tbody>
+                <?php if (isset($_POST['recherche'])) {
                     while ($qs = $querysearch->fetch()) { ?>
-                    <tr>
-                        <td><?= $qs['pseudo'] ?></td>
-                        <td><?= $qs['nom'] ?></td>
-                        <td><?= $qs['prenom'] ?></td>
-                        <td><?= $qs['classement'] ?></td>
-                        <td><?= $qs['telephone'] ?></td>
-                        <td class="text-center">
-                            <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $qs['user_id'] ?>'
-                                class=' btn btn-primary'>Voir le profil</a> </td> <?php } ?>
+                        <tr>
+                            <td><?= $qs['pseudo'] ?></td>
+                            <td><?= $qs['nom'] ?></td>
+                            <td><?= $qs['prenom'] ?></td>
+                            <td><?= str_replace(".", "/", (string) $qs['classement']) ?></td>
+                            <td><?= $qs['telephone'] ?></td>
+                            <td class="text-center">
+                                <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $qs['user_id'] ?>' class=' btn btn-primary'>Voir le profil</a> </td> <?php } ?>
 
-                    </tr>
-                    <?php } else {
+                        </tr>
+                        <?php } else {
                         while ($u = $users->fetch()) { ?>
-                    <tr class="text-center">
-                        <td><?= $u['pseudo'] ?></td>
-                        <td><?= $u['nom'] ?></td>
-                        <td><?= $u['prenom'] ?></td>
-                        <td><?= $u['classement'] ?></td>
-                        <td> <?php if ($u['telephone'] == 0) {
-                                echo "Non renseigné";
-                            } else {
-                                echo $u['telephone'];
-                            } ?></td>
-                        <td class="text-center">
-                            <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $u['user_id'] ?>'
-                                class=' btn btn-primary'>Voir le profil</a> </td>
+                            <tr class="text-center">
+                                <td><?= $u['pseudo'] ?></td>
+                                <td><?= $u['nom'] ?></td>
+                                <td><?= $u['prenom'] ?></td>
+                                <td><?= str_replace(".", "/", (string) $u['classement']) ?></td>
+                                <td> <?php if ($u['telephone'] == 0) {
+                                            echo "Non renseigné";
+                                        } else {
+                                            echo $u['telephone'];
+                                        } ?></td>
+                                <td class="text-center">
+                                    <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $u['user_id'] ?>' class=' btn btn-primary'>Voir le profil</a> </td>
                         <?php }
                     } ?>
 
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <script src="script/notification.js"></script>
-    </body>
+                            </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="script/notification.js"></script>
+</body>
 
 </html>

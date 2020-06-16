@@ -87,3 +87,7 @@
     color: #aaa;
     font-size: 12px;
 }
+
+.notifi-box a {
+    text-decoration: none;
+}
