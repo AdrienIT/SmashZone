@@ -5,7 +5,7 @@ include_once('../config.php');
 session_start();
 
 if (!isset($_SESSION["user_id"])) {
-    header('location: login.php');
+    header('location: ../login_register/login.php');
 }
 
 $id = (int) $_SESSION["user_id"];
@@ -17,9 +17,11 @@ $query->bindParam(':user_id', $id);
 $query->execute();
 $user = $query->fetch();
 
-$querypote = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id,r.receiver_id,receiver_name FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE (r.status = "Ami" AND r.receiver_id = :receiver_id) OR (r.status = "Ami" AND r.sender_id = :sender_id)');
-$querypote->bindParam(':sender_id', $user['user_id']);
+$querypote = $db->prepare('SELECT r.send_id,u.pseudo,r.request_id,r.receiver_id,receiver_name FROM relationships r JOIN users u ON u.user_id = r.send_id WHERE (r.status = "Ami" AND r.receiver_id = :receiver_id) OR (r.status = "Ami" AND r.send_id = :send_id)');
+$querypote->bindParam(':send_id', $user['user_id']);
 $querypote->bindParam(':receiver_id', $id);
+$querypote->bindParam(':receiver_id', $user['user_id']);
+$querypote->bindParam(':send_id', $id);
 $querypote->execute();
 
 $querymessage = $db->prepare('SELECT * FROM messages WHERE (message_sender = :message_sender AND message_receiver = :message_receiver) OR (message_sender = :message_receiver AND message_receiver = :message_sender)');
@@ -42,66 +44,92 @@ if (isset($_POST['messagebox'])) {
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="UTF-8">
-        <link rel="icon" href="../style/favicon.ico" />
-        <link href="../style/style.css" rel="stylesheet">
-        <link href="../style/offre.css" rel="stylesheet">
-        <script src="../script/checkbox.js" type="text/javascript"></script>
-        <link rel="stylesheet" href="../style/jquery-jvectormap-2.0.5.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-        </script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-        </script>
-        <script src="../script/jquery.js"></script>
-        <title>Chat</title>
-    </head>
+<head>
+    <title>Profil de <?php echo $user['pseudo'] ?></title>
 
-    <body>
-        <nav class="navbar navbar-expand-xl navbar-dark"
-            style="background-color: #264653; margin-bottom: 20px; height: 55px;">
-            <a class="logo" href="../index.php">
-                <div><img class="main" src="../style/SmashZone2.png" /><img class="ball"
-                        src="../style/SmashZoneIcon.png" />
-                </div>
-            </a>
-            <button class="navbar-toggler ml-auto" type=" button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span> </button>
-            <div class="collapse navbar-collapse rubriques" id="navbarNav">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item rubriquecolor">
-                        Recherchez :
-                    </li>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='../offres/list_offers.php'" type="button">Partenaires</button>
-                    </form>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
-                    </form>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='../tournois/liste_tournoi.php'" type="button">Tournois</button>
-                    </form>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='../offres/new_offer.php'" type="button">Poster une annonce</button>
-                    </form>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <button class="btn btn-outline-info my-2 my-sm-0"
-                        onclick="location.href='../login_register/login.php'" type="button">Mon compte</button>
-                </form>
+    <!-- Important ! -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../style/favicon.ico" />
+    <meta charset="utf-8">
+    <!-- -->
+
+    <!-- Scripts au chargement de la page -->
+    <script src="../script/checkbox.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+    <link href="../style/style.css" rel="stylesheet">
+    <link href="../style/home.css" rel="stylesheet">
+    <link href="../style/notification.css" rel="stylesheet">
+    <script>
+        var notifs = <?php echo json_encode($all_notifs) ?>
+    </script>
+    <!-- Scripts au chargement de la page -->
+
+</head>
+
+<body onload="loadNotifi(notifs)">
+
+    <!-- Barre de navigation -->
+    <nav class="navbar navbar-expand-xl navbar-dark mb-4" style="background-color: #264653; height: 55px;">
+        <a class="navbar-brand main" href="../index.php">
+            <img class="main" src="../style/SmashZone2.png" /><img class="ball" src="../style/SmashZoneIcon.png" />
+        </a>
+
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03" style="background-color: #264653;">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0 float-right text-right">
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../offres/list_offers.php'"
+                        type="button">Partenaires</button>
+                </li>
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../liste_joueurs.php'"
+                        type="button">Joueurs</button>
+                </li>
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../tournois/liste_tournoi.php'"
+                        type="button">Tournois</button>
+                </li>
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../classement.php'"
+                        type="button">Classement</button>
+                </li>
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../liste_clubs.php'"
+                        type="button">Clubs</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-outline-light" onclick="location.href='../offres/new_offer.php'"
+                        type="button">Poster une annonce</button>
+                </li>
+            </ul>
+
+            <div class="icon" onclick="toggleNotifi()" id="notif"></div>
+            <div class="notifi-box" id="box">
             </div>
-        </nav>
+            <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='../login_register/login.php'"
+                type="button">Mon compte</button>
+
+        </div>
+    </nav>
+    <!-- Fin barre de navigation -->
 
         <div class="container-fluid">
             <div class="row">
@@ -116,9 +144,11 @@ if (isset($_POST['messagebox'])) {
                 ?>
                     <div class="row pl-2">
                         <a class='listepotes text-decoration-none'
-                            href='chat_prive.php?message=<?php echo $row2['3'] ?>'>
+                            href='chat_prive.php?message=<?php if ($row2['3'] == $id) {
+                                echo $row2['0']; 
+                            } else { echo $row2['3']; }?>'>
                             <?php if ($row2['receiver_name'] == $user['pseudo']) { 
-                                echo  $user['pseudo']; } else {
+                                echo  $row2['pseudo']; } else {
                                 echo $row2['receiver_name']; } ?> </a> </div>
                     <?php }
                 } ?>
@@ -132,6 +162,7 @@ if (isset($_POST['messagebox'])) {
                     if ($m['message_sender'] == $id) { ?>
                     <div class="col">
                         <?php
+
                             echo "<p class='messagesender mb-2 mt-2'>" . $contenu . "</p>"; ?>
                     </div>
                     <?php

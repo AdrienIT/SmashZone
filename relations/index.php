@@ -16,13 +16,13 @@ $getusername->bindParam(':user_id', $id);
 $getusername->execute();
 $user = $getusername->fetch();
 
-$queryfriend = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE r.status = "En attente" AND r.receiver_id = :receiver_id');
+$queryfriend = $db->prepare('SELECT r.send_id,u.pseudo,r.request_id FROM relationships r JOIN users u ON u.user_id = r.send_id WHERE r.status = "En attente" AND r.receiver_id = :receiver_id');
 $queryfriend->bindParam(':receiver_id', $user['user_id']);
 $queryfriend->execute();
 
-$querypote = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id,r.receiver_id,receiver_name FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE (r.status = "Ami" AND r.receiver_id = :receiver_id) OR (r.status = "Ami" AND r.sender_id = :sender_id)');
+$querypote = $db->prepare('SELECT r.send_id,u.pseudo,r.request_id,r.receiver_id,receiver_name FROM relationships r JOIN users u ON u.user_id = r.send_id WHERE (r.status = "Ami" AND r.receiver_id = :receiver_id) OR (r.status = "Ami" AND r.send_id = :send_id)');
 $querypote->bindParam(':receiver_id', $user['user_id']);
-$querypote->bindParam(':sender_id', $id);
+$querypote->bindParam(':send_id', $id);
 $querypote->execute();
 
 
@@ -184,7 +184,7 @@ if (isset($_GET['delete'])) {
                                     while ($row2 = $querypote->fetch()) {
                                     ?> <div class="row">
                         <p>
-                            <?php if ($row2['sender_id'] == $id) {
+                            <?php if ($row2['send_id'] == $id) {
                                             echo $row2['receiver_name'];
                                         } else {
                                             echo $row2['pseudo'];
@@ -192,7 +192,7 @@ if (isset($_GET['delete'])) {
 
                             <a name='contact'
                                 href='../relations/chat_prive.php?message=<?php if ($row2['receiver_id'] == $id) {
-                                    echo $row2['sender_id']; } else {
+                                    echo $row2['send_id']; } else {
                                  echo $row2['receiver_id']; }?>' class=' btn btn-success ml-4
                     mr-4'>Contacter</a>
 

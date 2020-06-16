@@ -18,19 +18,19 @@ $query->execute();
 $user = $query->fetch();
 
 
-$checkIfAlreadyFriend = $db->prepare('SELECT sender_id,receiver_id,status FROM relationships WHERE (receiver_id = :receiver_id AND sender_id = :sender_id) AND status = "Ami"');
+$checkIfAlreadyFriend = $db->prepare('SELECT send_id,receiver_id,status FROM relationships WHERE (receiver_id = :receiver_id AND send_id = :send_id) AND status = "Ami"');
 $checkIfAlreadyFriend->bindParam(':receiver_id', $idcontact);
-$checkIfAlreadyFriend->bindParam(':sender_id', $id);
+$checkIfAlreadyFriend->bindParam(':send_id', $id);
 $checkIfAlreadyFriend->execute();
 
-$checkIfAlreadyWaiting = $db->prepare('SELECT sender_id,receiver_id,status FROM relationships WHERE (receiver_id = :receiver_id AND sender_id = :sender_id) AND status = "En attente"');
+$checkIfAlreadyWaiting = $db->prepare('SELECT send_id,receiver_id,status FROM relationships WHERE (receiver_id = :receiver_id AND send_id = :send_id) AND status = "En attente"');
 $checkIfAlreadyWaiting->bindParam(':receiver_id', $idcontact);
-$checkIfAlreadyWaiting->bindParam(':sender_id', $id);
+$checkIfAlreadyWaiting->bindParam(':send_id', $id);
 $checkIfAlreadyWaiting->execute();
 
 if (isset($_POST['demande_ami'])) {
-    $addfriend = $db->prepare('INSERT INTO relationships (sender_id,receiver_id,status,receiver_name) VALUES (:sender_id,:receiver_id,"En attente",:receiver_name)');
-    $addfriend->bindParam(':sender_id', $id);
+    $addfriend = $db->prepare('INSERT INTO relationships (send_id,receiver_id,status,receiver_name) VALUES (:send_id,:receiver_id,"En attente",:receiver_name)');
+    $addfriend->bindParam(':send_id', $id);
     $addfriend->bindParam(':receiver_id', $idcontact);
     $addfriend->bindParam(':receiver_name', $user['pseudo']);
     $addfriend->execute();
@@ -38,9 +38,9 @@ if (isset($_POST['demande_ami'])) {
 }
 
 if (isset($_POST['supprimer_ami'])) {
-    $querydelete = $db->prepare('DELETE FROM relationships WHERE receiver_id = :receiver_id AND sender_id = :sender_id');
+    $querydelete = $db->prepare('DELETE FROM relationships WHERE receiver_id = :receiver_id AND send_id = :send_id');
     $querydelete->bindParam(':receiver_id', $idcontact);
-    $querydelete->bindParam(':sender_id', $id);
+    $querydelete->bindParam(':send_id', $id);
     $querydelete->execute();
     header("Refresh:0");
 }
