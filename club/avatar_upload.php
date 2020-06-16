@@ -11,7 +11,7 @@ $query->bindParam(":id", $id);
 $query->execute();
 $user = $query->fetch();
 
-$nom_club = $user["nom_club"];
+$nom_club = str_replace(" ", "_", $user["nom_club"]);
 
 ?>
 

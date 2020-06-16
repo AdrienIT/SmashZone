@@ -10,6 +10,12 @@ function destroy_notifs() {
 
 }
 
+function ImageExist(url) {
+    var img = new Image();
+    img.src = url;
+    return img.height != 0;
+}
+
 
 function toggleNotifi() {
     if (down) {
@@ -79,10 +85,17 @@ function loadNotifi(notifs) {
 
             for (var i = 0; i < notifs.length; i++) {
 
+                var link = document.createElement("a")
+                link.href = "relations/index.php"
                 var item = document.createElement("div");
                 item.classList.add("notifi-item");
                 var img = document.createElement("img");
-                img.src = "login_register/" + notifs[i]["pseudo"] + "/" + notifs[i]["pseudo"] + ".png";
+                if (ImageExist("login_register/" + notifs[i]["pseudo"] + "/" + notifs[i]["pseudo"] + ".png")) {
+                    img.src = "login_register/" + notifs[i]["pseudo"] + "/" + notifs[i]["pseudo"] + ".png";
+                } else {
+                    img.src = "login_register/default-user.png"
+                }
+
                 var text = document.createElement("div");
                 text.classList.add("contains_text");
                 var notif_title = document.createElement("h4");
@@ -93,7 +106,8 @@ function loadNotifi(notifs) {
                 text.appendChild(desc);
                 item.appendChild(img);
                 item.appendChild(text)
-                box.appendChild(item)
+                link.appendChild(item)
+                box.appendChild(link)
             }
         }
     }
