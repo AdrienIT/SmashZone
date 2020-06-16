@@ -5,6 +5,7 @@ include 'config.php';
 session_start();
 $all_notifs = "none";
 
+
 if (!isset($_SESSION["user_id"])) {
     $connect = "Se connecter/S'inscrire";
 } else {

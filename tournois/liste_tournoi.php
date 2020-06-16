@@ -139,7 +139,7 @@ if (!isset($_SESSION["club_id"])) {
     <div class="filtres-tournoi"></div>
     <div class="liste-tournoi">
         <h1>Calendrier des tournois</h1>
-        <!-- <div class="filter">
+        <div class="filter">
             <button class="btn btn-primary mb-4" onclick="toggleFilters()">Afficher/cacher filtres</button>
             <div class="filter">
                 <form method="post">
@@ -261,7 +261,7 @@ if (!isset($_SESSION["club_id"])) {
                 </form>
                 <button class="btn btn-primary mb-4" onclick="getDepData()">Rechercher</button>
             </div>
-        </div> -->
+        </div>
         <div class="container">
             <div class="card">
                 <h3 class="card-header" id="monthAndYear"></h3>
