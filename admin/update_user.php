@@ -6,78 +6,80 @@ if (!isset($_SESSION["admin_id"])) {
     header('location: index.php');
 }
 
-$id = (int) $_SESSION["admin_id"];
+$idgars = (int) $_SESSION["admin_id"];
+
+$idgars = $_GET['id'];
 
 $query = $db->prepare("SELECT * FROM users WHERE user_id = ? ");
-$query->execute([$id]);
+$query->execute([$idgars]);
 $user = $query->fetch();
 
 $classement = $user['classement'];
 
-if (isset($user["user_id"])) {
+if (isset($idgars["user_id"])) {
     if (isset($_POST['newpseudo']) and !empty($_POST['newpseudo']) and $_POST['newpseudo'] != $user['pseudo']) {
         $newpseudo = htmlspecialchars($_POST['newpseudo']);
         $update_pseudo = $db->prepare("UPDATE users SET pseudo = :pseudo WHERE user_id = :id");
         $update_pseudo->bindParam(":pseudo", $newpseudo);
-        $update_pseudo->bindParam(":id", $id);
+        $update_pseudo->bindParam(":id", $idgars);
         $update_pseudo->execute();
-        header('Location: update_user.php?id=' . $id);
+        header('Location: update_user.php?id=' . $idgars);
     }
     if (isset($_POST['newmail']) and !empty($_POST['newmail']) and $_POST['newmail'] != $user['email']) {
         $new_email = htmlspecialchars($_POST['newmail']);
         $update_email = $db->prepare('UPDATE users SET email = :email WHERE user_id = :id');
         $update_email->bindParam(":email", $new_email);
-        $update_email->bindParam(":id", $id);
+        $update_email->bindParam(":id", $idgars);
         $update_email->execute();
-        header('Location: update_user.php?id=' . $id);
+        header('Location: update_user.php?id=' . $idgars);
     }
     if (isset($_POST['new_prenom']) and !empty($_POST['new_prenom']) and $_POST['new_prenom'] != $user['prenom']) {
         $new_prenom = htmlspecialchars($_POST['new_prenom']);
         $update_prenom = $db->prepare('UPDATE users SET prenom = :prenom WHERE user_id = :id');
         $update_prenom->bindParam(":prenom", $new_prenom);
-        $update_prenom->bindParam(":id", $id);
+        $update_prenom->bindParam(":id", $idgars);
         $update_prenom->execute();
-        header('Location: update_user.php?id=' . $id);
+        header('Location: update_user.php?id=' . $idgars);
     }
     if (isset($_POST['new_nom']) and !empty($_POST['new_nom']) and $_POST['new_nom'] != $user['nom']) {
         $nom = htmlspecialchars($_POST['new_nom']);
         $update_nom = $db->prepare('UPDATE users SET nom = :nom WHERE user_id = :id');
         $update_nom->bindParam(":nom", $nom);
-        $update_nom->bindParam(":id", $id);
+        $update_nom->bindParam(":id", $idgars);
         $update_nom->execute();
-        header('Location: update_user.php?id=' . $id);
+        header('Location: update_user.php?id=' . $idgars);
     }
     if (isset($_POST['new_ville']) and !empty($_POST['new_ville']) and $_POST['new_ville'] != $user['ville']) {
         $ville = htmlspecialchars($_POST['new_ville']);
         $update_ville = $db->prepare('UPDATE users SET ville = :ville WHERE user_id = :id');
         $update_ville->bindParam(":ville", $ville);
-        $update_ville->bindParam(":id", $id);
+        $update_ville->bindParam(":id", $idgars);
         $update_ville->execute();
-        header('Location: update_user.php?id=' . $id);
+        header('Location: update_user.php?id=' . $idgars);
     }
     if (isset($_POST['classement']) and !empty($_POST['classement']) and $_POST['classement'] != $user['classement']) {
         $new_classement = htmlspecialchars($_POST['classement']);
         $update_classement = $db->prepare('UPDATE users SET classement = :classement WHERE user_id = :id');
         $update_classement->bindParam(":classement", $new_classement);
-        $update_classement->bindParam(":id", $id);
+        $update_classement->bindParam(":id", $idgars);
         $update_classement->execute();
-        header('Location: update.php?id=' . $id);
+        header('Location: update.php?id=' . $idgars);
     }
     if (isset($_POST['new_postal_code']) and !empty($_POST['new_postal_code']) and $_POST['new_postal_code'] != $user['postal_code']) {
         $ville = htmlspecialchars($_POST['new_postal_code']);
         $update_postal_code = $db->prepare('UPDATE users SET postal_code = :postal_code WHERE user_id = :id');
         $update_postal_code->bindParam(":postal_code", $postal_code);
-        $update_postal_code->bindParam(":id", $id);
+        $update_postal_code->bindParam(":id", $idgars);
         $update_postal_code->execute();
-        header('Location: update_user.php?id=' . $id);
+        header('Location: update_user.php?id=' . $idgars);
     }
     if (isset($_POST['new_telephone']) and !empty($_POST['new_telephone']) and $_POST['new_telephone'] != $user['telephone']) {
         $telephone = htmlspecialchars($_POST['new_telephone']);
         $update_telephone = $db->prepare('UPDATE users SET telephone = :telephone WHERE user_id = :id');
         $update_telephone->bindParam(":telephone", $telephone);
-        $update_telephone->bindParam(":id", $id);
+        $update_telephone->bindParam(":id", $idgars);
         $update_telephone->execute();
-        header('Location: update_user.php?id=' . $id);
+        header('Location: update_user.php?id=' . $idgars);
     }
     if (isset($_POST['newpasswd1']) and !empty($_POST['newpasswd1']) and isset($_POST['newpasswd2']) and !empty($_POST['newpasswd2'])) {
         $passwd1 = md5($_POST['newpasswd1']);
@@ -85,9 +87,9 @@ if (isset($user["user_id"])) {
         if ($passwd1  == $passwd2) {
             $update_password = $db->prepare('UPDATE users SET password = :password WHERE user_id = :id');
             $update_password->bindParam(":password", $passwd1);
-            $update_password->bindParam(":id", $id);
+            $update_password->bindParam(":id", $idgars);
             $update_password->execute();
-            header('Location: update_user.php?id=' . $id);
+            header('Location: update_user.php?id=' . $idgars);
         } else {
             $err_passwd = "Les mdp ne correspondent pas";
             echo $err_passwd;
@@ -100,62 +102,90 @@ if (isset($user["user_id"])) {
 <!DOCTYPE html>
 <html lang="fr">
 
-    <head>
-        <meta charset="UTF-8">
-        <link rel="icon" href="../style/favicon.ico" />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-        </script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-        </script>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="../style/style.css" rel="stylesheet">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Edition de profil</title>
-    </head>
+<head>
+    <title>Profil de <?php echo $user['pseudo'] ?></title>
 
-    <body>
-        <nav class="navbar navbar-expand-xl navbar-dark"
-            style="background-color: #264653; margin-bottom: 20px; height: 55px;">
-            <a class="logo" href="../index.php">
-                <div><img class="main" src="../style/SmashZone2.png" /><img class="ball"
-                        src="../style/SmashZoneIcon.png" />
-                </div>
-            </a>
-            <button class="navbar-toggler ml-auto" type=" button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span> </button>
-            <div class="collapse navbar-collapse rubriques" id="navbarNav">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item rubriquecolor">
-                        Recherchez :
-                    </li>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='../offres/list_offers.php'" type="button">Partenaires</button>
-                    </form>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
-                    </form>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='recherchejouer.php'" type="button">Tournois</button>
-                    </form>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='../offres/new_offer.php'" type="button">Poster une annonce</button>
-                    </form>
-                </ul>
+    <!-- Important ! -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../style/favicon.ico" />
+    <meta charset="utf-8">
+    <!-- -->
+
+    <!-- Scripts au chargement de la page -->
+    <script src="../script/checkbox.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+    <link href="../style/style.css" rel="stylesheet">
+    <link href="../style/home.css" rel="stylesheet">
+    <link href="../style/notification.css" rel="stylesheet">
+    <script>
+        var notifs = <?php echo json_encode($all_notifs) ?>
+    </script>
+    <!-- Scripts au chargement de la page -->
+
+</head>
+
+<body onload="loadNotifi(notifs)">
+
+    <!-- Barre de navigation -->
+    <nav class="navbar navbar-expand-xl navbar-dark mb-4" style="background-color: #264653; height: 55px;">
+        <a class="navbar-brand main" href="../index.php">
+            <img class="main" src="../style/SmashZone2.png" /><img class="ball" src="../style/SmashZoneIcon.png" />
+        </a>
+
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03" style="background-color: #264653;">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0 float-right text-right">
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../offres/list_offers.php'"
+                        type="button">Partenaires</button>
+                </li>
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../liste_joueurs.php'"
+                        type="button">Joueurs</button>
+                </li>
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../tournois/liste_tournoi.php'"
+                        type="button">Tournois</button>
+                </li>
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../classement.php'"
+                        type="button">Classement</button>
+                </li>
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../liste_clubs.php'"
+                        type="button">Clubs</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-outline-light" onclick="location.href='../offres/new_offer.php'"
+                        type="button">Poster une annonce</button>
+                </li>
+            </ul>
+
+            <div class="icon" onclick="toggleNotifi()" id="notif"></div>
+            <div class="notifi-box" id="box">
             </div>
-        </nav>
+
+        </div>
+    </nav>
+    <!-- Fin barre de navigation -->
 
         <main>
             <div class="container">

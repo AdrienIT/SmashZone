@@ -151,7 +151,7 @@ if (isset($_POST['recherche'])) {
                     </tr>
                     <?php } else {
                         while ($u = $users->fetch()) { ?>
-                    <tr>
+                    <tr class="text-center">
                         <td><?= $u['pseudo'] ?></td>
                         <td><?= $u['nom'] ?></td>
                         <td><?= $u['prenom'] ?></td>
