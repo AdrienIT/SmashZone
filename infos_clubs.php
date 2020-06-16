@@ -2,23 +2,11 @@
 include_once "config.php";
 session_start();
 
-if (!isset($_SESSION["user_id"])) {
+if (!isset($_SESSION["user_id"]) && (!isset($_SESSION["admin_id"]) && (!isset($_SESSION["club_id"])))) {
     $connect = "Se connecter/S'inscrire";
 } else {
     $connect = "Mon compte";
     $id = (int) $_SESSION["user_id"];
-}
-
-if (!isset($_SESSION["admin_id"])) {
-    $connect = "Se connecter/S'inscrire";
-} else {
-    $connect = "Mon compte";
-}
-
-if (!isset($_SESSION["club_id"])) {
-    $connect = "Se connecter/S'inscrire";
-} else {
-    $connect = "Mon compte";
 }
 
 $idcontact = $_GET['contact'];
@@ -121,29 +109,29 @@ $user = $query->fetch();
                 <h3 class="text-left"><?php echo $user['nom_club'] ?></h3>
                 <hr>
                 <div class="d-flex">
-                    <i class="material-icons md-dark mr-2">mail</i>
-                    <p>Adresse E-mail</p>
+                    <i class="material-icons md-dark mr-2 text-dark">mail</i>
+                    <p class="infosjoueurs">Adresse E-mail</p>
                     <p class="ml-auto"><?php echo $user['email'] ?></p>
                 </div>
 
                 <div class="d-flex">
-                    <i class="material-icons md-dark mr-2">location_city</i>
-                    <p>Ville</p>
+                    <i class="material-icons md-dark mr-2 text-dark">location_city</i>
+                    <p class="infosjoueurs">Ville</p>
                     <p class="ml-auto"><?php echo $user['ville'] ?></p>
                 </div>
                 <div class="d-flex">
-                    <i class="material-icons md-dark mr-2">location_city</i>
-                    <p>Adresse</p>
+                    <i class="material-icons md-dark mr-2 text-dark">location_city</i>
+                    <p class="infosjoueurs">Adresse</p>
                     <p class="ml-auto"><?php echo $user['adresse'] ?></p>
                 </div>
                 <div class="d-flex">
-                    <i class="material-icons md-dark mr-2">money</i>
-                    <p>Code postal</p>
+                    <i class="material-icons md-dark mr-2 text-dark">money</i>
+                    <p class="infosjoueurs">Code postal</p>
                     <p class="ml-auto"><?php echo $user['postal_code'] ?></p>
                 </div>
                 <div class="d-flex">
-                    <i class="material-icons md-dark mr-2">phone</i>
-                    <p>Téléphone</p>
+                    <i class="material-icons md-dark mr-2 text-dark">phone</i>
+                    <p class="infosjoueurs">Téléphone</p>
                     <p class="ml-auto"><?php if ($user['telephone'] == 0) {
                                             echo "Non renseigné";
                                         } else {

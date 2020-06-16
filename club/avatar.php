@@ -9,24 +9,51 @@ if (!isset($_SESSION["club_id"])) {
 <!DOCTYPE html>
 <html lang="fr">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="../style/favicon.ico" />
-        <title>Avatar</title>
-    </head>
+<head>
+    <link rel="icon" href="../style/favicon.ico" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../style/style.css" rel="stylesheet">
+    <title>Changer la photo de club</title>
+</head>
 
     <body>
-        <form action='avatar_upload.php' method='POST' enctype='multipart/form-data'>
-            <p>Choisis ton image de profil (que du png)</p>
-            <input type='file' name='file' id='file'>
-            <input type='submit' name='submit' value='Upload'>
-        </form>
-        <br>
-        <a href="delete_avatar.php">Supprime ton Image de profil</a>
-        <br>
-        <br>
-        <a href="home.php">Retour</a>
-    </body>
+    <nav class="navbar navbar-expand-xl navbar-dark" style="background-color: #264653; margin-bottom: 20px; height: 55px;">
+        <a class="logo" href="../index.php">
+            <div><img class="main" src="../style/SmashZone2.png" /><img class="ball" src="../style/SmashZoneIcon.png" />
+            </div>
+        </a>
+        <button class="navbar-toggler ml-auto" type=" button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse rubriques" id="navbarNav">
+        </div>
+    </nav>
 
+    <main>
+            <div class="container">
+                <div class="d-flex justify-content-center">
+                    <div class="col-xl text-center">
+                        <h1 class="mb-4">Changer la photo de club</h1>
+                        <form action='avatar_upload.php' method='POST' enctype='multipart/form-data'>
+                            <p>Choisissez l'image de profil (format PNG uniquement pour le moment)</p>
+                            <input type='file' name='file' id='file'>
+                            <input class="btn btn-light" type='submit' name='submit' value='Envoyer'>
+                        </form>
+                        <br>
+                        <a href="delete_avatar.php">Supprimer l'image de profil</a>
+                        <br>
+                        <br>
+                        <a href="home.php">Retour</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
 </html>

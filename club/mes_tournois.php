@@ -80,56 +80,25 @@ $u = $query->fetchAll();
         </div>
     </nav>
     <!-- Fin barre de navigation -->
-
-    <h1 class="mb-4 font-weight-bold">Classement des joueurs</h1>
-        <table class="table">
-            <thead class="thead-dark text-center">
-                <tr class="joueurborder">
-                    <td>Nom du tournoi</td>
-                    <td>Gagnant ?</td>
-                </tr>
-            <tbody>
-                <?php if (isset($_POST['recherche'])) {
-                    while ($qs = $querysearch->fetch()) { ?>
-                <tr>
-                    <td><?=$u['pseudo']?></td>
-                    <td><?=$u['classement']?></td>
-                    <td><?=$u['victoire']?></td>
-                    <td class="text-center">
-                        <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $qs['user_id'] ?>'
-                            class=' btn btn-primary'>Voir le profil</a> </td> <?php } ?>
-
-                </tr>
-                <?php } else { ?>
-            </tbody>
-            <?php foreach($fetch_liste as $u) { ?>
-            <tr class="text-center">
-                <td><?=$u['pseudo']?></td>
-                <td><?=$u['classement']?></td>
-                <td><?=$u['victoire']?></td>
-                <td class="text-center">
-                            <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $u['user_id'] ?>'
-                                class=' btn btn-primary'>Voir le profil</a> </td>
-            </tr>
-            <?php } }?>
-        </table>
-
-    <table>
-        <tr>
+<h1 class="mb-4 font-weight-bold">Liste des tournois</h1>
+<table class="table">
+    <thead class="thead-dark text-center">
+        <tr class="joueurborder">
             <td>Nom du tournoi</td>
+            <td>Date de début</td>
+            <td>Date de fin</td>
             <td>Gagnant ?</td>
         </tr>
+    <tr>
         <?php foreach ($u as $tournois) { ?>
-            <tr>
-
-                <td><?= $tournois['nom_tournoi'] ?></td>
-                <td><?= $tournois['date_debut'] ?></td>
-                <td><?= $tournois['date_fin'] ?></td>
-                <td> <a href="choix_gagnant.php?tournoi_id=<?php echo $tournois['tournoi_id'] ?>">Choisir un gagnant</a> </td>
-
-            </tr>
-        <?php } ?>
-    </table>
+        <td><?= $tournois['nom_tournoi'] ?></td>
+        <td><?= $tournois['date_debut'] ?></td>
+        <td><?= $tournois['date_fin'] ?></td>
+        <td> <a class="btn btn-primary" href="choix_gagnant.php?tournoi_id=<?php echo $tournois['tournoi_id'] ?>">Choisir un gagnant</a> </td>
+    </tr>
+    <?php } ?>
+        </tbody>
+</table>
 </body>
 
 </html>
