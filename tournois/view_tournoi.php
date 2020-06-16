@@ -155,9 +155,9 @@ if (file_exists(str_replace(" ", "_", "../club/" . $tournoi_infos['nom_club'])))
                 <p class="infosjoueurs">E-mail</p>
                 <p class="ml-auto"><?= $tournoi_infos["email"] ?></p>
             </div>
-            <a class="btn btn-primary text-light"> S'inscrire </a>
+            <a class="btn btn-primary text-light" href="inscription_tournoi.php?id=<?= $tournoi_id ?>"> S'inscrire </a>
         </div>
     </div>
-    </body>
+</body>
 
-    </html>
+</html>

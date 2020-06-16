@@ -74,41 +74,13 @@ if (isset($_POST["submit"])) {
 
     <!-- Barre de navigation -->
     <nav class="navbar navbar-expand-xl navbar-dark mb-4" style="background-color: #264653; height: 55px;">
-        <a class="navbar-brand main" href="../index.php">
+        <a class="navbar-brand main" href="../club/home.php">
             <img class="main" src="../style/SmashZone2.png" /><img class="ball" src="../style/SmashZoneIcon.png" />
         </a>
 
         <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03" style="background-color: #264653;">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0 float-right text-right">
-                <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='../offres/list_offers.php'" type="button">Partenaires</button>
-                </li>
-                <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
-                </li>
-                <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='../tournois/liste_tournoi.php'" type="button">Tournois</button>
-                </li>
-                <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='../classement.php'" type="button">Classement</button>
-                </li>
-                <li class="nav-item mr-2">
-                    <button class="btn btn-outline-warning" onclick="location.href='../liste_clubs.php'" type="button">Clubs</button>
-                </li>
-                <li class="nav-item">
-                    <button class="btn btn-outline-light" onclick="location.href='../offres/new_offer.php'" type="button">Poster une annonce</button>
-                </li>
-            </ul>
-
-            <div class="icon" onclick="toggleNotifi()" id="notif"></div>
-            <div class="notifi-box" id="box">
-            </div>
-            <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='../club/home.php'" type="button">Mon club</button>
-        </div>
     </nav>
     <!-- Fin barre de navigation -->
 

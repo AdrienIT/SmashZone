@@ -41,7 +41,7 @@ if (file_exists(str_replace(" ", "_", $user['nom_club']))) {
 
 <body>
     <nav class="navbar navbar-expand-xl navbar-dark" style="background-color: #264653; margin-bottom: 20px; height: 55px;">
-        <a class="logo" href="../index.php">
+        <a class="logo" href="home.php">
             <div><img class="main" src="../style/SmashZone2.png" /><img class="ball" src="../style/SmashZoneIcon.png" />
             </div>
         </a>
@@ -62,7 +62,7 @@ if (file_exists(str_replace(" ", "_", $user['nom_club']))) {
                 </div>
             </div>
             <div class="col-sm-6">
-                <h1 class="text-left"> <?php echo $user['nom_club']?></h1>
+                <h1 class="text-left"> <?php echo $user['nom_club'] ?></h1>
                 <hr>
                 <div class="d-flex">
                     <i class="material-icons md-dark mr-2 text-dark">mail</i>
@@ -92,11 +92,14 @@ if (file_exists(str_replace(" ", "_", $user['nom_club']))) {
                 </div>
             </div>
             <div class="col-sm-4">
+                <button type="button" onclick="location.href='../tournois/new_tournoi.php'" class="btn btn-success col-xl-6 mx-auto justify-content-center mb-2">Créer un nouveau Tournoi</button>
+                <br>
+                <br>
                 <button type="button" onclick="location.href='update.php'" class="btn btn-light col-xl-6 mx-auto justify-content-center mb-2">Editer le club</button>
                 <button type="button" onclick="location.href='mes_tournois.php'" class="btn btn-primary col-xl-6 mx-auto justify-content-center mb-2">Mes tournois</button>
                 <button type="button" onclick="location.href='logout.php'" class="btn btn-danger col-xl-6 mx-auto justify-content-center">Se déconnecter</button>
             </div>
         </div>
-    </body>
+</body>
 
 </html>
