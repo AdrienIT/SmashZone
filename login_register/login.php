@@ -1,8 +1,17 @@
 <?php
 include_once '../config.php';
 session_start();
+
 if (isset($_SESSION["user_id"])) {
     header('location: home.php');
+}
+
+if (isset($_SESSION["admin_id"])) {
+    header('location: ../admin/home.php');
+}
+
+if (isset($_SESSION["club_id"])) {
+    header('location: ../club/home.php');
 }
 
 if (isset($_POST["submit"])) {

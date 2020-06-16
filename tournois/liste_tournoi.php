@@ -27,6 +27,7 @@ if (isset($_POST["submit"])) {
     $liste_tournois = $query->fetchAll();
 }
 $all_notifs = "none";
+
 if (!isset($_SESSION["user_id"])) {
     $connect = "Se connecter/S'inscrire";
 } else {
@@ -35,6 +36,18 @@ if (!isset($_SESSION["user_id"])) {
     $query->bindParam(":id", $_SESSION["user_id"]);
     $query->execute();
     $all_notifs = $query->fetchAll();
+}
+
+if (!isset($_SESSION["admin_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
+
+if (!isset($_SESSION["club_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
 }
 ?>
 <html>

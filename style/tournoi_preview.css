@@ -28,8 +28,38 @@ a:hover+.preview {
 }
 
 @media (max-width: 500px) {
+    body {
+        overflow: hidden;
+      }
     nav {
         visibility: hidden;
         margin-top: -55px;
+    }
+    .aretrecir {
+        font-size: 15px;
+    }
+    .infosjoueurs {
+        font-size: 15px;
+    }
+    .imgdeprofil {
+        overflow:hidden;
+        -webkit-border-radius:50px; 
+        -moz-border-radius:50px;
+        border-radius:50px; 
+        height:45px; 
+        width:45px;
+    }
+    h1 {
+        margin-top: 10px;
+        font-size: 15px;
+    }
+    .relever {
+        margin-top: -10px;
+    }
+    .iconecache {
+        visibility: hidden;
+    }
+    .iconeretreci {
+        font-size: 1px;
     }
 }

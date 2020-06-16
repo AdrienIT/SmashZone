@@ -13,6 +13,18 @@ if (!isset($_SESSION["user_id"])) {
     $connect = "Mon compte";
 }
 
+if (!isset($_SESSION["admin_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
+
+if (!isset($_SESSION["club_id"])) {
+    $connect = "Se connecter/S'inscrire";
+} else {
+    $connect = "Mon compte";
+}
+
 if (isset($_POST["submit"])) {
     $dispo = "";
     foreach ($_POST as $key => $val) {
