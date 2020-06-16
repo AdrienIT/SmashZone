@@ -43,7 +43,7 @@ if (isset($_POST['messagebox'])) {
 <html>
 
 <head>
-    <title>Profil de <?php echo $user['pseudo'] ?></title>
+    <title>Discussions</title>
 
     <!-- Important ! -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -157,11 +157,13 @@ if (isset($_POST['messagebox'])) {
                     <hr>
                     <?php foreach ($fetchmessage as $m) {
                     $contenu = $m['content'];
+                    $date = strtotime($m['message_time']);
                     if ($m['message_sender'] == $id) { ?>
                     <div class="col">
                         <?php
 
-                            echo "<p class='messagesender mb-2 mt-2'>" . $contenu . "</p>"; ?>
+                            echo "<p class='messagesender mb-2 mt-2'>" . $contenu . "</p>";
+                            echo "<p class='small'>" . date('d/m H:i', $date) . "</p>"; ?>
                     </div>
                     <?php
                     } else { ?>
