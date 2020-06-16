@@ -6,7 +6,7 @@ if (!isset($_SESSION["admin_id"])) {
     header('location: index.php');
 }
 
-$id = (int) $_SESSION["admin_id"];
+$id = $_GET['id'];
 
 $query = $db->prepare("SELECT * FROM clubs WHERE club_id = ? ");
 $query->execute([$id]);
