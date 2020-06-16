@@ -55,69 +55,96 @@ if (isset($_GET['delete'])) {
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <title>SmashZone</title>
-        <link rel="icon" href="../style/favicon.ico" />
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-        </script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-        </script>
-        <link href="../style/style.css" rel="stylesheet">
-    </head>
+<head>
+    <title>Profil de <?php echo $user['pseudo'] ?></title>
 
-    <body>
-        <nav class="navbar navbar-expand-xl navbar-dark"
-            style="background-color: #264653; margin-bottom: 20px; height: 55px;">
-            <a class="logo" href="../index.php">
-                <div><img class="main" src="../style/SmashZone2.png" /><img class="ball"
-                        src="../style/SmashZoneIcon.png" />
-                </div>
-            </a>
-            <button class="navbar-toggler ml-auto" type=" button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span> </button>
-            <div class="collapse navbar-collapse rubriques" id="navbarNav">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item rubriquecolor">
-                        Recherchez :
-                    </li>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='../offres/list_offers.php'" type="button">Partenaires</button>
-                    </form>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
-                    </form>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='recherchejouer.php'" type="button">Tournois</button>
-                    </form>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch"
-                            onclick="location.href='../offres/new_offer.php'" type="button">Poster une annonce</button>
-                    </form>
-                </ul>
-                <form class="nav-item">
-                    <button class="btn btn-outline-info my-2 my-sm-0"
-                        onclick="location.href='../login_register/home.php'" type="button">Retour au compte</button>
-                </form>
+    <!-- Important ! -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../style/favicon.ico" />
+    <meta charset="utf-8">
+    <!-- -->
+
+    <!-- Scripts au chargement de la page -->
+    <script src="../script/checkbox.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+    <link href="../style/style.css" rel="stylesheet">
+    <link href="../style/home.css" rel="stylesheet">
+    <link href="../style/notification.css" rel="stylesheet">
+    <script>
+        var notifs = <?php echo json_encode($all_notifs) ?>
+    </script>
+    <!-- Scripts au chargement de la page -->
+
+</head>
+
+<body onload="loadNotifi(notifs)">
+
+    <!-- Barre de navigation -->
+    <nav class="navbar navbar-expand-xl navbar-dark mb-4" style="background-color: #264653; height: 55px;">
+        <a class="navbar-brand main" href="../index.php">
+            <img class="main" src="../style/SmashZone2.png" /><img class="ball" src="../style/SmashZoneIcon.png" />
+        </a>
+
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03" style="background-color: #264653;">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0 float-right text-right">
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../offres/list_offers.php'"
+                        type="button">Partenaires</button>
+                </li>
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../liste_joueurs.php'"
+                        type="button">Joueurs</button>
+                </li>
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../tournois/liste_tournoi.php'"
+                        type="button">Tournois</button>
+                </li>
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../classement.php'"
+                        type="button">Classement</button>
+                </li>
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../liste_clubs.php'"
+                        type="button">Clubs</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-outline-light" onclick="location.href='../offres/new_offer.php'"
+                        type="button">Poster une annonce</button>
+                </li>
+            </ul>
+
+            <div class="icon" onclick="toggleNotifi()" id="notif"></div>
+            <div class="notifi-box" id="box">
             </div>
-        </nav>
+
+        </div>
+    </nav>
+    <!-- Fin barre de navigation -->
 
         <div class="container">
-            <h1> <img src=<?php echo "./" . $user['prenom'] . "/" . $user['prenom'] . ".png" ?>
-                    style="overflow:hidden; -webkit-border-radius:50px; -moz-border-radius:50px; border-radius:50px; height:90px; width:90px">
+            <a href="../login_register/home.php" class="text-decoration-none text-dark">
+            <h1> <img src=<?php echo "../login_register/" . $user['pseudo'] . "/" . $user['pseudo'] . ".png" ?> style="overflow:hidden; -webkit-border-radius:50px; -moz-border-radius:50px; border-radius:50px; height:90px; width:90px">
                 <?php echo $user['prenom'] . " " . $user['nom'] ?></h1>
+</a>
             <div class="row justify-content-center mb-4">
                 <div class="col-auto text-center">
                     <p>Demandes d'amis</p>
@@ -164,7 +191,9 @@ if (isset($_GET['delete'])) {
                                         } ?>
 
                             <a name='contact'
-                                href='../relations/chat_prive.php?message=<?php echo $row2['receiver_id'] ?>' class=' btn btn-success ml-4
+                                href='../relations/chat_prive.php?message=<?php if ($row2['receiver_id'] == $id) {
+                                    echo $row2['sender_id']; } else {
+                                 echo $row2['receiver_id']; }?>' class=' btn btn-success ml-4
                     mr-4'>Contacter</a>
 
                             <div class="dropdown">
@@ -183,6 +212,7 @@ if (isset($_GET['delete'])) {
                 </div>
             </div>
         </div>
+        <script src="../script/notification2.js"></script>
     </body>
 
 </html>

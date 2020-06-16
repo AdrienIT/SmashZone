@@ -12,10 +12,14 @@ $id = (int) $_SESSION["user_id"];
 
 $idmessage = $_GET['message'];
 
+$query = $db->prepare('SELECT prenom,nom,pseudo,email,ville,postal_code,date_creation,telephone,date_naissance,classement FROM users WHERE user_id = :user_id');
+$query->bindParam(':user_id', $id);
+$query->execute();
+$user = $query->fetch();
 
 $querypote = $db->prepare('SELECT r.sender_id,u.pseudo,r.request_id,r.receiver_id,receiver_name FROM relationships r JOIN users u ON u.user_id = r.sender_id WHERE (r.status = "Ami" AND r.receiver_id = :receiver_id) OR (r.status = "Ami" AND r.sender_id = :sender_id)');
-$querypote->bindParam(':receiver_id', $user['user_id']);
-$querypote->bindParam(':sender_id', $id);
+$querypote->bindParam(':sender_id', $user['user_id']);
+$querypote->bindParam(':receiver_id', $id);
 $querypote->execute();
 
 $querymessage = $db->prepare('SELECT * FROM messages WHERE (message_sender = :message_sender AND message_receiver = :message_receiver) OR (message_sender = :message_receiver AND message_receiver = :message_sender)');
@@ -106,14 +110,16 @@ if (isset($_POST['messagebox'])) {
                     <hr>
                     <?php
                 if ($querypote->rowCount() == 0) {
-                    echo "Vous n'avez pas d'ami, pleurez";
+                    echo "Vous n'avez pas de discussion active, pleurez";
                 } else {
                     while ($row2 = $querypote->fetch()) {
                 ?>
                     <div class="row pl-2">
                         <a class='listepotes text-decoration-none'
                             href='chat_prive.php?message=<?php echo $row2['3'] ?>'>
-                            <?php echo $row2['receiver_name'] ?> </a> </div>
+                            <?php if ($row2['receiver_name'] == $user['pseudo']) { 
+                                echo  $user['pseudo']; } else {
+                                echo $row2['receiver_name']; } ?> </a> </div>
                     <?php }
                 } ?>
                 </div>
@@ -143,13 +149,7 @@ if (isset($_POST['messagebox'])) {
                         avec
                         qui que ce soit.</small>
                 </div>
-
-                <div class="col-2">
-                    <p>Match</p>
-                    <hr>
-                </div>
             </div>
         </div>
-        </div>
-        </div>
+        <script src="../script/notification2.js"></script>
     </body>

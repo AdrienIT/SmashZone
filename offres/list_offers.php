@@ -70,76 +70,97 @@ if (isset($_POST["submit"])) {
 <html>
 
 <head>
-    <meta charset="UTF-8">
+    <title>Offres de partenaires</title>
+
+    <!-- Important ! -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../style/favicon.ico" />
-    <link href="../style/style.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <!-- -->
+
+    <!-- Scripts au chargement de la page -->
     <link href="../style/offre.css" rel="stylesheet">
     <script src="../script/checkbox.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../style/jquery-jvectormap-2.0.5.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
     <script src="../script/jquery.js"></script>
     <script src="../script/jquery-jvectormap-2.0.5.min.js"></script>
     <script src="../script/map_fr.js"></script>
     <script src="../script/dep_fr.js"></script>
-    <title>Liste des offres</title>
+
     <link href="../style/style.css" rel="stylesheet">
     <link href="../style/home.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link href="../style/notification.css" rel="stylesheet">
-    <link rel="stylesheet" href="../style/calendar.css">
-    <link rel="stylesheet" href="../style/tournoi_preview.css">
+    <script>
+        var notifs = <?php echo json_encode($all_notifs) ?>
+    </script>
+    <!-- Scripts au chargement de la page -->
+
 </head>
-<script>
-    var notifs = <?php echo json_encode($all_notifs) ?>
-</script>
 
 <body onload="loadNotifi(notifs)">
-    <nav class="navbar navbar-expand-xl navbar-dark" style="background-color: #264653; margin-bottom: 0px; height: 55px;">
-        <a class="logo" href="../index.php">
-            <div><img class="main" src="../style/SmashZone2.png" /><img class="ball" src="../style/SmashZoneIcon.png" />
-            </div>
+
+    <!-- Barre de navigation -->
+    <nav class="navbar navbar-expand-xl navbar-dark mb-4" style="background-color: #264653; height: 55px;">
+        <a class="navbar-brand main" href="../index.php">
+            <img class="main" src="../style/SmashZone2.png" /><img class="ball" src="../style/SmashZoneIcon.png" />
         </a>
-        <button class="navbar-toggler ml-auto" type=" button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span> </button>
-        <div class="collapse navbar-collapse rubriques" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item rubriquecolor">
-                    Recherchez :
+
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03" style="background-color: #264653;">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0 float-right text-right">
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../offres/list_offers.php'"
+                        type="button">Partenaires</button>
                 </li>
-                <form class="nav-item">
-                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../offres/list_offers.php'" type="button">Partenaires</button>
-                </form>
-                <form class="nav-item">
-                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../liste_joueurs.php'" type="button">Joueurs</button>
-                </form>
-                <form class="nav-item">
-                    <button class="btn btn-outline-warning my-2 my-sm-0 rubriquesearch" onclick="location.href='../tournois/liste_tournoi.php'" type="button">Tournois</button>
-                </form>
-                <form class="nav-item">
-                    <button class="btn btn-outline-light my-2 my-sm-0 rubriquesearch" onclick="location.href='../offres/new_offer.php'" type="button">Poster une annonce</button>
-                </form>
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../liste_joueurs.php'"
+                        type="button">Joueurs</button>
+                </li>
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../tournois/liste_tournoi.php'"
+                        type="button">Tournois</button>
+                </li>
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../classement.php'"
+                        type="button">Classement</button>
+                </li>
+                <li class="nav-item mr-2">
+                    <button class="btn btn-outline-warning" onclick="location.href='../liste_clubs.php'"
+                        type="button">Clubs</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-outline-light" onclick="location.href='../offres/new_offer.php'"
+                        type="button">Poster une annonce</button>
+                </li>
             </ul>
-            <div class="icon" onclick="toggleNotifi()" id="notif">
 
-            </div>
+            <div class="icon" onclick="toggleNotifi()" id="notif"></div>
             <div class="notifi-box" id="box">
-
             </div>
-
-        </div>
-        <form class="nav-item">
-            <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='../login_register/login.php'" type="button"><?= $connect ?></button>
-        </form>
+            <button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='../login_register/login.php'"
+                type="button"><?= $connect ?></button>
         </div>
     </nav>
+    <!-- Fin barre de navigation -->
 
     <div class="container">
         <h1>Recherche des offres de partenaires</h1>
@@ -435,7 +456,7 @@ if (isset($_POST["submit"])) {
                     <div class="card shadow offre text-center">
                         <h3><?= $nom ?> </h3>
                         <h3><?= $prenom ?> </h3>
-                        <p><?= $age . " ans - " ?> <i class="material-icons md-dark">sports_tennis</i>
+                        <p><?= $age . " ans - " ?> <i class="material-icons text-dark mx-0">sports_tennis</i>
                             <?php if ($offre['classement'] == 0) {
                                 echo "NC";
                             } else {
@@ -481,7 +502,11 @@ if (isset($_POST["submit"])) {
                 </div>
         </div>
     </div>
-    <script src="../script/notification2.js"></script>
+
+        <!-- Script à charger à la fin uniquement -->
+        <script src="../script/notification.js"></script>
+        <!-- -->
+
 </body>
 
 </html>
