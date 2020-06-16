@@ -11,10 +11,19 @@ if (!isset($_SESSION["user_id"])) {
     $query = $db->prepare("SELECT n.*, u.pseudo FROM notifications n INNER JOIN users u ON (n.id_link = u.user_id) WHERE n.vu = 0 ORDER BY n.date ASC");
     $query->execute();
     $all_notifs = $query->fetchAll();
-} 
+}
 
-$query_classement = $db->prepare('SELECT user_id, pseudo, classement, victoire FROM users ORDER BY victoire DESC');
-$query_classement->execute();
+
+if (isset($_GET["order"]) && $_GET["order"] == "name") {
+    $query_classement = $db->prepare('SELECT user_id, pseudo, classement, victoire FROM users ORDER BY pseudo ASC');
+    $query_classement->execute();
+} else if (isset($_GET["order"]) && $_GET["order"] == "classement") {
+    $query_classement = $db->prepare('SELECT user_id, pseudo, classement, victoire FROM users ORDER BY classement ASC');
+    $query_classement->execute();
+} else {
+    $query_classement = $db->prepare('SELECT user_id, pseudo, classement, victoire FROM users ORDER BY victoire DESC');
+    $query_classement->execute();
+}
 
 
 $fetch_liste = $query_classement->fetchAll();
@@ -32,6 +41,7 @@ if (isset($_POST['recherche'])) {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <title>SmashZone</title>
 
@@ -114,39 +124,38 @@ if (isset($_POST['recherche'])) {
         <table class="table">
             <thead class="thead-dark text-center">
                 <tr class="joueurborder">
-                    <td>Pseudo</td>
-                    <td>Classement</td>
-                    <td>Victoires</td>
+                    <td>Pseudo <a href="classement.php?order=name">↓</a></td>
+                    <td>Classement <a href="classement.php?order=classement">↓</a></td>
+                    <td>Victoires <a href="classement.php">↓</a></td>
                     <td>Profil</td>
                 </tr>
             <tbody>
                 <?php if (isset($_POST['recherche'])) {
                     while ($qs = $querysearch->fetch()) { ?>
-                <tr>
-                    <td><?=$u['pseudo']?></td>
-                    <td><?=$u['classement']?></td>
-                    <td><?=$u['victoire']?></td>
-                    <td class="text-center">
-                        <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $qs['user_id'] ?>'
-                            class=' btn btn-primary'>Voir le profil</a> </td> <?php } ?>
+                        <tr>
+                            <td><?= $u['pseudo'] ?></td>
+                            <td><?= str_replace(".", "/", (string) $u['classement']) ?></td>
+                            <td><?= $u['victoire'] ?></td>
+                            <td class="text-center">
+                                <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $qs['user_id'] ?>' class=' btn btn-primary'>Voir le profil</a> </td> <?php } ?>
 
-                </tr>
-                <?php } else { ?>
+                        </tr>
+                    <?php } else { ?>
             </tbody>
-            <?php foreach($fetch_liste as $u) { ?>
-            <tr class="text-center">
-                <td><?=$u['pseudo']?></td>
-                <td><?=$u['classement']?></td>
-                <td><?=$u['victoire']?></td>
-                <td class="text-center">
-                            <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $u['user_id'] ?>'
-                                class=' btn btn-primary'>Voir le profil</a> </td>
-            </tr>
-            <?php } }?>
+            <?php foreach ($fetch_liste as $u) { ?>
+                <tr class="text-center">
+                    <td><?= $u['pseudo'] ?></td>
+                    <td><?= str_replace(".", "/", (string) $u['classement']) ?></td>
+                    <td><?= $u['victoire'] ?></td>
+                    <td class="text-center">
+                        <a type='submit' name='contact' href='infos_joueur.php?contact=<?php echo $u['user_id'] ?>' class=' btn btn-primary'>Voir le profil</a> </td>
+                </tr>
+        <?php }
+                } ?>
         </table>
         <!-- Script à charger à la fin uniquement -->
         <script src="script/notification.js"></script>
         <!-- -->
-        </body>
+</body>
 
-        </html>
+</html>
