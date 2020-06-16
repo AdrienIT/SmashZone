@@ -64,7 +64,7 @@ if (isset($user["user_id"])) {
         $update_classement->bindParam(":classement", $new_classement);
         $update_classement->bindParam(":id", $id);
         $update_classement->execute();
-        header('Location: update.php?id=' . $id);
+        header('Location: update_user.php?id=' . $id);
     }
     if (isset($_POST['new_postal_code']) and !empty($_POST['new_postal_code']) and $_POST['new_postal_code'] != $user['postal_code']) {
         $ville = htmlspecialchars($_POST['new_postal_code']);
@@ -104,7 +104,7 @@ if (isset($user["user_id"])) {
 <html lang="fr">
 
 <head>
-    <title>Profil de <?php echo $user['pseudo'] ?></title>
+    <title>Edition utilisateur ?></title>
 
     <!-- Important ! -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -210,10 +210,68 @@ if (isset($user["user_id"])) {
                                             class="form-control" value="<?php echo $user['pseudo']; ?>">
                                     </div>
                                     <div class="col">
-                                        <label for="nom">Classement</label>
-                                        <input type="text" name="classement" placeholder="classement"
-                                            class="form-control" value="<?php echo $classement; ?>">
-                                    </div>
+                                    <label for="nom">Classement</label>
+                                    <br>
+                                    <select name="classement" id="classement" class="form-control">
+                                        <option value="40" <?php if (isset($classement) && $classement == "40") {
+                                                                echo "selected";
+                                                            } ?>>--Aucun--</option>
+                                        <option value="30.5" <?php if (isset($classement) && $classement == "30.5") {
+                                                                    echo "selected";
+                                                                } ?>>30/5</option>
+                                        <option value="30.4" <?php if (isset($classement) && $classement == "30.4") {
+                                                                    echo "selected";
+                                                                } ?>>30/4</option>
+                                        <option value="30.3" <?php if (isset($classement) && $classement == "30.3") {
+                                                                    echo "selected";
+                                                                } ?>>30/3</option>
+                                        <option value="30.2" <?php if (isset($classement) && $classement == "30.2") {
+                                                                    echo "selected";
+                                                                } ?>>30/2</option>
+                                        <option value="30.1" <?php if (isset($classement) && $classement == "30.1") {
+                                                                    echo "selected";
+                                                                } ?>>30/1</option>
+                                        <option value="30" <?php if (isset($classement) && $classement == "30") {
+                                                                echo "selected";
+                                                            } ?>>30</option>
+                                        <option value="15.5" <?php if (isset($classement) && $classement == "15.5") {
+                                                                    echo "selected";
+                                                                } ?>>15/5</option>
+                                        <option value="15.4" <?php if (isset($classement) && $classement == "15.4") {
+                                                                    echo "selected";
+                                                                } ?>>15/4</option>
+                                        <option value="15.3" <?php if (isset($classement) && $classement == "15.3") {
+                                                                    echo "selected";
+                                                                } ?>>15/3</option>
+                                        <option value="15.2" <?php if (isset($classement) && $classement == "15.2") {
+                                                                    echo "selected";
+                                                                } ?>>15/2</option>
+                                        <option value="15.1" <?php if (isset($classement) && $classement == "15.1") {
+                                                                    echo "selected";
+                                                                } ?>>15/1</option>
+                                        <option value="15" <?php if (isset($classement) && $classement == "15") {
+                                                                echo "selected";
+                                                            } ?>>15</option>
+                                        <option value="5.6" <?php if (isset($classement) && $classement == "5.6") {
+                                                                echo "selected";
+                                                            } ?>>5/6</option>
+                                        <option value="4.6" <?php if (isset($classement) && $classement == "4.6") {
+                                                                echo "selected";
+                                                            } ?>>4/6</option>
+                                        <option value="3.6" <?php if (isset($classement) && $classement == "3.6") {
+                                                                echo "selected";
+                                                            } ?>>3/6</option>
+                                        <option value="2.6" <?php if (isset($classement) && $classement == "2.6") {
+                                                                echo "selected";
+                                                            } ?>>2/6</option>
+                                        <option value="1.6" <?php if (isset($classement) && $classement == "1.6") {
+                                                                echo "selected";
+                                                            } ?>>1/6</option>
+                                        <option value="0" <?php if (isset($classement) && $classement == "0") {
+                                                                echo "selected";
+                                                            } ?>>0</option>
+                                    </select>
+                                </div>
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col">

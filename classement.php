@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 include 'config.php';
 session_start();
 $all_notifs = "none";
-if (!isset($_SESSION["user_id"])) {
+if (!isset($_SESSION["user_id"]) && (!isset($_SESSION["admin_id"]) && (!isset($_SESSION["club_id"])))) {
     $connect = "Se connecter/S'inscrire";
 } else {
     $connect = "Mon compte";
@@ -13,7 +13,6 @@ if (!isset($_SESSION["user_id"])) {
     $query->execute();
     $all_notifs = $query->fetchAll();
 }
-
 
 if (isset($_GET["order"]) && $_GET["order"] == "name") {
     $query_classement = $db->prepare('SELECT user_id, pseudo, classement, victoire FROM users ORDER BY pseudo ASC');
@@ -35,8 +34,6 @@ if (isset($_POST['recherche'])) {
     $querysearch->bindValue(':recherche', '%' . $search . '%');
     $querysearch->execute();
 }
-
-
 
 ?>
 

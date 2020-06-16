@@ -12,7 +12,7 @@ if (!isset($_SESSION["admin_id"])) {
 <html>
 
 <head>
-    <title>Profil de <?php echo $user['pseudo'] ?></title>
+    <title>Profil Admin</title>
 
     <!-- Important ! -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

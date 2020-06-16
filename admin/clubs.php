@@ -30,7 +30,7 @@ $clubs = $db->query('SELECT * FROM clubs');
 <html lang="en">
 
 <head>
-    <title>Profil de <?php echo $user['pseudo'] ?></title>
+    <title>PListe des clubs</title>
 
     <!-- Important ! -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -143,7 +143,7 @@ $clubs = $db->query('SELECT * FROM clubs');
                     </tr>
                     <?php } ?>
 
-                    <a class="btn btn-light mb-2" href="index.php">
+                    <a class="btn btn-light mb-2" href="home.php">
                         < Retour à la page d'administration</a>
     </body>
 
