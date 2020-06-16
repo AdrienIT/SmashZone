@@ -120,7 +120,7 @@ $user = $query->fetch();
                     <p class="ml-auto"><?php echo $user['ville'] ?></p>
                 </div>
                 <div class="d-flex">
-                    <i class="material-icons md-dark mr-2 text-dark">location_city</i>
+                    <i class="material-icons md-dark mr-2 text-dark">domain</i>
                     <p class="infosjoueurs">Adresse</p>
                     <p class="ml-auto"><?php echo $user['adresse'] ?></p>
                 </div>
@@ -138,20 +138,6 @@ $user = $query->fetch();
                                             echo $user['telephone'];
                                         } ?></p>
                 </div>
-                <?php if (!isset($_SESSION["user_id"])) {;
-                } elseif ($checkIfAlreadyFriend->fetch() > 0) {  ?>
-                    <form method="post">
-                        <input type='submit' name='supprimer_ami' class="btn btn-danger btn-block justify-content-center" value="Supprimer des amis" />
-                    </form>
-                <?php } elseif ($checkIfAlreadyWaiting->fetch() > 0) { ?>
-                    <form method="post">
-                        <input type='submit' name='supprimer_ami' class="btn btn-danger btn-block justify-content-center" value="Annuler la demande d'ami" />
-                    </form>
-                <?php
-                } elseif ($id == $idcontact) {;
-                } else { ?> <form method="post">
-                        <input type='submit' name='demande_ami' class="btn btn-primary btn-block justify-content-center" value="Demander en ami" /> </form>
-                <?php } ?>
             </div>
         </div>
 </body>

@@ -41,7 +41,7 @@ if (file_exists(str_replace(" ", "_", $user['nom_club']))) {
 
 <body>
     <nav class="navbar navbar-expand-xl navbar-dark" style="background-color: #264653; margin-bottom: 20px; height: 55px;">
-        <a class="logo" href="home.php">
+        <a class="logo" href="../index.php">
             <div><img class="main" src="../style/SmashZone2.png" /><img class="ball" src="../style/SmashZoneIcon.png" />
             </div>
         </a>
