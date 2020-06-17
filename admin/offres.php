@@ -96,7 +96,7 @@ if (isset($_GET['delete']) and !empty($_GET['delete'])) {
     <!-- Fin barre de navigation -->
 
     <div class="container">
-        <h1 class="mb-4 font-weight-bold">Liste des joueurs inscrits</h1>
+        <h1 class="mb-4 font-weight-bold">Liste des offres</h1>
         <a class="btn btn-light mb-2" href="index.php">
             < Retour à la page d'administration</a> <table class="table">
                 <thead class="thead-dark text-center">
