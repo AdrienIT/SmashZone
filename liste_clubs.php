@@ -104,7 +104,7 @@ if (isset($_POST['recherche'])) {
 
     <div class="container">
         <form class="row d-flex" action="" method="post">
-            <input required type="text" name="recherche" class="form-control" placeholder="Rechercher un joueur">
+            <input required type="text" name="recherche" class="form-control" placeholder="Rechercher un club">
             <button name="submit" type="submit" class="invisible btn btn-outline-primary">Rechercher un
                 club</button>
         </form>
