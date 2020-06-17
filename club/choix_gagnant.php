@@ -72,7 +72,7 @@ $u = $query2->fetchAll();
         </div>
     </nav>
     <!-- Fin barre de navigation -->
-    <h1 class="mb-4 font-weight-bold">Liste des tournois</h1>
+    <h1 class="mb-4 font-weight-bold">Choisir un gagnant</h1>
     <table class="table">
         <thead class="thead-dark text-center">
             <tr class="joueurborder">
@@ -87,7 +87,7 @@ $u = $query2->fetchAll();
                 <td> <?= $users['pseudo'] ?> </td>
                 <td> <?= $users['nom'] ?> </td>
                 <td> <?= $users['prenom'] ?> </td>
-                <td> <a href="selection.php?tournoi_id=<?= $id ?>&id=<?php echo $users['user_id'] ?>">Choisir</a> </td>
+                <td> <a class="btn btn-primary" href="selection.php?tournoi_id=<?= $id ?>&id=<?php echo $users['user_id'] ?>">Choisir</a> </td>
             </tr>
         <?php } ?>
     </table>

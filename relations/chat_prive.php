@@ -30,7 +30,7 @@ $fetchmessage = $querymessage->fetchAll();
 
 if (isset($_POST['messagebox'])) {
     $message = htmlspecialchars($_POST['messagebox']);
-    $insermessage = $db->prepare('INSERT INTO messages (message_sender,message_receiver,content) VALUES (:message_sender,:message_receiver,:content) ORDER BY message_time');
+    $insermessage = $db->prepare('INSERT INTO messages (message_sender,message_receiver,content) VALUES (:message_sender,:message_receiver,:content)');
     $insermessage->bindValue(':message_sender', $id);
     $insermessage->bindValue(':message_receiver', $idmessage);
     $insermessage->bindValue(':content', $message);
