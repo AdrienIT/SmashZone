@@ -46,9 +46,17 @@ if (isset($user["club_id"])) {
         header('Location: update.php?id=' . $id);
     }
     if (isset($_POST['new_telephone']) and !empty($_POST['new_telephone']) and $_POST['new_telephone'] != $user['telephone']) {
-        $telephone = htmlspecialchars($_POST['new_telephone']);
+        $adresse = htmlspecialchars($_POST['new_telephone']);
         $update_telephone = $db->prepare('UPDATE clubs SET telephone = :telephone WHERE club_id = :id');
-        $update_telephone->bindParam(":telephone", $telephone);
+        $update_telephone->bindParam(":telephone", $adresse);
+        $update_telephone->bindParam(":id", $id);
+        $update_telephone->execute();
+        header('Location: update.php?id=' . $id);
+    }
+    if (isset($_POST['new_adresse']) and !empty($_POST['new_adresse']) and $_POST['new_adresse'] != $user['adresse']) {
+        $telephone = htmlspecialchars($_POST['new_adresse']);
+        $update_telephone = $db->prepare('UPDATE clubs SET adresse = :adresse WHERE club_id = :id');
+        $update_telephone->bindParam(":adresse", $telephone);
         $update_telephone->bindParam(":id", $id);
         $update_telephone->execute();
         header('Location: update.php?id=' . $id);
@@ -75,7 +83,7 @@ if (isset($user["club_id"])) {
 <html lang="fr">
 
 <head>
-    <title>Profil de <?php echo $user['pseudo'] ?></title>
+    <title>Edition de club</title>
 
     <!-- Important ! -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -149,9 +157,15 @@ if (isset($user["club_id"])) {
                             <?php endif ?>
 
                             <div class="row mb-4">
+                            <div class="col">
                                     <label for="pseudo">Nom du club</label>
                                     <input type="text" name="newpseudo" placeholder="Nom d'utilisateur" class="form-control" value="<?php echo $user['nom_club']; ?>">
                                 </div>
+                                <div class="col">
+                                    <label for="adresse">Adresse</label>
+                                    <input type="text" name="new_adresse" placeholder="Adresse" class="form-control" value="<?php echo $user['adresse']; ?>">
+                                </div>
+                            </div>
                             </div>
                             <div class="row mb-4">
                                 <div class="col">

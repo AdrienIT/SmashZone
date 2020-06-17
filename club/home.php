@@ -75,6 +75,11 @@ if (file_exists(str_replace(" ", "_", $user['nom_club']))) {
                     <p class="ml-auto"><?php echo $user['ville'] ?></p>
                 </div>
                 <div class="d-flex">
+                    <i class="material-icons md-dark mr-2 text-dark">location_city</i>
+                    <p class="infosjoueurs">Adresse</p>
+                    <p class="ml-auto"><?php echo $user['adresse'] ?></p>
+                </div>
+                <div class="d-flex">
                     <i class="material-icons md-dark mr-2 text-dark">money</i>
                     <p class="infosjoueurs">Code postal</p>
                     <p class="ml-auto"><?php echo $user['postal_code'] ?></p>
