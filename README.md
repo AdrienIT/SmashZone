@@ -1,5 +1,9 @@
 # SmashZone
 
+## Documentation
+
+Présente ici : https://pdfhost.io/v/QUYmnWs9U_Documentation_du_site_SmashZonepdf.pdf
+
 ## Installation
 
 ### Etape 1
