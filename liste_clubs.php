@@ -116,7 +116,7 @@ if (isset($_POST['recherche'])) {
                     <th>Ville</td>
                     <th>Profil</td>
                 </tr>
-            <tbody>
+            <tbody class="text-center">
                 <?php if (isset($_POST['recherche'])) {
                     while ($qs = $querysearch->fetch()) { ?>
                         <tr>
